@@ -1,0 +1,18 @@
+{
+	name = "\chDa\cmku\chta\cutoru" //Pik Counter-part, also known as Anti-Pik bot.
+	accuracy = 5 //Unlike real pik, fake pik has good aim.
+	intellect = 5 //Unlike real pik, fake pik is smart.
+	evade = 5 //Unlike real pik, fake pik can dodge.
+	anticipation = 5 //Unlike real pik, fake pik can do something.
+	reactiontime = 5 //Unlike real pik, fake pik can react fast.
+	perception = 5 //Unlike real pik, fake pik can be a thing.
+	favoriteweapon = "DLVBuster" //Self-explanatory.
+	color = "00 00 00" //Not needed.
+	gender = "male" //Obvious.
+	skin = "Napalmman" //Fake pik's favorite skin.
+	class = "Dakutatoru" //Worst class to use.
+	revealed = True //False
+	script = "humanbot" //BotBot
+	chatlump = "botchats/BOTDAK" //Botchat is annoying, pls shush.
+	chatfrequency = 50 //Mute.
+}

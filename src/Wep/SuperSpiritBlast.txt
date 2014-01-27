@@ -1,0 +1,111 @@
+//Beta weapon to use against Evil Robot.
+actor SuperFist : MegaBuster 26782 
+{
+Weapon.AmmoUse 0
+Weapon.AmmoGive 112
+Weapon.SlotNumber 1
+Obituary "%o was defeated by \\cfSuper \c-%k."
+Inventory.Pickupmessage "%k cracks his knuckles."
+weapon.ammotype "SmashFistsAmmo"
+inventory.pickupsound "weapon/weaponup"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
+inventory.icon "SPIRII"
+Scale 2.0
+States
+{
+Spawn:
+CLWP E 1
+loop
+Ready:
+SUPI C 0 ACS_ExecuteAlways(998,0,204)
+SUPI C 1 A_WeaponReady
+SUPI C 0 A_JumpIfInventory("NormalAttack",2,"Recharge")
+SUPI C 0 A_JumpIfInventory("NormalAttack",1,"Recharge")
+SUPI C 9
+SUPI C 1 A_GiveInventory("NormalAttack",3)
+Goto Ready+1
+Recharge:
+SUPI C 3
+SUPI C 1 A_GiveInventory("NormalAttack",3)
+Goto Ready+1
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+SUPI C 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+SUPI C 1 A_Raise
+Loop
+Fire:
+SUPI C 0 A_GiveInventory("FistAttack",1)
+SUPI C 0 SetPlayerProperty(0,0,0)
+SUPI C 0 A_JumpIfInventory("NormalAttack",3,"FirstPunch")
+SUPI C 0 A_JumpIfInventory("NormalAttack",2,"SecondPunch")
+SUPI C 0 A_JumpIfInventory("NormalAttack",1,"ThirdKick")
+SUPI C 9
+SUPI C 1 A_GiveInventory("NormalAttack",3)
+SUPI C 0 A_Refire
+Goto Ready+1
+FirstPunch:
+SFST A 2 A_TakeInventory("NormalAttack",1)
+SFST B 1 A_PlaySoundEx("Smash/Punch","Smash")
+SFST C 0 A_FireCustomMissile("RendingPunch",0,1,0,0)
+SFST C 2 A_FireCustomMissile("SmashFists",0,1,0,0)
+SFST C 2 SetPlayerProperty(0,0,0)
+SFST B 2
+SFST A 2 
+SUPI C 0 A_Refire
+Goto Ready+1
+SecondPunch:
+SFST A 2 A_TakeInventory("NormalAttack",1)
+SFST D 1 A_PlaySoundEx("Smash/Punch","Smash")
+SFST E 0 A_FireCustomMissile("RendingPunch",0,1,0,0)
+SFST E 2 A_FireCustomMissile("SmashFists",0,1,0,0)
+SFST E 2 SetPlayerProperty(0,0,0)
+SUPI C 1
+SUPI C 0 A_Refire
+Goto Ready+1
+ThirdKick:
+KIC2 C 3 A_TakeInventory("NormalAttack",1)
+KIC2 B 1 A_PlaySoundEx("Smash/Punch","Smash")
+SKIC D 0 A_FireCustomMissile("SmashFists",0,1,0,0)
+SKIC D 0 A_FireCustomMissile("RendingKick2",0,1,0,0)
+SKIC A 4
+SKIC D 2
+KIC2 B 2
+SKIC C 2
+SUPI C 1 A_TakeInventory("FistAttack",1)
+SUPI C 0 A_Refire
+Goto Ready+1
+AttackEnd:
+SUPI C 1
+SUPI C 0 A_Refire
+Goto Ready+1
+altfire:
+SUPI C 0 SetPlayerProperty(0,1,4)
+SUPI C 0 A_PlaySoundEx("Smash/SpiritBlast1","Smash")
+SFST A 0 A_GiveInventory("SmashArmor",1)
+SFST A 2 A_Recoil(-1)
+SFST A 1 A_Recoil(-3)
+SFST A 0 A_Recoil(-6)
+SFST B 1
+SFST B 1 A_PlaySoundEx("Smash/SpiritBlast2","Smash")
+SFST C 0 A_Stop
+SFST C 2 A_FireCustomMissile("SpiritBlast",0,1,0,0)
+SFST C 2 SetPlayerProperty(0,0,4)
+SFST B 2 
+SFST A 2 A_TakeInventory("SpiritCharge",28)
+SUPI C 0 A_TakeInventory("BasicArmor",9999)
+SUPI C 40 A_TakeInventory("FistAttack",1)
+SUPI C 0 A_Refire
+Goto Ready+1
+}
+}
+
+actor SpiritCharge : Ammo
+{
+inventory.amount 1
+inventory.maxamount 28
+}
+

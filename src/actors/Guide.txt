@@ -1,0 +1,1048 @@
+actor ClassBase : PlayerPawn  //All Classes inherit from this in order to make pain states more manageable. To make a new class, refer to the guide file.
+{
+player.soundclass "megaman"
+player.displayname "Copy Robot"
+player.damagescreencolor "yellow"
+player.maxhealth 100
+player.forwardmove 0.8, 0.8
+player.sidemove 0.78, 0.78
+player.jumpz 10
++NOBLOOD
++DONTBLAST
++NODAMAGETHRUST
+//+GHOST
+player.colorrange 0 0
+mass 9999
+damagefactor "Dummy", 0.0
+damagefactor "Detonation", 0.0
+gravity 0.8
+scale 2.5
++QUICKTORETALIATE
+States
+{
+Spawn:
+"----" A 0
+"----" B 1
+"----" A 1
+Goto Spawn+2
+See:
+"----" BCDE 5
+Goto Spawn
+Missile:
+"----" F 5
+"----" G 4
+goto Spawn
+Pain.ReversalAttack: //Pik is Douche attack.
+"----" H 0 A_GiveInventory("ReversalOK",1)
+Goto pain+1
+Pain.DeadlyWind: //Pik is mighty bunghole attack.
+"----" H 0 ACS_ExecuteAlways(990,0,1)
+"----" H 0 ThrustThingZ(0,90,0,0)
+Goto pain+1
+Pain.FireSpin:
+Pain.QuickBoomerang:
+Pain.Buster:
+Pain.WildCoil:
+Pain.ChargeKick:
+Pain.YamatoSpear:
+Pain.DiveMissile:
+Pain.StarCrash:
+Pain.NeedleCannon:
+Pain.CentaurFlash:
+Pain.FreezeCrack:
+Pain.ScrewCrusher:
+Pain.PharaohHold:
+Pain.TornadoHold:
+Pain.TrebleSentry:
+Pain.ScorchWheel:
+Pain.MagnetMissile:
+Pain.JunkShield:
+Pain.Misc:
+Pain.Oil:
+Pain.SteamSword:
+Pain.SteamSwordSpark:
+Pain.LClaw:
+Pain.FireType:
+Pain.IceType:
+Pain.PoisonType:
+Pain.ThunderType:
+Pain.CMT2:
+"----" H 0 A_Stop
+"----" H 0 A_SpawnItemEx("ShockFX",4,0,32)
+"----" H 0 A_GiveInventory("Shocked",1)
+goto pain+1
+Pain.CMT3:
+"----" H 0 
+"----" H 0 //A_SpawnItemEx("WepJammed",1)
+goto pain
+Pain.CMT4:
+"----" H 0 ThrustThingZ(0,8,0,0)
+"----" H 0 A_Recoil(56)
+Goto Pain
+Pain.CMT5:
+"----" H 0 
+Goto Pain+1
+Pain.AntiAir1: //Smash Personal Damagetype
+"----" H 0 
+"----" H 0 ThrustThingZ(0,25,0,0)
+"----" H 0 A_PlaySoundEx("smash/punch4","SoundSlot5")
+"----" H 4 A_GiveInventory("Shocked",1)
+"----" H 0
+Goto pain+1
+Pain.AntiAir2: //Smash Personal Damagetype
+"----" H 0 A_Recoil(10)
+"----" H 0 ThrustThingZ(0,150,1,0)
+"----" H 0 A_PlaySoundEx("smash/punch5","SoundSlot5")
+"----" H 0 A_JumpIf(z-floorz>180,"GravityForce4")
+"----" H 0 A_JumpIf(z-floorz>128,"GravityForce3")
+"----" H 0 A_JumpIf(z-floorz>32,"GravityForce2")
+"----" H 0 A_JumpIf(z-floorz>8,"GravityForce1")
+Goto pain
+Pain.VulcanJab: //Smash Personal Damagetype
+"----" H 0 A_PlaySoundEx("smash/punch7","SoundSlot5")
+Goto pain+1
+Pain.RendingKick: //Smash Personal Damagetype
+"----" H 0 A_PlaySoundEx("smash/punch6","SoundSlot5")
+"----" H 0 A_Stop
+Goto pain
+Pain.Uppercut: //Smash Personal Damagetype
+"----" H 0 ThrustThingZ(0,60,0,0)
+"----" H 0 A_PlaySoundEx("smash/punch4","SoundSlot5")
+Goto pain
+Pain.BCrusher: //Smash Personal Damagetype
+"----" H 0 A_PlaySoundEx("smash/punch8","SoundSlot5")
+Goto pain
+Pain.SevenStars: //Smash Personal Damagetype
+"----" H 0 A_PlaySoundEx("smash/punch9","SoundSlot5")
+"----" H 0 A_SpawnItemEx("ShockFX",4,0,32)
+"----" H 0 A_PlaySoundEx("misc/dizzy","SoundSlot6")
+"----" H 0 A_GiveInventory("ExtraShocked",1)
+"----" H 105 
+"----" H 0 
+goto pain+1
+Pain.SCracker: //Smash Personal Damagetype
+"----" H 0 A_PlaySoundEx("smash/punch10","SoundSlot5")
+Goto pain
+Pain.USmasherClaws: //Smash Personal Damagetype
+"----" H 0 A_PlaySoundEx("smash/punch11","SoundSlot5")
+Goto pain
+Pain.USCUppercut: //Smash Personal Damagetype
+"----" H 0 A_PlaySoundEx("smash/punch4","SoundSlot5")
+"----" H 0 ThrustThingZ(0,60,0,0)
+"----" H 0 A_PlaySoundEx("smash/punch11","SoundSlot6")
+Goto pain
+Pain.UltraUppercut: //Smash Personal Damagetype
+"----" H 0 A_PlaySoundEx("smash/criticalhit","SoundSlot5")
+"----" H 0 ThrustThingZ(0,60,0,0)
+"----" H 0 A_PlaySoundEx("smash/criticalhit2","SoundSlot6")
+Goto pain
+Pain.SmashCombo: //Smash Personal Damagetype
+"----" H 0 A_PlaySoundEx("smash/punch7","SoundSlot5")
+"----" H 0 A_SpawnItemEx("ShockFX",4,0,32)
+"----" H 0 A_GiveInventory("ExtraShocked",1)
+"----" H 105 A_Stop
+"----" H 0 
+goto pain
+Pain.FirePalm:
+"----" H 0 //A_ChangeFlag("SHOOTABLE"),0)
+"----" H 0 A_SpawnItemEx("ImOnFiyah")
+"----" H 0 A_GiveInventory("FiyahVision",1)
+Goto Pain+1
+//Zard spells damagetypes
+Pain.ParalizingBeam:
+"----" H 0 A_SpawnItemEx("ShockFX",4,0,32)
+"----" H 0 A_GiveInventory("ExtraShocked",1)
+"----" H 0 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Pain+1
+Pain.FlashFreeze:
+"----" H 0 A_ChangeFlag("SHOOTABLE",0)
+"----" H 0 SetPlayerProperty(0,1,4)
+"----" H 0 A_SpawnItemEx("ImFrozen")
+"----" H 0 A_GiveInventory("IceVision",1)
+"----" H 0 A_SpawnItemEx("FreezeBlockStart",0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+"----" H 6 A_Stop
+"----" H 0 A_SpawnItemEx("FreezeBlock1",0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+"----" H 6 A_Stop
+"----" H 0 A_SpawnItemEx("FreezeBlock2",0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+"----" H 6 A_Stop
+"----" H 0 A_SpawnItemEx("FreezeBlock3",0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+"----" H 6 A_Stop
+"----" H 0 A_SpawnItemEx("FreezeBlock4",0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+"----" H 6 A_Stop
+"----" H 0 SetPlayerProperty(0,0,4)
+"----" H 0 A_TakeInventory("IceVision",1)
+"----" H 0 A_PlaySoundEx("weapon/Freezebreak","Weapon")
+"----" H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+"----" H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+"----" H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+"----" H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+"----" H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+"----" H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+"----" H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+"----" H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+goto pain
+Pain.TornadoJump:
+"----" H 0
+"----" H 0 ThrustThingZ(0,20,0,0)
+"----" H 0 A_Recoil(32)
+Goto pain+1
+//Zard spells damage types end here
+Pain.FlameSword:
+"----" H 0
+"----" HH 0 A_SpawnItemEx("ScorchBit",0,0,0,random(-10,10),random(-10,10),random(10,15),random(0,360))
+Goto pain
+Pain.FlashBomb:
+"----" H 0 A_ScaleVelocity(0.85)
+"----" H 0
+Goto Pain+1
+Pain.WindStorm:
+"----" H 0 //ThrustThing(random(0,255),50,1,0)
+"----" H 0 ThrustThing(random(0,255),5,0,0)
+"----" H 0 ThrustThingZ(0,30,0,0)
+Goto pain+1
+Pain.SlashClaw:
+"----" H 0 A_PlaySoundEx("weapon/slashclawhit","SoundSlot5")
+Goto Pain
+Pain.FlashStopper:
+"----" H 0 
+"----" H 0 A_JumpIfInventory("BrightBlind", 1,3)
+"----" H 0 A_GiveInventory("BrightBlind",125)
+"----" H 0 ACS_ExecuteAlways(249, 0)
+Goto pain+1
+"----" H 0 A_GiveInventory("BrightBlind",55)
+Goto pain+1
+Pain.FlashBang://Daku's varient
+"----" H 0 
+"----" H 0 A_JumpIfInventory("BrightBlind", 1,3)
+"----" H 0 A_GiveInventory("BrightBlind",20)
+"----" H 0 ACS_ExecuteAlways(249, 0)
+Goto pain+1
+"----" H 0 A_GiveInventory("BrightBlind",5)
+Goto pain+1
+Pain.TimeSlow:
+"----" H 0 A_GiveInventory("Slowed",1)
+Goto pain+1
+Pain.CentaurShock:
+Pain.NeutralShock:
+Pain.SparkShock:
+"----" H 0 A_SpawnItemEx("ShockFX",4,0,32)
+"----" H 0 A_GiveInventory("Shocked",1)
+Goto Pain+1
+Pain.CrashBomb:
+"----" H 0 A_Stop
+"----" H 0
+Goto Pain+1
+Pain.CrashBomb2://For proto's protorangs
+"----" H 0 A_ScaleVelocity(0.5)
+"----" H 0
+Goto Pain+1
+Pain.GravityHold:
+"----" H 0 ThrustThingZ(0,150,1,0)
+"----" H 0 A_JumpIf(z-floorz>180,"GravityForce4")
+"----" H 0 A_JumpIf(z-floorz>128,"GravityForce3")
+"----" H 0 A_JumpIf(z-floorz>32,"GravityForce2")
+"----" H 0 A_JumpIf(z-floorz>8,"GravityForce1")
+Goto pain+1
+GravityForce4:
+//PLAY H 0 A_Print("Gravity 4")
+"----" H 0 A_GiveInventory("GravityForce4",1)
+Goto Pain+1
+GravityForce3:
+//PLAY H 0 A_Print("Gravity 3")
+"----" H 0 A_GiveInventory("GravityForce3",1)
+Goto Pain+1
+GravityForce2:
+//PLAY H 0 A_Print("Gravity 2")
+"----" H 0 A_GiveInventory("GravityForce2",1)
+Goto Pain+1
+GravityForce1:
+//PLAY H 0 A_Print("Gravity 1")
+"----" H 0 A_GiveInventory("GravityForce1",1)
+Goto Pain+1
+Pain.Drowning:
+Pain.Fire:
+Pain.Falling:
+Pain.Slime:
+"----" H 0 
+"----" H 0 A_JumpIfInventory("BeatCallCheck", 1, "BeatAssist")
+"----" H 0 A_GiveInventory("FallingFlag",1)
+Goto Pain+2
+BeatAssist:
+"----" H 0 
+"----" H 0 HealThing(2)
+"----" H 0 ThrustThingZ(0,25,0,0)
+"----" H 0 ACS_ExecuteAlways(205,0)
+Goto Pain+2
+Pain.WilyFire:
+"----" H 0 //A_ChangeFlag("SHOOTABLE",0)
+"----" H 0 A_SpawnItemEx("ImOnFire")
+"----" H 0 A_GiveInventory("FireVision",1)
+Goto Pain
+Pain.WilyIce:
+"----" H 0 A_ChangeFlag("SHOOTABLE",0)
+"----" H 0 SetPlayerProperty(0,1,4)
+"----" H 0 A_SpawnItemEx("ImFrozen")
+"----" H 0 A_GiveInventory("IceVision",1)
+"----" H 30 A_Stop
+"----" H 30 A_ChangeFlag("SHOOTABLE",1)
+"----" H 0 SetPlayerProperty(0,0,0)
+"----" H 0 A_TakeInventory("IceVision",1)
+Goto Spawn
+Pain.Rage:
+"----" H 0 ThrustThing(random(0,255),100,1,0)
+"----" H 0 ThrustThingZ(0,50,0,0)
+goto Pain+1
+Pain.DrkMgnPul:
+"----" H 0 SetPlayerProperty(0,1,4)
+"----" H 0 ThrustThingZ(0,9001,1,0)
+"----" H 3 A_Recoil(48)
+"----" H 0 A_Stop
+"----" H 0 A_SpawnItemEx("DarkShockFX",4,0,32)
+"----" H 0 A_GiveInventory("DarkStunned",1)
+"----" H 0 SetPlayerProperty(0,0,4)
+goto Pain
+Pain:
+"----" H 0 A_ScaleVelocity(0.75)
+"----" H 0 
+"----" H 0 A_Pain
+"----" H 0 //A_GiveInventory("TempInvince",1)
+"----" H 0 //SetPlayerProperty(0, 1, 4)
+"----" H 0 A_Jump(256, "ClassPain")
+goto ClassPain
+ClassPain:
+"----" H 0
+goto PainContinue
+PainContinue:
+"----" H 1 A_SpawnItem("PainFX",0,3)
+"----" H 1 //A_Recoil(1)
+"----" H 1 A_SpawnItem("PainFX",0,3)
+"----" H 1 //A_Recoil(1)
+"----" H 1 A_SpawnItem("PainFX",0,3)
+"----" H 1 //A_Recoil(1)
+"----" H 1 A_SpawnItem("PainFX",0,3)
+"----" H 1 //A_Recoil(1)
+"----" H 1 A_SpawnItem("PainFX",0,3)
+"----" H 1 //A_Recoil(1)
+"----" H 1 A_SpawnItem("PainFX",0,3)
+"----" H 1 //A_Recoil(1)
+"----" H 1 A_SpawnItem("PainFX",0,3)
+"----" H 1 //A_Recoil(1)
+"----" H 1 A_SpawnItem("PainFX",0,3)
+"----" H 1 //A_Recoil(1)
+"----" H 1 A_SpawnItem("PainFX",0,3)
+"----" H 1 //A_Recoil(1)
+"----" H 1 A_SpawnItem("PainFX",0,3)
+"----" H 1 //A_Recoil(1)
+"----" H 0 //SetPlayerProperty(0, 0, 4)
+"----" H 0 //SetPlayerProperty(0,0,1)
+"----" H 0 A_Jump(256, "Spawn")
+goto Spawn
+Death.Beam:
+Death.Gravity:
+Death.instagib:
+"----" H 0 A_GiveInventory("InstagibFlag",1)
+"----" H 0 A_Jump(256, "ClassDeath")
+goto ClassDeath
+Death:
+"----" H 0 
+"----" H 0 A_Jump(256, "ClassDeath")
+goto ClassDeath
+DeathContinue:
+"----" H 0 A_TakeInventory("PharaohCharge",999)  
+"----" H 0 A_GiveInventory("CutterFlag",999)
+"----" H 0 A_GiveInventory("IsDead",1)
+"----" H 0 A_JumpIfInventory("InstagibFlag",1,"DeathContinueInstagib")
+"----" H 0 A_JumpIfInventory("FallingFlag",1,"DeathContinueFalling")
+"----" H 0 SetPlayerProperty(0, 0, 4) 
+"----" H 0 
+"----" H 0 A_NoBlocking
+"----" H 0 A_Stop
+"----" H 0 A_GiveToTarget("KilledMeStock",1)
+"----" H 0 A_GiveToTarget("KilledMe",1)
+"----" H 0 ACS_ExecuteAlways(999,0,0)
+"----" H 0 A_Jump(256, "DeathFrames")
+goto DeathFrames
+ClassDeath:
+"----" H 0 
+goto DeathContinue
+DeathFrames:
+"----" H 20 
+goto DeathContinue2
+DeathContinue2:
+"----" H 0 SetPlayerProperty(0, 0, 4)
+"----" H 0 A_PlayerScream
+"----" H 0 A_SpawnItemEx("FakeDeathFX", 0, 0, 32)
+"----" H 0 A_Jump(256, "DropWeapon")
+goto NoDropWeapon
+Death.Falling:
+"----" H 0 A_GiveInventory("FallingFlag",1)
+"----" H 0 A_Jump(256, "ClassDeath")
+goto ClassDeath
+DeathContinueFalling:
+"----" H 0 SetPlayerProperty(0, 0, 4) 
+"----" H 0 A_NoBlocking
+PLAY Z 1 A_PlayerScream
+PLAY Z 1 A_Stop
+PLAY Z 1 ACS_ExecuteAlways(999,0,0)
+//PLAY Z -1
+PLAY Z 1 A_CheckPlayerDone
+wait
+DeathContinueInstagib:
+"----" H 0 
+"----" Z 1 SetPlayerProperty(0, 0, 4)
+"----" H 0 A_GiveToTarget("KilledMe",1)
+"----" H 0 A_GiveToTarget("KilledMeStock",1)
+"----" Z 0 A_PlayerScream
+"----" H 0 A_SpawnItemEx("FakeDeathFX", 0, 0, 32)
+"----" H 0 A_Jump(256, "DropWeapon")
+goto DropWeapon
+DropWeapon:
+"----" H 0
+NoDropWeapon:
+PLAY Z 1 A_CheckPlayerDone
+wait
+PunkSpin:
+PLAY AVW 3
+PLAY XY 3
+Goto PunkSpin+3
+PunkStop:
+PLAY WV 5
+Goto Spawn
+EnkerRaise:
+PLAY Y 1
+loop
+EnkerAbsorb:
+PLAY Y 0 A_PlaySound("weapon/mirrorabsorb")
+PLAY Y 0 A_GiveInventory("EnkerMirrorCount",1)
+Goto EnkerAbsorb3
+EnkerAbsorb3:
+PLAY Y 3 ACS_ExecuteAlways(998,0,65)
+PLAY Y 0 A_JumpIfInventory("EnkerMirrorCount",1,"EnkerAbsorb2")
+Goto Spawn
+EnkerAbsorb2:
+PLAY Y 3 ACS_ExecuteAlways(998,0,66)
+PLAY Y 0 A_JumpIfInventory("EnkerMirrorCount",1,"EnkerAbsorb3")
+Goto Spawn
+DarkLeap:
+PLAY Y 1 A_SpawnItemEx("DarkDamager")
+PLAY Y 0 A_JumpIf(z-floorz==0,"Spawn")
+loop
+BalladeJump:
+PLAY Y 5 A_SpawnItemEx("BalladeMelee")
+loop
+TheEnd:
+PLAY G 4 //If I tell you what this is, I'll be giving out spoilers unless you seen the ending of the MM6 Cmapaign.
+loop
+CreditWalk:
+PLAY BCDE 8 //This is just the player walking during the credits.
+loop
+}
+}
+
+actor DeathFX1
+{
+PROJECTILE
+height 1
+radius 1
++NOINTERACTION
++NOGRAVITY
+-SOLID
++DONTBLAST
+scale 2.5
+Speed 15
+States
+{
+Spawn:
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+Stop
+}
+}
+
+actor DeathFX2 
+{
+PROJECTILE
+height 1
+radius 1
++NOINTERACTION
++NOGRAVITY
+-SOLID
++DONTBLAST
+scale 2.5
+Speed 15
+States
+{
+Spawn:
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+MMFX BCDE 2
+stop
+}
+}
+
+actor ImLightlyOnFire
+{
++MISSILE
++RIPPER
++NOGRAVITY
++NOINTERACTION
+States
+{
+Spawn:
+TNT1 A 20
+TNT1 A 0 A_GiveToTarget("LightlyOnFireDamage",1)
+TNT1 A 20
+TNT1 A 0 A_GiveToTarget("LightlyOnFireDamage",1)
+TNT1 A 20
+TNT1 A 0 A_GiveToTarget("LightlyOnFireDamage",1)
+TNT1 A 20
+TNT1 A 0 A_GiveToTarget("ImNotLightlyOnFireNow",1)
+stop
+}
+}
+
+actor LightlyOnFireDamage : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 DamageThing(2)
+stop
+}
+}
+
+actor ImNotLightlyOnFireNow : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 SetPlayerProperty(0,0,4)
+TNT1 A 0 A_TakeInventory("LightFireVision",1)
+TNT1 A 0 A_ChangeFlag("SHOOTABLE",1)
+stop
+}
+}
+
+actor LightFireVision : PowerSpeed
+{
+Powerup.Duration 450
+Speed 0.75
+Powerup.Color Red, 0.25
+}
+
+actor PowerChidorInvulnFrames : PowerProtection
+{
+Powerup.Duration 25
+damagefactor "Chidori", 0.0
+}
+
+actor ShockFX2
+{
++NOINTERACTION
+-SOLID
++NOGRAVITY
+Scale 2.5
+States
+{
+Spawn:
+SPAS FGFGFGFGFGFGFGFGFGFGFGFGFG 3 
+SPAS F 2 
+stop
+}
+}
+
+actor Stunned : PowerupGiver
+{
+  inventory.maxamount 0
+  powerup.duration 70
+  powerup.color "00 00 00", 0.0
+  powerup.type "PowerStun"
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  states
+  {
+  Spawn:
+    TNT1 A 6
+    loop
+  }
+}
+
+actor PowerStun : PowerSpeed
+{
+Speed 0.0
+}
+
+actor ShockFX2
+{
++NOINTERACTION
+-SOLID
++NOGRAVITY
+Scale 2.5
+States
+{
+Spawn:
+SPAS FGFGFGFGFGFGFGFGFGFGFGFGFG 3 
+SPAS F 2 
+stop
+}
+}
+
+actor DarkStunned : PowerupGiver
+{
+  inventory.maxamount 0
+  powerup.duration 70
+  powerup.type "PowerDarkStun"
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  states
+  {
+  Spawn:
+    TNT1 A 6
+    loop
+  }
+}
+
+actor PowerDarkStun : PowerSpeed
+{
+powerup.duration 70
+Speed 0.0
+Powerup.Color "00 00 00", 0.5
+}
+
+actor DarkShockFX
+{
++NOINTERACTION
+-SOLID
++NOGRAVITY
+Scale 2.5
+States
+{
+Spawn:
+DMPW F 0
+DMPW FGHIFGHIFGHIFGHIFGHIFGHIFGHIFGHIFGHI 2 
+stop
+}
+}
+
+actor ImStopped
+{
++MISSILE
++NOGRAVITY
++NOINTERACTION
+States
+{
+Spawn:
+TNT1 A 198
+TNT1 A 0 A_GiveToTarget("ImNotStoppedNow",1)
+stop
+}
+}
+
+actor ImNotStoppedNow : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 SetPlayerProperty(0,0,4)
+TNT1 A 0 A_ChangeFlag("SHOOTABLE",1)
+TNT1 A 0 A_TakeInventory("StopVision",1)
+stop
+}
+}
+
+actor StopVision : PowerSpeed
+{
+Powerup.Duration 247
+Speed 0.1
+Powerup.Color InverseMap
+}
+
+actor PowerStopDefenses : PowerProtection
+{
+Powerup.Duration 247
+damagefactor "Normal", 0.0
+damagefactor "Aururinite", 0.0
+}
+
+actor ImFrozen
+{
++MISSILE
++NOGRAVITY
++NOINTERACTION
+States
+{
+Spawn:
+TNT1 A 30
+TNT1 A 0 A_GiveToTarget("ImNotFrozenNow",1)
+stop
+}
+}
+
+actor ImNotFrozenNow : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 SetPlayerProperty(0,0,4)
+TNT1 A 0 A_ChangeFlag("SHOOTABLE",1)
+TNT1 A 0 A_TakeInventory("IceVision",1)
+stop
+}
+}
+
+actor ImFrozen2
+{
++MISSILE
++NOGRAVITY
++NOINTERACTION
+States
+{
+Spawn:
+TNT1 A 30
+TNT1 A 0 A_GiveToTarget("ImNotFrozenNow2",1)
+stop
+}
+}
+
+actor ImNotFrozenNow2 : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 A_ChangeFlag("SHOOTABLE",1)
+TNT1 A 0 A_TakeInventory("IceVision",1)
+stop
+}
+}
+
+actor PowerNowsAreChance : PowerProtection
+{
+Powerup.Duration 15
+damagefactor "ThunderBeam", 2.5
+damagefactor "ThunderBolt", 2.5
+damagefactor "ThunderClaw", 2.5
+damagefactor "SparkShock", 2.5
+damagefactor "ElectricType", 2.5
+}
+
+actor InstagibFlag : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor FallingFlag : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+//do NOT ask why these things are recoded, its the same reason the death FX thing was recoded =\
+actor FlameOily
+{
++DONTBLAST
+-NOGRAVITY
++CLIENTSIDEONLY
+Scale 2.5
+Height 8
+Radius 8
+States
+{
+Spawn:
+//1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1 
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABBCCC 1
+OFLM AAABB 1
+stop
+}
+}
+
+actor JunkLavaPillar 10621
+{
+//$Category MM8BDM-Interactive Props
+-SOLID
++SHOOTABLE
+Height 500
+radius 32
+Health 9999
+painchance 256
+mass 999999999
++NOBLOOD
++NODAMAGE
++DONTBLAST
+States
+{
+Spawn:
+TNT1 A 1
+loop
+Pain:
+TNT1 A 0
+Goto Spawn
+Pain.FreezeCracker:
+Pain.FreezeCrackerBit:
+Pain.BlizzardAttack:
+Pain.IceSlasher:
+Pain.IceWave:
+Pain.IceType:
+Pain.Blizzara:
+Pain.Blizzara2:
+TNT1 A 1 ACS_Execute(tid,0)
+Goto Spawn
+}
+}
+
+actor TeruTeru
+{
++SOLID
++SHOOTABLE
+Height 70
+scale 2.5
+radius 32
+Health 100
+painchance 0
+mass 999999999
++NOBLOOD
++NOGRAVITY
++FLOATBOB
++DONTBLAST
+States
+{
+Spawn:
+TERU A 0
+TERU A 0 ThrustThingZ(0,30,0,1)
+TERU A 30
+TERU A 0 A_Stop
+TERU A 1
+Goto Spin
+Spin:
+TERU ABCD 5
+loop
+Death.ThunderBolt:
+Death.ThunderBeam:
+Death.ThunderClaw:
+Death:
+TERU A 0 ACS_Execute(1,0)
+Goto Dropping
+
+Death.FreezeCracker:
+Death.FreezeCrackerBit:
+Death.IceSlasher:
+Death.IceWave: //How this would even work?
+Death.IceType:
+Death.Blizzara:
+Death.Blizzara2:
+Death.BlizzardAttack:
+TERU A 0 ACS_Execute(1,0,1)
+Goto Dropping
+
+Dropping:
+TERU A 0 A_ChangeFlag("NOGRAVITY",1)
+TERU EEEFGHIIII 6
+TERU I 1 A_ChangeFlag("NOGRAVITY",0)
+Goto Dead
+Dead:
+TERU I 1 A_JumpIf(floorz-z==0,"Bye")
+loop
+Bye:
+TERU I 0
+stop
+}
+}
+
+actor ImOnFiyah
+{
++MISSILE
++RIPPER
++NOGRAVITY
++NOINTERACTION
+States
+{
+Spawn:
+TNT1 A 20
+TNT1 A 0 A_GiveToTarget("OnFiyahDamage",1)
+TNT1 A 20
+TNT1 A 0 A_GiveToTarget("OnFiyahDamage",1)
+TNT1 A 20
+TNT1 A 0 A_GiveToTarget("OnFiyahDamage",1)
+TNT1 A 20
+TNT1 A 0 A_GiveToTarget("ImNotOnFiyahNow",1)
+stop
+}
+}
+
+actor OnFiyahDamage : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 DamageThing(4)
+stop
+}
+}
+
+actor ImNotOnFiyahNow : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+States
+{
+Spawn:
+TNT1 A 0
+stop
+Pickup:
+TNT1 A 0 SetPlayerProperty(0,0,4)
+TNT1 A 0 A_TakeInventory("FiyahVision",1)
+TNT1 A 0 A_ChangeFlag("SHOOTABLE",1)
+stop
+}
+}
+
+actor FiyahVision : PowerSpeed
+{
+Powerup.Duration 1200
+Powerup.Color Red, 0.5
+}
+
+actor PowerNOONEGETSHURTBUTTHEBOSS : PowerProtection
+{
+Powerup.Duration 0x7FFFFFFF
+damagefactor "Peekaboo", 1.0
+damagefactor "Scared", 1.0
+damagefactor "CaveStory", 1.0
+damagefactor "Clone", 1.0
+damagefactor "instagib", 1.0
+damagefactor "WilyFire", 1.0
+damagefactor "Scrooge", 1.0
+damagefactor "Slender", 1.0
+damagefactor "Falling", 1.0
+damagefactor "Drowning", 1.0
+damagefactor "Slime", 1.0
+damagefactor "Fire", 1.0
+damagefactor "Crush", 1.0
+damagefactor "Beam", 1.0
+damagefactor "Spiney", 1.0
+damagefactor "Torchic", 1.0
+damagefactor "Treecko", 1.0
+damagefactor "Mudkip", 1.0
+damagefactor "MudkipWooshWoosh", 1.0
+damagefactor "BusterRodG", 1.0
+damagefactor "MegaWaterS", 1.0
+damagefactor "HyperStormH", 1.0
+damagefactor "BusterRodGFire", 1.0
+damagefactor "BusterRodGIce", 1.0
+damagefactor "BusterRodGElec", 1.0
+damagefactor "DioFlash", 1.0
+damagefactor "Normal", 0.0
+damagefactor "ElectricType", 0.0
+damagefactor "Aururinite", 0.0
+damagefactor "Annihilation", 0.0//forever alone =(
+damagefactor "ThunderType", 0.0
+}

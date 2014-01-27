@@ -1,0 +1,112 @@
+actor YukkuriReimu
+{
+MONSTER
+health 40
+obituary "%o was made to take it easy by a \cjYukkuri \cgReimu!"
+Translation "192:192=179:179,198:198=4:4"
++DONTBLAST
+-COUNTKILL
++FRIENDLY
++SHOOTABLE
++ACTIVATEMCROSS
+-NOBLOCKMONST
++NOBLOOD
++NEVERRESPAWN
++NOINFIGHTING
+speed 50
+scale 2.5
+Radius 20
+SeeSound "weapon/YukkuriAttack"
+PainSound "weapon/YukkuriPain"
+DeathSound "weapon/YukkuriDeath"
+AttackSound "weapon/YukkuriAttack"
+PainChance 256
+ReactionTime 256
+Height 25
+meleerange 120
+MaxStepHeight 64
+MaxDropOffHeight 64
+damagefactor "FirePalm", 2.0
+damagefactor "FireType", 2.0
+states
+{
+Spawn:
+YUKK A 3 A_Look
+loop
+See:
+YUKK BCDE 5 A_Chase
+goto See
+Melee:
+YUKK F 4 A_FaceTarget
+YUKK F 0 A_PlaySoundEX("weapon/YukkuriAttack","weapon")
+TNT1 A 0 A_JumpIfCloser(60, "Melee2")
+TNT1 A 0 ThrustThingZ(0,30,0,1)
+TNT1 A 0 A_FaceTarget
+TNT1 A 0 A_Recoil (-10)
+YUKK F 6 
+TNT1 A 0 A_FaceTarget
+YUKK F 6 A_CustomMissile("YukkuriAttack2",10,0,0,0)
+Goto See
+Melee2:
+YUKK E 4 A_FaceTarget
+YUKK F 0 A_PlaySoundEX("weapon/YukkuriAttack","weapon")
+YUKK F 4 A_CustomMissile("YukkuriAttack",10,0,0,0)
+YUKK E 4 
+Goto See
+Pain:
+YUKK H 1 A_PlaySoundEX("weapon/YukkuriPain","weapon")
+YUKK H 10 A_Stop
+YUKK H 2 A_Pain
+Goto See
+Death:
+YUKK H 1 A_PlaySoundEX("weapon/YukkuriDeath","weapon")
+YUKK H 0 A_NoBlocking
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,0,2,90)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,0,2,-90)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,90,2,45)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,-90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,-90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,-90,2,45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,0,2,90)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,0,2,-90)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,90,2,45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,-90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,-90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,-90,2,45)
+PLAY Z -1
+stop
+}
+}
+
+actor YukkuriAttack
+{
+PROJECTILE
+Damage (10)
+Radius 10
+Height 18
+Speed 20
+damagetype "KnightCrush"
+Obituary "%o's was Forced to take it easy by %k's Pet Yukkuri Reimu!"
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 4
+stop
+Death:
+TNT1 A 0
+TNT1 A 0
+Stop
+}
+}
+
+ACTOR YukkuriAttack2: YukkuriAttack
+{
+	DamageType "KnightCrush"
+	Obituary "%o's was Forced to take it easy by %k's Pet Yukkuri Reimu!"
+    Damage (5)
+}

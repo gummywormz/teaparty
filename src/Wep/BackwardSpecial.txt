@@ -1,0 +1,252 @@
+actor BackwardSpecial : MegaBuster 25702
+{
+Weapon.AmmoUse 0
+Weapon.AmmoGive 112
+Weapon.SlotNumber 1
+Obituary "%o was defeated by %k."
+Inventory.Pickupmessage "%k cracks his knuckles."
+weapon.ammotype "SmashFistsAmmo"
+inventory.pickupsound "weapon/weaponup"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
+inventory.icon "BACKWI"
+Scale 2.0
+States
+{
+Spawn:
+CLWP E 1
+loop
+Ready:
+IDLS C 0 ACS_ExecuteAlways(998,0,203)
+IDLS C 1 A_WeaponReady
+IDLS C 3
+IDLS C 1 A_GiveInventory("NormalAttack",3)
+Goto Ready+1
+Ready2:
+IDLS C 0 ACS_ExecuteAlways(998,0,0)
+IDLS C 0 ACS_ExecuteAlways(991,0,0)
+IDLS C 0 A_TakeInventory("SkullCrackerCharge",999)
+IDLS C 0 A_TakeInventory("SmashSlow", 999)
+IDLS C 1 A_GiveInventory("NormalAttack",3)
+IDLS C 2 A_WeaponReady
+Goto Ready2+2
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+IDLS C 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+IDLS C 1 A_Raise
+Loop
+Fire:
+IDLS C 0 A_GiveInventory("FistAttack",1)
+IDLS A 0 SetPlayerProperty(0,0,0)
+IDLS A 0 A_JumpIfInventory("NormalAttack",3,"FirstPunch")
+IDLS A 0 A_JumpIfInventory("NormalAttack",2,"SecondPunch")
+IDLS A 0 A_JumpIfInventory("NormalAttack",1,"ThirdKick")
+IDLS C 9
+IDLS C 1 A_GiveInventory("NormalAttack",3)
+IDLS C 0 A_Refire
+Goto Ready2+1
+FirstPunch:
+STEF A 2 A_TakeInventory("NormalAttack",1)
+STEF B 1 A_PlaySoundEx("Smash/Punch","Smash")
+STEF C 0 A_FireCustomMissile("SmashGrapple",0,1,0,0)
+STEF C 2 A_FireCustomMissile("SmashFists",0,1,0,0)
+STEF C 2 SetPlayerProperty(0,0,0)
+STEF B 2
+STEF A 2 
+IDLS C 0 A_Refire
+Goto Ready2+1
+SecondPunch:
+STEF A 2 A_TakeInventory("NormalAttack",1)
+STEF D 1 A_PlaySoundEx("Smash/Punch","Smash")
+STEF E 0 A_FireCustomMissile("SmashGrapple",0,1,0,0)
+STEF E 2 A_FireCustomMissile("SmashFists",0,1,0,0)
+STEF E 2 SetPlayerProperty(0,0,0)
+IDLS C 1
+IDLS C 0 A_Refire
+Goto Ready2+1
+ThirdKick:
+SKIC C 3 A_TakeInventory("NormalAttack",1)
+SKIC B 1 A_PlaySoundEx("Smash/Punch","Smash")
+SKIC D 0 A_FireCustomMissile("SmashFoot",0,1,0,0)
+SKIC A 4
+SKIC D 2
+SKIC B 2
+SKIC C 2
+IDLS C 1 A_TakeInventory("FistAttack",1)
+IDLS C 0 A_Refire
+Goto Ready2+1
+AttackEnd:
+IDLS C 1
+IDLS C 0 A_Refire
+Goto Ready+1
+altfire: //Smashing Decent
+IDLS B 1 A_JumpIf(z-floorz<=0, "GroundAttack")
+IDLS C 0 A_GiveInventory("FistAttack",1)
+IDLS A 0 A_JumpIfNoAmmo("NoAmmo")
+IDLS A 0 SetPlayerProperty(0,1,0)
+IDLS A 0 
+SKIC C 5 A_ChangeFlag("NOGRAVITY",1)
+SKIC B 1 A_PlaySoundEx("Smash/Punch","Smash")
+SKIC D 0 SetPlayerProperty(0,0,0)
+SKIC D 0 A_SpawnItemEx("SmashKick",0,1,0,0)
+SKIC D 0 SetPlayerProperty(0,1,4)
+SKIC D 1 A_SetAngle(angle-20.0)
+SKIC D 1 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 1 A_SetAngle(angle-20.0)
+SKIC D 1 A_SetAngle(angle-20.0)
+SKIC A 4
+SKIC D 0
+SKIC B 1 A_PlaySoundEx("Smash/Punch","Smash")
+SKIC B 2 A_SpawnItemEx("SmashKick",0,1,0,0)
+SKIC B 1 A_SetAngle(angle-20.0)
+SKIC C 1 A_SetAngle(angle-20.0)
+SKIC B 0 A_SetAngle(angle-20.0)
+SKIC B 1 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 0 A_SetAngle(angle-20.0)
+SKIC D 1 A_SetAngle(angle-20.0)
+SKIC D 1 A_SetAngle(angle-20.0)
+SKIC D 1 A_SetAngle(angle-20.0)
+SKIC D 1 A_SetAngle(angle-20.0)
+SKIC A 4
+SKIC B 1
+SKIC B 2 A_ChangeFlag("NOGRAVITY",0)
+SKIC C 0 A_PlaySoundEx("Smash/GroundPound1","Smash")
+SKIC C 0 A_Recoil(-145)
+SKIC C 3 ThrustThingZ(0,-115,0,0)
+Goto Dive
+Dive:
+SKIC C 0 A_Recoil(-3)
+SKIC C 0 ThrustThingZ(0,-115,0,0)
+SKIC C 0 A_FireCustomMissile("SmashDive",0,1,0,0)
+SKIC C 1 A_JumpIf(z-floorz<=0, "Land2")
+loop
+Land2:
+SKIC C 0 A_PlaySoundEx("Smash/GroundPound2","Smash")
+SKIC C 0 A_Stop
+SKIC C 2 A_FireCustomMissile("StompWave",0,1,0,0)
+SKIC C 0 A_Recoil(-10)
+SKIC C 2 A_ChangeFlag("NOGRAVITY",0)
+SKIC C 10
+SKIC C 1 SetPlayerProperty(0,0,4)
+IDLS A 0 A_TakeInventory("BasicArmor",9999)
+IDLS C 20 A_TakeInventory("FistAttack",1)
+IDLS C 0 A_Refire
+SKIC C 1 SetPlayerProperty(0,0,4)
+IDLS A 0 A_TakeInventory("BasicArmor",9999)
+IDLS C 20 A_TakeInventory("FistAttack",1)
+IDLS C 0 A_GiveInventory("NormalAttack",3)
+IDLS C 0 A_Refire
+Goto Ready+1
+GroundAttack: //Skull Cracker
+IDLS C 0 A_JumpIfNoAmmo("AltHold")
+IDLS C 0 A_TakeInventory("SkullCrackerCharge",999)
+STEF A 2 A_TakeInventory("NormalAttack",1)
+STEF B 1 A_PlaySoundEx("Smash/Punch","Smash")
+STEF C 2 A_FireCustomMissile("SmashFists",0,1,0,0)
+STEF C 2 A_FireCustomMissile("SmashFists",0,1,0,0)
+STEF B 2 SetPlayerProperty(0,0,0)
+STEF A 7 
+IDLS C 0 A_GiveInventory("NormalAttack",3)
+IDLS C 0 A_Refire
+goto Ready2+1
+Fire2:
+IDLS C 0 
+IDLS C 0 A_TakeInventory("SkullCrackerCharge",999)
+IDLS C 0 SetPlayerProperty(0,0,0)
+IDLS A 3 A_Recoil(-10)
+STEF A 3
+STEF B 0 A_PlaySoundEx("Smash/criticalhit","Smash")
+STEF B 0 A_Stop
+STEF D 1 A_FireCustomMissile("SevenStars",0,1,0,0)
+STEF E 0 A_TakeInventory("BasicArmor",9999)
+STEF E 3 A_Recoil(-3)
+IDLS C 0 SetPlayerProperty(0,0,4)
+IDLS C 0 A_GiveInventory("NormalAttack",3)
+STEF A 5 A_TakeInventory("CutterFlag", 999)
+goto Ready2+1
+Fire3:
+IDLS C 0 A_TakeInventory("SmashSlow", 999) 
+IDLS C 0 A_TakeInventory("SkullCrackerCharge",999)
+IDLS A 0 A_GiveInventory("FistAttack",1)
+IDLS A 0 A_JumpIfNoAmmo("NoAmmo")
+IDLS A 0 SetPlayerProperty(0,1,0)
+IDLS A 0 A_PlaySoundEx("Smash/Dash","Smash")
+IDLS A 3 A_Recoil(-10)
+SKCR A 0 A_TakeInventory("BasicArmor",9999)
+SKCR A 3
+SKCR A 2 
+SKCR B 1 
+SKCR C 0 A_Stop
+SKCR C 2 A_FireCustomMissile("SkullCracker",0,1,0,0)
+SKCR C 0 A_FireCustomMissile("SkullCracker",0,1,0,0)
+SKCR C 0 A_Recoil(-3)
+SKCR C 2 SetPlayerProperty(0,0,0)
+SKCR D 2 A_TakeInventory("CutterFlag", 999)
+IDLS C 0 A_GiveInventory("NormalAttack",3)
+STEF A 15
+goto Ready2+1
+AltHold:
+STEF A 0 A_JumpIfInventory("CutterFlag",666,"Charge2")
+STEF A 0 A_JumpIfInventory("SkullCrackerCharge",52,"FullCharge")
+STEF A 0 A_JumpIfInventory("SkullCrackerCharge",5,"Charge1")
+STEF A 0 A_JumpIfInventory("SkullCrackerCharge",4,"Charge")
+STEF A 1 A_GiveInventory("SkullCrackerCharge",1)
+STEF A 0 A_Refire
+Goto Fire+1
+Charge:
+STEF A 0 A_JumpIfInventory("CutterFlag",666,"Charge2")
+STEF A 0 A_JumpIfInventory("SkullCrackerCharge",52,"FullCharge")
+STEF A 0 A_JumpIfInventory("SkullCrackerCharge",5,"Charge1")
+STEF A 0 //A_PlaySoundEx("weapon/gizchrg","Weapon")
+STEF A 2 
+Goto Charge1
+Charge1:
+STEF A 0 A_JumpIfInventory("CutterFlag",666,"Charge2")
+STEF A 0 A_JumpIfInventory("SkullCrackerCharge",52,"FullCharge")
+STEF A 1 A_GiveInventory("SkullCrackerCharge",1)
+STEF A 2 A_GiveInventory("SkullCrackerCharge",1)
+STEF A 0 
+STEF A 0 A_Refire
+Goto Fire2
+FullCharge:
+STEF A 0 A_StopSoundEx ("Smash")
+STEF A 0 A_PlaySoundEx("Smash/skill","Smash")
+STEF A 0 A_GiveInventory("CutterFlag", 666)
+Goto Charge2
+Charge2:
+STEF A 0 A_GiveInventory("SmashSlow", 1)
+STEF A 0 
+STEF A 1 
+STEF A 1 
+STEF A 1 
+STEF A 0 A_Refire
+Goto Fire3
+}
+}
+

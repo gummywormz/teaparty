@@ -1,0 +1,410 @@
+actor MegaBusterC : Weapon
+{
+Weapon.AmmoUse 1
+Weapon.AmmoGive 3
+Weapon.SlotNumber 1
+scale 2.0
+Obituary "%o was bombed by %k's Mega Buster."
+Inventory.Pickupmessage "You got the Mega Buster!"
+weapon.ammotype "BusterAmmo"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
+States
+{
+Spawn:
+WEAP X 1
+stop
+Ready:
+BUST B 0 A_JumpIfInventory("Once",1,"Ready2")
+BUST B 0 ACS_ExecuteAlways(981,0,0)
+BUST B 0 A_GiveInventory("Once",1)
+Goto Ready2+1
+Ready2:
+BUST B 0 ACS_ExecuteAlways(998,0,0)
+BUST B 1 A_WeaponReady
+Goto Ready2+1
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+BUST B 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+BUST B 1 A_Raise
+Loop
+Fire:
+BUST B 0 A_JumpIfNoAmmo("NoAmmo")
+BUST B 0 A_PlaySoundEx("weapon/mbuster","Weapon")
+BUST B 0 A_FireCustomMissile("MegaShot",0,0,8,0)
+BUST CD 3
+BUST B 2
+BUST B 0 A_Refire
+goto Ready2+1
+NoAmmo:
+BUST B 1
+Goto Ready
+}
+}
+
+actor TimeStopperGiverC : TimeStopperGiver replaces TimeStopperGiver
+{
+states
+{
+Pickup:
+DUST B 0 A_JumpIfInventory("TimeStopperWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("TimeStopperWepC",1)
+stop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor FlashStopperGiverC : FlashStopperGiver replaces FlashStopperGiver
+{
+states
+{
+Pickup:
+DUST B 0 A_JumpIfInventory("FlashStopperWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("FlashStopperWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor SkullBarrierGiverC : SkullBarrierGiver replaces SkullBarrierGiver
+{
+states
+{
+Pickup:
+DUST B 0 A_JumpIfInventory("SkullBarrierWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("SkullBarrierWepC",1)
+stop
+}
+}
+
+actor SakugarneGiverC : SakugarneGiver replaces SakugarneGiver
+{
+states
+{
+Pickup:
+DUST B 0 A_JumpIfInventory("SakugarneWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("SakugarneWepC",1)
+stop
+}
+}
+
+actor OilSliderWepC : OilSliderWep //replaces OilSliderWep
+{
+}
+
+actor TimeSlowWepC : TimeSlowWep //replaces TimeSlowWep
+{
+}
+
+actor AstroCrushWepC : AstroCrushWep //replaces AstroCrushWep
+{
+}
+
+actor ChargeKickWepC : ChargeKickWep //replaces ChargeKickWep
+{
+}
+
+actor LeafShieldWepC : LeafShieldWep //replaces LeafShieldWep
+{
+}
+
+actor JunkShieldWepC : JunkShieldWep //replaces JunkShieldWep
+{
+}
+
+actor StarCrashWepC : StarCrashWep //replaces StarCrashWep
+{
+}
+
+actor SuperArmWepC : SuperArmWep //replaces SuperArmWep
+{
+}
+
+actor SkullBarrierWepC : SkullBarrierWep //replaces SkullBarrierWep
+{
+States
+{
+Ready:
+SKLA A 0 ACS_ExecuteAlways(998,0,34)
+SKLA A 0 ACS_ExecuteAlways(994,0)
+SKLA A 1 A_WeaponReady
+Goto Ready+2
+Fire:
+SKLA A 1 ACS_ExecuteAlways(994,0)
+SKLA A 0 A_JumpIfNoAmmo("Hold")
+SKLA A 0 //A_TakeInventory("BasicArmor",9999)
+SKLA A 0 A_ChangeFlag("SHOOTABLE",0)
+SKLA A 0 A_ChangeFlag("DONTRIP",1)
+SKLA A 0 A_GiveInventory("ShieldCheck",1)
+SKLA IJ 2 
+Goto BarrierActive
+}
+}
+
+actor PlantBarrierWepC : PlantBarrierWep //replaces PlantBarrierWep
+{
+}
+
+actor ScorchWheelWepC : ScorchWheelWep //replaces ScorchWheelWep
+{
+}
+
+actor DangerWrapWepC : DangerWrapWep //replaces DangerWrapWep
+{
+}
+
+actor NoiseCrushWepC : NoiseCrushWep //replaces NoiseCrushWep
+{
+}
+
+actor ThunderBoltWepC : ThunderBoltWep //replaces ThunderBoltWep
+{
+}
+
+actor WildCoilWepC : WildCoilWep //replaces WildCoilWep
+{
+}
+
+actor SlashClawWepC : SlashClawWep //replaces SlashClawWep
+{
+}
+
+actor AirShooterWepC : AirShooterWep //replaces AirShooterWep
+{
+}
+
+actor AtomicFireWepC : AtomicFireWep //replaces AtomicFireWep
+{
+}
+
+actor BalladeCrackerWepC : BalladeCrackerWep //replaces BalladeCrackerWep
+{
+}
+
+actor BlizzardAttackWepC : BlizzardAttackWep //replaces BlizzardAttackWep
+{
+}
+
+actor BubbleLeadWepC : BubbleLeadWep //replaces BubbleLeadWep
+{
+}
+
+actor CentaurFlashWepC : CentaurFlashWep //replaces CentaurFlashWep
+{
+}
+
+actor CrashBombWepC : CrashBombWep //replaces CrashBombWep
+{
+}
+
+actor CrystalEyeWepC : CrystalEyeWep //replaces CrystalEyeWep
+{
+}
+
+actor DiveMissileWepC : DiveMissileWep //replaces DiveMissileWep
+{
+}
+
+actor DrillBombWepC : DrillBombWep //replaces DrillBombWep
+{
+}
+
+actor DustCrusherWepC : DustCrusherWep //replaces DustCrusherWep
+{
+}
+
+actor FireStormWepC : FireStormWep //replaces FireStormWep
+{
+}
+
+actor FlameBlastWepC : FlameBlastWep //replaces FlameBlastWep
+{
+}
+
+actor FlashStopperWepC : FlashStopperWep //replaces FlashStopperWep
+{
+}
+
+actor FreezeCrackerWepC : FreezeCrackerWep //replaces FreezeCrackerWep
+{
+}
+
+actor GeminiLaserWepC : GeminiLaserWep //replaces GeminiLaserWep
+{
+}
+
+actor GravityHoldWepC : GravityHoldWep //replaces GravityHoldWep
+{
+}
+
+actor GyroAttackWepC : GyroAttackWep //replaces GyroAttackWep
+{
+}
+
+actor HardKnuckleWepC : HardKnuckleWep //replaces HardKnuckleWep
+{
+}
+
+actor HyperBombWepC : HyperBombWep //replaces HyperBombWep
+{
+}
+
+actor IceSlasherWepC : IceSlasherWep //replaces IceSlasherWep
+{
+}
+
+actor KnightCrushWepC : KnightCrushWep //replaces KnightCrushWep
+{
+}
+
+actor MagnetMissileWepC : MagnetMissileWep //replaces MagnetMissileWep
+{
+}
+
+actor MetalBladeWepC : MetalBladeWep //replaces MetalBladeWep
+{
+}
+
+actor MirrorBusterWepC : MirrorBusterWep //replaces MirrorBusterWep
+{
+}
+
+actor NapalmBombWepC : NapalmBombWep //replaces NapalmBombWep
+{
+}
+
+actor NeedleCannonWepC : NeedleCannonWep //replaces NeedleCannonWep
+{
+}
+
+actor PharaohShotWepC : PharaohShotWep //replaces PharaohShotWep
+{
+}
+
+actor PowerStoneWepC : PowerStoneWep //replaces PowerStoneWep
+{
+}
+
+actor QuickBoomerangWepC : QuickBoomerangWep //replaces QuickBoomerangWep
+{
+}
+
+actor RainFlushWepC : RainFlushWep //replaces RainFlushWep
+{
+}
+
+actor RingBoomerangWepC : RingBoomerangWep //replaces RingBoomerangWep
+{
+}
+
+actor RollingCutterWepC : RollingCutterWep //replaces RollingCutterWep
+{
+}
+
+actor SakugarneWepC : SakugarneWep //replaces SakugarneWep
+{
+}
+
+actor ScrewCrusherWepC : ScrewCrusherWep //replaces ScrewCrusherWep
+{
+}
+
+actor SearchSnakeWepC : SearchSnakeWep //replaces SearchSnakeWep
+{
+}
+
+actor ShadowBladeWepC : ShadowBladeWep //replaces ShadowBladeWep
+{
+}
+
+actor SilverTomahawkWepC : SilverTomahawkWep //replaces SilverTomahawkWep
+{
+}
+
+actor SparkShockWepC : SparkShockWep //replaces SparkShockWep
+{
+}
+
+actor ThunderBeamWepC : ThunderBeamWep //replaces ThunderBeamWep
+{
+}
+
+actor TimeStopperWepC : TimeStopperWep //replaces TimeStopperWep
+{
+States
+{
+TimeStop:
+TIMS A 9 A_TakeInventory("TimeStopperAmmo",1)
+TIMS A 0 A_JumpIfInventory("TimeStopperAmmo",1,"TimeStop")
+TIMS A 0 ACS_Terminate(986,0)
+TIMS A 2 ACS_Execute(987,0)
+TIMS A 3 ACS_Execute(587,0)
+Goto Ready
+}
+}
+
+actor TopSpinWepC : TopSpinWep //replaces TopSpinWep
+{
+}
+
+actor WaterWaveWepC : WaterWaveWep //replaces WaterWaveWep
+{
+}
+
+actor WindStormWepC : WindStormWep //replaces WindStormWep
+{
+}
+
+actor YamatoSpearWepC : YamatoSpearWep //replaces YamatoSpearWep
+{
+}
+
+actor MegaBallWepC : MegaBallWep //replaces MegaBallWep
+{
+}
+
+actor FlameSwordWepC : FlameSwordWep //replaces FlameSwordWep
+{
+}
+
+actor FlashBombWepC : FlashBombWep //replaces FlashBombWep
+{
+}
+
+actor HomingSniperWepC : HomingSniperWep //replaces HomingSniperWep
+{
+}
+
+actor IceWaveWepC : IceWaveWep //replaces IceWaveWep
+{
+}
+
+actor ThunderClawWepC : ThunderClawWep //replaces ThunderClawWep
+{
+}
+
+actor TornadoHoldWepC : TornadoHoldWep //replaces TornadoHoldWep
+{
+}
+
+actor WaterBalloonWepC : WaterBalloonWep //replaces WaterBalloonWep
+{
+}

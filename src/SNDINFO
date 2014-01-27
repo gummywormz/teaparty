@@ -1,0 +1,113 @@
+//Zard
+$playersound	Zard1084 male	*death		TOHODEAD
+$playersound	Zard1084 male	*xdeath		TOHOOVKL
+$playersound	Zard1084 male	*gibbed		TOHOOVKL
+$playersound	Zard1084 male	*pain100	MEGAPAIN
+$playersound	Zard1084 male	*pain75		MEGAPAIN
+$playersound	Zard1084 male	*pain50		MEGAPAIN
+$playersound	Zard1084 male	*pain25		MEGAPAIN
+$playersound	Zard1084 male	*grunt		LAND
+$playersound	Zard1084 male	*land		LAND
+$playersound	Zard1084 male	*jump		ZARDJUMP
+$playersound	Zard1084 male	*fist		dsnone
+$playersound	Zard1084 male	*usefail	LAND
+$playersound	Zard1084 male	*taunt		SPARTA
+
+weapon/ZardLaserShot   ZARDSHOT
+weapon/ZardCrossSword  claw
+weapon/Freezebreak   ICEWBRAK
+weapon/ZardGunCharge   bdoor
+weapon/ZardGunChargeFull   BOMBTIC
+weapon/ZardAirJump   ZARDJUMP
+weapon/YukkuriAttack   YUKKATCK
+weapon/YukkuriPain   MEGAPAIN
+weapon/YukkuriDeath   YUKKDEAD
+
+//Proto
+$playersound	PR01SND	male	*death		MEGADEAT
+$playersound	PR01SND	male	*xdeath		MEGADEAT
+$playersound	PR01SND	male	*gibbed		MEGADEAT
+$playersound	PR01SND	male	*pain100	MEGAPAIN
+$playersound	PR01SND	male	*pain75		MEGAPAIN
+$playersound	PR01SND	male	*pain50		MEGAPAIN
+$playersound	PR01SND	male	*pain25		MEGAPAIN
+$playersound	PR01SND	male	*grunt		LAND
+$playersound	PR01SND	male	*land		LAND
+$playersound	PR01SND	male	*jump		dsnone
+$playersound	PR01SND	male	*fist		dsnone
+$playersound	PR01SND	male	*usefail	LAND
+$playersound	PR01SND	male	*taunt		PROTMUS7
+
+weapon/chidori1	CHDRIS1
+weapon/chidori2	CHDRIS2
+
+//Dakutatoru
+$playersound	DakuMan male	*death		DAKUDEAD
+$playersound	DakuMan male	*xdeath		DAKUDEAD
+$playersound	DakuMan male	*gibbed		DAKUDEAD
+$playeralias	DakuMan male	*pain100	Daku/Pain
+$playeralias	DakuMan male	*pain75		Daku/Pain
+$playeralias	DakuMan male	*pain50		Daku/Pain
+$playeralias	DakuMan male	*pain25		Daku/Pain
+$playersound	DakuMan male	*grunt		LAND
+$playersound	DakuMan male	*land		LAND
+$playersound	DakuMan male	*jump		dsnone
+$playersound	DakuMan male	*fist		dsnone
+$playersound	DakuMan male	*usefail	LAND
+$playeralias	DakuMan male	*taunt		Daku/Taunt
+
+DAKUPAI1   DAKUPAI1
+DAKUPAI2   DAKUPAI2
+BUTTSCKS   BUTTSCKS
+BAWTSCKS   BAWTSCKS
+BUTTBAG   BUTTBAG
+BUTTNUMB   BUTTNUMB
+DANCINC   DANCINC
+FCKAWF   FCKAWF
+HAHASFCK   HAHASFCK
+
+$Random Daku/Taunt { BUTTSCKS BAWTSCKS BUTTBAG BUTTNUMB DANCINC FCKAWF HAHASFCK }
+$Random Daku/Pain { DAKUPAI1 DAKUPAI2 }
+
+//Smash
+Smash/punch1      Punch1
+Smash/punch2      Punch2
+Smash/punch4      Punch4
+Smash/punch5      Punch5
+Smash/punch6      Punch9
+Smash/punch7      Punch14
+Smash/punch8      PunchBC
+Smash/punch9      PunchSS
+Smash/punch10      PunchSC
+Smash/punch11      PunchUSC
+
+$random Smash/punch { Smash/Punch1 Smash/Punch2 }
+
+Smash/criticalhit      Punch3
+Smash/criticalhit2      CritHit
+Smash/criticalhit3      ShinKill
+Smash/SkullCracker      HITHARD
+Smash/VulcanJab      Jab
+Smash/SpiritBlast1      SPIRIT
+Smash/SpiritBlast2      BLAST
+Smash/GroundPound1      GRNDPND1
+Smash/GroundPound2      GRNDPND2
+Smash/Dash      Dash
+Smash/Skill      Skill
+Smash/Eat      Eat
+Smash/SmashItem      SABox
+Smash/SmashItem2      SAEMBLM
+Smash/SmashItem3      SALIFE
+
+$playersound	"Smash" 	male	*taunt		dsnone
+$playersound	"Smash" 	male	*death		SONICDIE
+$playersound    "Smash" 	male    *xdeath     SONICDIE
+$playersound	"Smash" 	male	*pain100	MEGAPAIN
+$playersound    "Smash" 	male	*pain75		MEGAPAIN
+$playersound    "Smash" 	male	*pain50		MEGAPAIN
+$playersound    "Smash"  	male	*pain25		MEGAPAIN
+$playersound	"Smash" 	male	*land		SONICLND
+$playersound	"Smash" 	male	*usefail	SONICLND
+$playersound	"Smash" 	male	*jump   	SONICJMP
+$playersound	"Smash"	    male	*gibbed		SONICDIE
+$playersound	"Smash" 	male	*grunt		NONE

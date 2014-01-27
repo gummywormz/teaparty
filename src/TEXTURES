@@ -1,0 +1,123 @@
+graphic FRONTI, 175, 50
+{
+   XScale 2.0
+   YScale 2.0
+   Patch FRNTE0, 0, 0
+}
+
+graphic STANDI, 175, 50
+{
+   XScale 2.0
+   YScale 2.0
+   Patch STNDE0, 0, 0
+}
+
+graphic BACKWI, 200, 50
+{
+   XScale 2.0
+   YScale 2.0
+   Patch BACKE0, 0, 0
+}
+
+graphic SIDEWI, 175, 50
+{
+   XScale 2.0
+   YScale 2.0
+   Patch SIDEE0, 0, 0
+}
+
+graphic SPIRII, 175, 50
+{
+   XScale 2.0
+   YScale 2.0
+   Patch SPIRE0, 0, 0
+}
+
+graphic ZDGN, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch ZDGNA0, 0, 0
+}
+texture ZARDBAR2, 56, 8
+{
+patch ZARDBAR, 0, 0 {rotate 90}
+}
+
+graphic ZDIC, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch ZDICA0, 0, 0
+}
+texture ZDSWBAR2, 56, 8
+{
+patch ZDSWBAR, 0, 0 {rotate 90}
+}
+
+graphic ZRSD, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch ZRSDP0, 0, 0
+}
+texture ZDSWBAR2, 56, 8
+{
+patch ZDSWBAR, 0, 0 {rotate 90}
+}
+
+graphic PROTOSI, 32, 32
+{
+   XScale 2.0
+   YScale 2.0
+   Patch WEAPU0, 0, 0
+}
+
+Graphic PABMA0, 32, 32
+{
+	XScale 2.0
+	YScale 2.0
+	Patch PABMA0, 0, 0
+}
+
+Graphic FSFZA0, 32, 32
+{
+	XScale 2.0
+	YScale 2.0
+	Patch FSFZA0, 0, 0
+}
+
+Graphic RTEAA0, 32, 32
+{
+	XScale 2.0
+	YScale 2.0
+	Patch RTEAA0, 0, 0
+}
+
+Graphic LTEAA0, 32, 32
+{
+	XScale 2.0
+	YScale 2.0
+	Patch LTEAA0, 0, 0
+}
+
+graphic AJUMA0, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch AJUMA0, 0, 0
+}
+
+graphic WJUMA0, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch WJUMA0, 0, 0
+}
+
+graphic YUKKI0, 30, 30
+{
+   XScale 2.0
+   YScale 2.0
+   Patch YUKKI0, 0, 0
+}

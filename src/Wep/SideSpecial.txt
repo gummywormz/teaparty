@@ -1,0 +1,202 @@
+actor SideSpecial : MegaBuster 25703
+{
+Weapon.AmmoUse 0
+Weapon.AmmoGive 112
+Weapon.SlotNumber 1
+Obituary "%o was defeated by %k."
+Inventory.Pickupmessage "%k cracks his knuckles."
+weapon.ammotype "SmashFistsAmmo"
+inventory.pickupsound "weapon/weaponup"
++WEAPON.AMMO_OPTIONAL
++WEAPON.DONTBOB
+inventory.icon "SIDEWI"
+Scale 2.0
+States
+{
+Spawn:
+CLWP E 1
+loop
+Ready:
+IDLS C 0 A_JumpIfInventory("Once",1,"Ready2")
+IDLS C 0 ACS_ExecuteAlways(481,0,0)
+IDLS C 0 A_GiveInventory("Once",1)
+Goto Ready2
+Ready2:
+IDLS C 0 ACS_ExecuteAlways(998,0,203)
+IDLS C 1 A_WeaponReady
+IDLS C 3
+IDLS C 1 A_GiveInventory("NormalAttack",3)
+Goto Ready2+1
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+IDLS C 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+IDLS C 1 A_Raise
+Loop
+Fire:
+IDLS C 0 A_GiveInventory("FistAttack",1)
+IDLS A 0 SetPlayerProperty(0,0,0)
+IDLS A 0 A_JumpIfInventory("NormalAttack",3,"FirstPunch")
+IDLS A 0 A_JumpIfInventory("NormalAttack",2,"SecondPunch")
+IDLS A 0 A_JumpIfInventory("NormalAttack",1,"ThirdKick")
+IDLS C 9
+IDLS C 1 A_GiveInventory("NormalAttack",3)
+IDLS C 0 A_Refire
+Goto Ready2+1
+FirstPunch:
+STEF A 2 A_TakeInventory("NormalAttack",1)
+STEF B 1 A_PlaySoundEx("Smash/Punch","Smash")
+STEF C 0 A_FireCustomMissile("SmashGrapple",0,1,0,0)
+STEF C 2 A_FireCustomMissile("SmashFists",0,1,0,0)
+STEF C 2 SetPlayerProperty(0,0,0)
+STEF B 2
+STEF A 2 
+IDLS C 0 A_Refire
+Goto Ready2+1
+SecondPunch:
+STEF A 2 A_TakeInventory("NormalAttack",1)
+STEF D 1 A_PlaySoundEx("Smash/Punch","Smash")
+STEF E 0 A_FireCustomMissile("SmashGrapple",0,1,0,0)
+STEF E 2 A_FireCustomMissile("SmashFists",0,1,0,0)
+STEF E 2 SetPlayerProperty(0,0,0)
+IDLS C 1
+IDLS C 0 A_Refire
+Goto Ready2+1
+ThirdKick:
+SKIC C 3 A_TakeInventory("NormalAttack",1)
+SKIC B 1 A_PlaySoundEx("Smash/Punch","Smash")
+SKIC D 0 A_FireCustomMissile("SmashFoot",0,1,0,0)
+SKIC A 4
+SKIC D 2
+SKIC B 2
+SKIC C 2
+IDLS C 1 A_TakeInventory("FistAttack",1)
+IDLS C 0 A_Refire
+Goto Ready2+1
+AttackEnd:
+IDLS C 1
+IDLS C 0 A_Refire
+Goto Ready+1
+altfire:
+IDLS B 1 A_JumpIf(z-floorz<=0, "GroundAttack")
+IDLS C 0 A_GiveInventory("FistAttack",1)
+IDLS A 0 A_JumpIfNoAmmo("NoAmmo")
+IDLS A 0 
+IDLS A 1 ThrustThingZ(0,13,0,0)
+IDLS A 5 A_ChangeFlag("NOGRAVITY",1)
+SPIN E 1 A_JumpIfNoAmmo("NoAmmo")
+SPIN E 0 A_TakeInventory("TopSpinAmmo", 5)
+SPIN E 0 A_TakeInventory("JumpCancler", 1)
+SPIN E 0 A_PlaySoundEx("weapon/topspin","Weapon")
+SPIN E 0 A_GiveInventory("SpinTime",1)
+SPIN E 0 A_SpawnItemEx("SpinFist",8,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+SPIN E 0 A_SetAngle(angle-20.0) 
+SPIN E 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN A 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN A 0 A_SetAngle(angle-20.0) 
+SPIN A 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN B 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN A 0 A_SpawnItemEx("SpinFist",8,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+SPIN A 0 A_SetAngle(angle-20.0) 
+SPIN A 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN A 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN A 0 A_SetAngle(angle-20.0) 
+SPIN A 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN B 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN A 0 A_SpawnItemEx("SpinFist",8,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+SPIN A 0 A_SetAngle(angle-20.0) 
+SPIN A 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN B 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN A 0 A_SetAngle(angle-20.0) 
+SPIN A 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN B 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN A 0 A_SpawnItemEx("SpinFist",8,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+SPIN A 0 A_SetAngle(angle-20.0) 
+SPIN A 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN B 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN A 0 A_SetAngle(angle-20.0) 
+SPIN A 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN B 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+IDLS A 0 ThrustThingZ(0,13,0,0)
+SPIN B 0 A_SpawnItemEx("SpinFist",8,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+SPIN B 0 A_SetAngle(angle-20.0) 
+SPIN B 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN C 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN B 0 A_SetAngle(angle-20.0) 
+SPIN B 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN C 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN B 0 A_SpawnItemEx("SpinFist",8,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+SPIN B 0 A_SetAngle(angle-20.0) 
+SPIN B 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN C 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN B 0 A_SetAngle(angle-20.0) 
+SPIN B 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN C 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN B 0 A_SpawnItemEx("SpinFist",8,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+SPIN B 0 A_SetAngle(angle-20.0) 
+SPIN B 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN C 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN B 0 A_SetAngle(angle-20.0) 
+SPIN B 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN C 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN B 0 A_SpawnItemEx("SpinFist",8,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+SPIN B 0 A_SetAngle(angle-20.0) 
+SPIN B 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN C 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+SPIN B 0 A_SetAngle(angle-20.0) 
+SPIN B 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+SPIN C 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+Spin:
+TNT1 A 0 A_SpawnItemEx("SpinFist",8,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+TNT1 A 0 A_SetAngle(angle-20.0) 
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+TNT1 A 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+TNT1 A 0 A_SetAngle(angle-20.0) 
+TNT1 A 0 A_JumpIfInventory("CutterFlag",999,"Ready")
+TNT1 A 1 A_JumpIf(z-floorz<=0, "SpinEnd")
+TNT1 A 0 A_GiveInventory("CutterFlag", 1)
+TNT1 A 0 A_JumpIfInventory("CutterFlag", 15, "MomentumCheck")
+Goto SpinEnd
+MomentumCheck:
+TNT1 A 0 A_JumpIfInventory("StrongSpring", 1, "Spin")
+TNT1 A 0 A_TakeInventory("CutterFlag", 15)
+TNT1 A 0 A_JumpIf(momz==0, "SpinEnd")
+Goto Spin
+SpinEnd:
+SPIN B 0 A_TakeInventory("SpinTime",1)
+SPIN BCD 1 ACS_Execute(979,0)
+SPIN D 0 A_TakeInventory("CutterFlag", 15)
+IDLS C 0 SetPlayerProperty(0,0,4)
+IDLS C 0 A_ChangeFlag("NOGRAVITY",0)
+IDLS C 30
+IDLS C 0 A_Refire
+Goto Ready2+1
+GroundAttack: //BoneCrusher
+IDLS A 0 A_GiveInventory("FistAttack",1)
+IDLS A 0 A_JumpIfNoAmmo("NoAmmo")
+IDLS A 0 SetPlayerProperty(0,1,0)
+IDLS A 3 A_Recoil(-4)
+BNCR ABC 1
+BNCR C 2 
+BNCR D 1 A_PlaySoundEx("Smash/Punch","Smash")
+BNCR D 0 A_FireCustomMissile("BoneCrusher2",0,1,0,0)
+BNCR DE 2 
+BNCR E 2 SetPlayerProperty(0,0,0)
+BNCR F 2
+BNCR G 2
+BNCR H 2 A_Recoil(-2)
+BNCR I 1 A_PlaySoundEx("Smash/Punch","Smash")
+BNCR J 2 A_FireCustomMissile("BoneCrusher1",0,1,0,0)
+BNCR J 2 SetPlayerProperty(0,0,0)
+IDLS C 1
+IDLS A 0 SetPlayerProperty(0,0,0)
+STEF A 35
+IDLS C 5 A_TakeInventory("FistAttack",1)
+IDLS A 0 A_GiveInventory("NormalAttack",3)
+IDLS A 0 A_Refire
+Goto Ready2+1
+}
+}
+

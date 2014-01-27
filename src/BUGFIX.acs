@@ -1,0 +1,40 @@
+//Wall jump angling
+int JumpAngByte;
+int TotalAngles;
+
+script 160 (void)
+{
+	SetActivatorToTarget(0);
+	JumpAngByte = 0;
+	TotalAngles = 0;
+    if (CheckInventory("WallN") && !CheckInventory("WallS")) {
+		JumpAngByte += 128;
+		TotalAngles++;
+	}
+    if (/*CheckInventory("WallS") &&*/ !CheckInventory("WallN")) {
+		JumpAngByte += 256;
+		TotalAngles++;
+	}
+	if (CheckInventory("WallE") && !CheckInventory("WallW")) {
+	    JumpAngByte += 64;
+		TotalAngles++;
+	}
+	if (CheckInventory("WallW") && !CheckInventory("WallE")) {
+	    JumpAngByte += 192;
+		TotalAngles++;
+	}
+	if (/*CheckInventory("WallS") && */ !CheckInventory("WallN") && CheckInventory("WallE") && !CheckInventory("WallW")) { //Somewhere, a mathematician is crying.
+	    JumpAngByte = 32;
+		TotalAngles = 1;
+	}
+	if (TotalAngles>0) {
+		JumpAngByte /= TotalAngles;
+		if (CheckInventory("QuickBoomerangBoss")) {
+			//ThrustThing(((GetActorAngle(0) >> 8) + JumpAngByte),12,1);
+			ThrustThing(((GetActorAngle(0) >> 8) + JumpAngByte),11,1);
+			//ThrustThing(((GetActorAngle(0) >> 8) + JumpAngByte),10,1);
+		} else {
+			ThrustThing(((GetActorAngle(0) >> 8) + JumpAngByte),10,1);
+		}
+	}
+}

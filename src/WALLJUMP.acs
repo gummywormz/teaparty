@@ -1,0 +1,92 @@
+#include "zcommon.acs"
+#library "walljump"
+
+int buttons2[32];
+int fallingplayer[32];
+
+// Jump Canceling script. Very awkward but it works somewhat!
+//
+script 977 ENTER
+{
+if(PlayerIsBot(PlayerNumber())){terminate;}
+  while (TRUE)
+  {
+    buttons2[PlayerNumber()] = GetPlayerInput(-1, INPUT_BUTTONS);
+	//if(GetActorZ (0) - GetActorFloorZ (0)==0.0)
+	if(GetActorVelZ(0)==0.0 || (GetActorZ (0) - GetActorFloorZ (0)==0.0))
+	{
+	GiveInventory("JumpCancler",1);
+	GiveInventory("BoostFlag", 1);
+	//print(s:"You're grounded!");
+	
+	if(CheckInventory("CanWallJump")){
+		GiveInventory("Stamina",5);
+	}
+	TakeInventory("NoJump",999);
+	}
+	
+	if(GetActorVelZ(0)<0.0)
+	{
+	TakeInventory("JumpCancler",1);
+	//print(s:"You're falling!");
+	}
+	fallingplayer[ActivatorTID()] = GetActorZ (0);
+	
+	if(CheckInventory("JumpCancler")>0){
+	//print(s:"You let go but are already falling!");
+    if (GetPlayerInput(-1, INPUT_OLDBUTTONS) == GetPlayerInput(-1, INPUT_BUTTONS) + BT_JUMP )
+    {
+	TakeInventory("JumpCancler",1);
+    //  print(s:"You let go!");
+	  ThrustThingZ(0,0,0,0);
+    }}
+	
+if(!CheckInventory("FlightDisableFlag")){
+
+	if(CheckWeapon("SuperAdaptorWep")==1){
+	if(CheckInventory("NoBoost")==0){
+	if(CheckInventory("JumpCancler")==0){
+    if (GetPlayerInput(-1, INPUT_OLDBUTTONS) == GetPlayerInput(-1, INPUT_BUTTONS) - BT_JUMP && CheckInventory("BoostFlag")==1 && CheckInventory("RushJetCounter")<1)
+		{
+		GiveInventory("Boosting",1);
+		TakeInventory("BoostFlag", 1);
+		}
+	}
+	}
+	}
+	
+	if(CheckInventory("BassBusterC")==1){
+	if(CheckInventory("NoJump")==0){
+	if(CheckInventory("JumpCancler")==0){
+    if (GetPlayerInput(-1, INPUT_OLDBUTTONS) == GetPlayerInput(-1, INPUT_BUTTONS) - BT_JUMP )
+    {
+	GiveInventory("Jumping",1);
+    }
+	}
+	}
+	}
+	if(CheckInventory("CanWallJump")){
+	if(CheckInventory("NoJump")==0){
+	if(CheckInventory("JumpCancler")==0){
+    if (GetPlayerInput(-1, INPUT_OLDBUTTONS) == GetPlayerInput(-1, INPUT_BUTTONS) - BT_JUMP )
+    {
+	GiveInventory("WallJumping",1);
+    }
+	}
+	}
+	}
+	
+}
+	
+	if(CheckInventory("OnCeilingFlag")==1){
+    if (GetPlayerInput(-1, INPUT_OLDBUTTONS) == GetPlayerInput(-1, INPUT_BUTTONS) - BT_JUMP )
+    {
+	GiveInventory("ReverseJump",1);
+	}
+	}
+
+    delay(1);
+		
+  }
+
+}

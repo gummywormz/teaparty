@@ -1,0 +1,486 @@
+#include "zcommon.acs"
+#library "170499"
+
+int timestop=0;
+int IHM=0;
+
+//should be merged
+
+script 137 RESPAWN //Bot weapons. Making a bot force using a special weapon to make it be stable and not suck.
+{
+	if(PlayerIsBot(PlayerNumber()))
+	{
+	if(CheckInventory("DLVBuster")>0){TakeInventory("DLVBuster",255); GiveInventory("DLVBusterBot",1);}
+	}
+}
+
+script 597 ENTER
+{
+// If instagib is enabled, give respective IG weapon.
+if(GetCvar("instagib")==1){
+//if the player is Proto's class.
+if(CheckInventory("ChidoreWep")==1){
+TakeInventory("ChidoreWep",1);
+TakeInventory("Proto01Buster",1);
+GiveInventory("AmaterasuWep",1);
+}
+//If the player is Light's class
+if(CheckInventory("PureLightWep")==1){
+TakeInventory("PureLightWep",1);
+GiveInventory("IGPureLightSword",1);
+}
+
+//AAANND if your any other class.
+if(CheckInventory("ZardGun")==1){
+TakeInventory("ZardGun",1);
+TakeInventory("DanmakuBoomerangWep",1);
+GiveInventory("IGMetalBladeWep",1);
+}
+if(CheckInventory("GemBuster")==1){
+TakeInventory("GemBuster",1);
+GiveInventory("IGMetalBladeWep",1);
+}
+if(CheckInventory("RocketJumpWep")==1){
+TakeInventory("RocketJumpWep",1);
+TakeInventory("ShurikenBuster",1);
+GiveInventory("IGMetalBladeWep",1);
+}
+if(CheckInventory("PhotonCannonWep")==1){
+TakeInventory("PhotonCannonWep",1);
+GiveInventory("IGMetalBladeWep",1);
+}
+if(CheckInventory("ClaytonWep")==1){
+TakeInventory("ClaytonWep",1);
+TakeInventory("Claytonwep2",1);
+TakeInventory("Claytonwep3",1);
+GiveInventory("IGMetalBladeWep",1);
+}
+if(CheckInventory("ForwardSpecial")==1){
+TakeInventory("ForwardSpecial",1);
+TakeInventory("StandardSpecial",1);
+TakeInventory("BackwardSpecial",1);
+TakeInventory("SideSpecial",1);
+GiveInventory("IGMetalBladeWep",1);
+}
+if(CheckInventory("GlitchField")==1){
+TakeInventory("GlitchField",1);
+GiveInventory("IGMetalBladeWep",1);
+}
+if(CheckInventory("ToastCannonWep")==1){
+TakeInventory("ToastCannonWep",1);
+GiveInventory("IGMetalBladeWep",1);
+}
+if(CheckInventory("NeoVariX")==1){
+TakeInventory("IGMetalBladeWep",1);
+}
+
+}}
+
+script 996 RESPAWN
+{
+// Execute the ENTER script above
+ACS_ExecuteAlways(994,0);
+ACS_ExecuteAlways(597,0);
+ACS_ExecuteAlways(188,0);
+//As well as stopping any regen scripts from carrying over
+ACS_Terminate(515, 0);
+ACS_Terminate(516, 0);
+ACS_Terminate(520, 0);
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1){
+ACS_Terminate(500, 0);
+ACS_Terminate(501, 0);
+ACS_Terminate(510, 0);
+}
+}
+
+script 994 (void)
+{
+if(PlayerIsBot(PlayerNumber())){
+if(CheckInventory("TimeStopperWepC")>0){
+TakeInventory("TimeStopperWepC",1);
+GiveInventory("MegaBusterC",1);
+SetWeapon("MegaBusterC");
+}
+if(CheckInventory("SkullBarrierWepC")>0){
+TakeInventory("SkullBarrierWepC",1);
+GiveInventory("MegaBusterC",1);
+SetWeapon("MegaBusterC");
+}
+if(CheckInventory("JunkShieldWepC")>0){
+TakeInventory("JunkShieldWepC",1);
+GiveInventory("MegaBusterC",1);
+SetWeapon("MegaBusterC");
+}
+if(CheckInventory("PlantBarrierWepC")>0){
+TakeInventory("PlantBarrierWepC",1);
+GiveInventory("MegaBusterC",1);
+SetWeapon("MegaBusterC");
+}
+SetPlayerProperty(0,1,4);
+Delay(1);
+SetPlayerProperty(0,0,4);
+}}
+
+script 987 DEATH
+{
+	// Check if the guy who died stopped time
+	if(timestop==PlayerNumber()){
+	ACS_Terminate(986,0); // Stop the flashy effects on the HUD for all players
+	HudMessageBold(s:""; HUDMSG_PLAIN,50,CR_UNTRANSLATED,0.0,0.0,0.1);
+	SetWeapon("MegaBuster");
+	Delay(1);
+	SetPlayerProperty(1,0,4);
+	TakeInventory("PowerTimeFreezer",1);
+	TakeInventory("TimeFreezer",1);
+	TakeInventory("TimeStopperWepC",1);
+	timestop=0;
+	ACS_Terminate(193,0); //
+	}
+	
+	// Stop the HUD effects
+	HudMessageBold(s:""; HUDMSG_PLAIN,50,CR_UNTRANSLATED,0.0,0.0,0.1);
+	//ACS_Terminate(986,0);
+}
+
+script 983 ENTER
+{
+	if(PlayerIsBot(PlayerNumber())){
+		if(timestop==0){
+		// Give the bot the special "stair checker" actor
+		GiveInventory("CreateBotBuddy",1);
+		// And infinite ammo
+		GiveInventory("WeaponEnergy",50);
+		Delay(1);
+		
+		// If CutterFlag is 999, the player is dead, so terminate this script
+		if(CheckInventory("CutterFlag")==999){terminate;}
+		
+		Restart;
+		}
+	}
+}
+
+// Duplicate of the above for RESPAWN
+//
+script 982 RESPAWN
+{
+ACS_ExecuteAlways(983,0);
+}
+
+str RangedWep[19]={
+"BlizzardAttackWepC",
+"SparkShockWepC",
+"FireStormWepC",
+"DustCrusherWepC",
+"ThunderBeamWepC",
+"GyroAttackWepC",
+"DiveMissileWepC",
+"SilverTomahawkWepC",
+"MagnetMissileWepC",
+"GeminiLaserWepC",
+"ThunderBoltWepC",
+"FreezeCrackerWepC",
+"NoiseCrushWepC",
+"GeminiLaserWepC",
+"SearchSnakeWepC",
+"IceWaveWepC",
+"ThunderBoltWepC",
+"FreezeCrackerWepC",
+"HomingSniperWepC"
+};
+str RapidWep[8]={
+"QuickBoomerangWepC",
+"IceSlasherWepC",
+"WaterWaveWepC",
+"MetalBladeWepC",
+"ScrewCrusherWepC",
+"YamatoSpearWepC",
+"NeedleCannonWepC",
+"WaterBalloonWepC"
+};
+str CloseWep[19]={
+"BubbleLeadWep",
+"WindStormWepC",
+"CrystalEyeWepC",
+"PowerStoneWepC",
+"RingBoomerangWepC",
+"RollingCutterWepC",
+"ChargeKickWepC",
+"FlameBlastWepC",
+"WildCoilWepC",
+"ShadowBladeWepC",
+"KnightCrushWepC",
+"TopSpinWepC",
+"AirShooterWepC",
+"SlashClawWepC",
+"TornadoHoldWepC",
+"ThunderClawWepC",
+"FlameSwordWepC",
+"MegaBallWepC",
+"OilSliderWepC"
+};
+str PowerWep[11]={
+"PharaohShotWepC",
+"SuperArmWepC",
+"AtomicFireWepC",
+"HardKnuckleWepC",
+"CrashBombWepC",
+"NapalmBombWepC",
+"HyperBombWepC",
+"DangerWrapWepC",
+"DrillBombWepC",
+"BalladeCrackerWepC",
+//"AstroCrushWepC",
+"FlashBombWepC"
+};
+str ShieldWep[8]={
+"StarCrashWepC",
+"LeafShieldWepC",
+"MirrorBusterWepC",
+"PlantBarrierWepC",
+"SkullbarrierWepC",
+"JunkShieldWepC",
+"ScorchWheelWepC",
+"SakuGarneWepC"
+};
+
+str ItemStart[5]={
+"ParalizingBeamspellUseItem",
+"FlashFreezespellUseItem",
+"SummonYukkuriUseItem",
+"RecoveryTea",
+"LifeTea"
+};
+
+str ItemStart2[3]={
+"Soda",
+"HotDog",
+"Pizza"
+};
+
+global int 0:RangedWepRandom;
+global int 1:RapidWepRandom;
+global int 2:CloseWepRandom;
+global int 3:PowerWepRandom;
+global int 4:ShieldWepRandom;
+global int 8:ItemStartRandom;
+global int 9:ItemStart2Random;
+
+// LMS Weapon Randomization
+//
+script 981 (void)
+{
+// Check if the game is actually LMS
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1){
+	// Ignore if game is set to instagib
+	if(GetCvar("instagib")==1){terminate;}
+	
+	Delay(5);
+	
+	// Take bots Mega Buster so they actually use a different weapon (limited to ranged weapon at present)
+	if(PlayerIsBot(PlayerNumber())){
+		TakeInventory("MegaBuster",1);
+	}
+	
+	// Give players one of each weapon type at random
+	GiveInventory(ShieldWep[ShieldWepRandom],1);
+	GiveInventory(RapidWep[RapidWepRandom],1);
+	GiveInventory(CloseWep[CloseWepRandom],1);
+	GiveInventory(PowerWep[PowerWepRandom],1);
+	GiveInventory(RangedWep[RangedWepRandom],1);
+	
+	Delay(1);
+	
+	// Give the bot the Mega Buster back
+	if(PlayerIsBot(PlayerNumber())){
+		GiveInventory("MegaBuster",1);
+	}
+}
+}
+
+// A script to generate random numbers for LMS weapons
+//
+script 980 OPEN
+{
+	Delay(1);
+	RangedWepRandom = Random(0,18);
+	RapidWepRandom = Random(0,7);
+	CloseWepRandom = Random(0,18);
+	PowerWepRandom = Random(0,10);
+	ShieldWepRandom = Random(0,7);
+}
+
+script 482 (void)
+{
+// Check if the game is actually LMS
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1||GetCvar("invasion")==1){
+	// Ignore if game is set to instagib
+	if(GetCvar("instagib")==1){terminate;}
+	Delay(5);
+	GiveInventory(ItemStart[ItemStartRandom],5);
+	Delay(1);
+	TakeInventory("FlashFreezespellUseItem",4);
+	TakeInventory("SummonYukkuriUseItem",4);
+	TakeInventory("RecoveryTea",4);
+	TakeInventory("LifeTea",4);
+	GiveInventory("AirJump",3);
+	GiveInventory("TornadoJump",1);
+	}
+terminate;	
+}
+
+script 481 (void)
+{
+// Check if the game is actually LMS
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1||GetCvar("invasion")==1){
+	// Ignore if game is set to instagib
+	if(GetCvar("instagib")==1){terminate;}
+	Delay(5);
+	GiveInventory(ItemStart2[ItemStart2Random],3);
+	TakeInventory("HotDog",1);
+	TakeInventory("Pizza",2);
+	Delay(1);
+	}
+terminate;	
+}
+
+script 480 OPEN
+{
+	Delay(1);
+	ItemStartRandom = Random(0,4);
+	ItemStart2Random = Random(0,2);
+}
+
+script 587 (void)
+{
+TakeInventory("PowerTimeFreezer",1);
+TakeInventory("TimeFreezer",1);
+TakeInventory("TimeStopperWepC",1);
+terminate;
+}
+
+script 500 (void)
+{
+if(CheckInventory("GTankChecker")==0){terminate;}
+GiveInventory("WeaponCharge",1);
+Delay(13);
+GiveInventory("WeaponCharge",1);
+GiveInventory("ManaPoints",1);
+Delay(12);
+GiveInventory("WeaponCharge",1);
+HealThing(1);
+restart;
+}
+
+script 501 (void)
+{
+if(CheckInventory("STankChecker")==0){terminate;}
+GiveInventory("ManaPoints",3);
+Delay(17);
+GiveInventory("WeaponCharge",1);
+GiveInventory("ManaPoints",2);
+Delay(18);
+GiveInventory("ManaPoints",3);
+Delay(17);
+GiveInventory("WeaponCharge",1);
+GiveInventory("ManaPoints",2);
+Delay(18);
+GiveInventory("ManaPoints",3);
+Delay(17);
+GiveInventory("WeaponCharge",1);
+GiveInventory("ManaPoints",2);
+Delay(18);
+GiveInventory("ManaPoints",3);
+Delay(17);
+GiveInventory("WeaponCharge",1);
+GiveInventory("ManaPoints",2);
+Delay(18);
+HealThing(1);
+restart;
+}
+
+script 502 (void)
+{
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1||GetCvar("invasion")==1){
+	if(GetCvar("instagib")==1){terminate;}
+	Delay(5);
+	TakeInventory("SpellGiver",1);
+	GiveInventory("ElementalSpellGiver",1);
+	GiveInventory("SpellGiverEddie",2);
+	GiveInventory("STank",1);
+	Delay(1);
+}
+terminate;
+}
+
+script 506 (void)
+{
+Delay(1);
+Radius_Quake(5,25,0,10,0);
+Delay(24);
+terminate;
+}
+
+script 507 (void)
+{
+Delay(1);
+Radius_Quake(7,10,0,16,0);
+Delay(9);
+terminate;
+}
+
+script 508 (void)
+{
+Delay(1);
+Radius_Quake(5,10,0,32,0);
+Delay(4);
+terminate;
+}
+
+script 509 (void)
+{
+Delay(1);
+Radius_Quake(10,10,0,64,0);
+Delay(9);
+terminate;
+}
+
+script 510 (void)
+{
+if(CheckInventory("LifeSupportItem")==0){terminate;}
+HealThing(1);
+Delay(35);
+HealThing(1);
+Delay(25);
+restart;
+}
+
+script 515 (void)
+{
+if(CheckInventory("SmashHealthChecker")==0){terminate;}
+HealThing(1);
+TakeInventory("SmashHealthChecker",1);
+Delay(1);
+restart;
+}
+
+script 516 (void)
+{
+if(CheckInventory("HealthCountFlag")==0){terminate;}
+HealThing(1);
+TakeInventory("HealthCountFlag",1);
+Delay(7);
+restart;
+}
+
+script 520 (void)
+{
+if(GetCvar("lastmanstanding")==1||GetCvar("teamlms")==1||GetCvar("invasion")==1){
+	if(GetCvar("instagib")==1){terminate;}
+	Delay(5);
+	GiveInventory("LifeSupportItem",1);
+	ACS_Execute(510,0);
+	Delay(1);
+}
+terminate;
+}

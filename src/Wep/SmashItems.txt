@@ -1,0 +1,216 @@
+actor Soda : CustomInventory
+{
+//$Category MM8BDM-Assists
+inventory.amount 1
+//Inventory.RespawnTics 350
+inventory.maxamount 3
+inventory.pickupmessage "You got a can of Soda."// I didn't forget, but whatever. (Smash)
+inventory.icon "SODAI"
+Inventory.PickupSound "Smash/SmashItem"
++INVBAR
++COUNTITEM
+scale 2.0
+States
+{
+Spawn:
+SODA A 0 
+SODA A 0 A_JumpIf(ACS_ExecuteWithResult(975,0)==3,"Death")
+SODA A 0 Thing_ChangeTID(0,999)
+SODA A 6
+Goto Spawn+3
+Use:
+SODA A 0 A_JumpIfHealthLower(100,"Success")
+fail
+Success:
+SODA A 0 A_PlaySound("item/energyup")
+SODA A 0 A_PlaySoundEx("Smash/Eat","Voice")
+SODA A 0 A_GiveInventory("SmashHealthChecker",30)
+SODA A 0 ACS_ExecuteAlways(515)
+stop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor HotDog : CustomInventory
+{
+//$Category MM8BDM-Assists
+inventory.amount 1
+//Inventory.RespawnTics 350
+inventory.maxamount 2
+inventory.pickupmessage "You got a Hot Dog. Yum."
+inventory.icon "HOTDI"
+Inventory.PickupSound "Smash/SmashItem"
++INVBAR
++COUNTITEM
+scale 2.0
+States
+{
+Spawn:
+HOTD A 0 
+HOTD A 0 A_JumpIf(ACS_ExecuteWithResult(975,0)==3,"Death")
+HOTD A 0 Thing_ChangeTID(0,999)
+HOTD A 6
+Goto Spawn+3
+Use:
+HOTD A 0 A_JumpIfHealthLower(100,"Success")
+fail
+Success:
+HOTD A 0 A_PlaySound("item/energyup")
+HOTD A 0 A_PlaySoundEx("Smash/Eat","Voice")
+HOTD A 0 A_GiveInventory("SmashHealthChecker",60)
+HOTD A 0 ACS_ExecuteAlways(515)
+stop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor Pizza : CustomInventory
+{
+//$Category MM8BDM-Assists
+inventory.amount 1
+//Inventory.RespawnTics 350
+inventory.maxamount 1
+inventory.pickupmessage "You got a Slice of Pizza! Delicious!"
+inventory.icon "PIZZA"
+Inventory.PickupSound "Smash/SmashItem"
++INVBAR
++COUNTITEM
+scale 2.0
+States
+{
+Spawn:
+PIZA A 0 
+PIZA A 0 A_JumpIf(ACS_ExecuteWithResult(975,0)==3,"Death")
+PIZA A 0 Thing_ChangeTID(0,999)
+PIZA A 6
+Goto Spawn+3
+Use:
+PIZA A 0 A_JumpIfHealthLower(100,"Success")
+fail
+Success:
+PIZA A 0 A_PlaySound("item/energyup")
+PIZA A 0 A_PlaySoundEx("Smash/Eat","Voice")
+PIZA A 0 A_GiveInventory("SmashHealthChecker",90)
+PIZA A 0 ACS_ExecuteAlways(515)
+stop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor UltraSmasherClawsUpgrade : CustomInventory 
+{
+Inventory.RespawnTics 350
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "Support Item! 'Ultra Smasher Claws' Upgrade!"
+inventory.icon "USCUPI"
+Inventory.PickupSound "Smash/SmashItem3"
+scale 1.8
++COUNTITEM
++INVBAR
+states
+{
+Spawn:
+WEA7 Q 0
+WEA7 Q 1 A_JumpIf(ACS_ExecuteWithResult(975,0)==3,"Death")
+WEA7 Q 1
+loop
+Use:
+WEA7 Q 0 A_PlaySoundEx("Smash/SmashItem1","Voice")
+WEA7 Q 0 A_PlaySoundEx("Smash/SmashItem2","Misc")
+WEA7 Q 0 A_GiveInventory("StandardSpecialUSC",1)
+WEA7 Q 0 A_GiveInventory("ForwardSpecialUSC",1)
+WEA7 Q 0 A_GiveInventory("BackwardSpecialUSC",1)
+WEA7 Q 0 A_GiveInventory("SideSpecialUSC",1)
+WEA7 Q 0 A_TakeInventory("StandardSpecial",1)
+WEA7 Q 0 A_TakeInventory("ForwardSpecial",1)
+WEA7 Q 0 A_TakeInventory("BackwardSpecial",1)
+WEA7 Q 0 A_TakeInventory("SideSpecial",1)
+WEA7 Q 0 A_SelectWeapon("StandardSpecialUSC")
+WEA3 A 0 A_TakeInventory("UltraSmasherClawsUpgrade",1)
+stop
+Death:
+TNT1 A 0
+Stop
+}
+}
+
+actor Springboard : CustomInventory
+{
+//$Category MM8BDM-Assists
+//Inventory.RespawnTics 300
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "Support Item! Spring board!"
+inventory.icon "RCOIL"
+Inventory.PickupSound "Smash/SmashItem"
+scale 2.0
++COUNTITEM
++INVBAR
+states
+{
+Spawn:
+WEAP B 1
+loop
+Use:
+WEAP B 0 A_PlaySoundEx("Smash/","Voice")
+WEAP B 0 A_SpawnItemEx("YellowSpring", 40, 0, 256, 0, 0, -32, 0, SXF_NOCHECKPOSITION, 0)
+stop
+}
+}
+
+actor YellowSpring
+{
+- SOLID
++NOGRAVITY
++MISSILE
++DONTBLAST
++NOCLIP
++SKYEXPLODE
+speed 0
+scale 2.5
+Radius 12
+Height 32
+reactiontime 250
+meleerange 80
+states
+{
+Spawn:
+YSPR A 0 A_Jump(256,"Death")
+YSPR A 1 A_ChangeFlag("MISSILE",0)
+YSPR A 1 
+YSPR A 1 //A_PlaySound("support/rushsummon")
+YSPR A 1 A_JumpIf(z-floorz<=0, "Look")
+Goto Spawn+4
+Look:
+RUSH E 0 A_ChangeFlag("NOCLIP",0)
+RUSH EF 2
+YSPR A 1 A_Chase
+YSPR A 0 A_CountDown
+Goto Look+3
+Melee:
+YSPR B 1 A_JumpIfInTargetInventory("StrongSpring",1,"Melee2")
+YSPR BCDCB 18 A_GiveToTarget("SpringActivate",1)
+YSPR A 0 A_Die
+Goto Death
+Melee2:
+YSPR BCDCB 18 A_GiveToTarget("SpringActivate2",1)
+YSPR A 0 A_Die
+Goto Death
+Death:
+RUSH F 0 A_SpawnItemEx("RushDeath",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION)
+stop
+}
+}
+
+Actor SmashHealthChecker : Inventory
+{
+inventory.amount 1
+inventory.maxamount 90
+} 

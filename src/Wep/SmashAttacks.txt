@@ -1,0 +1,1004 @@
+actor SmashFists
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 45
+Height 16
+scale 2.5
+damage (12)
+damagetype "VulcanJab"
+Obituary "%o was punched by %k."
+speed 15
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 0
+TNT1 H 2
+stop
+}
+}
+
+actor SmasherClaws
+{
+PROJECTILE
+Radius 5
+Height 5
+scale 2.5
+damage (14)
+damagetype "USmasherClaws"
+Obituary "%o was overwhelmed by %k's Ultra Smasher Claws."
+speed 15
+States
+{
+Spawn:
+TNT1 H 0
+TNT1 H 0
+SCLA HIJKL 1 A_Explode(1,80,0)
+stop
+}
+}
+
+actor SmashFoot
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 45
+Height 16
+scale 2.5
+damage (13)
+damagetype "RendingKick"
+Obituary "%o collapsed before %k could finish his special move."
+speed 15
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 1
+stop
+}
+}
+
+actor SmashElbow
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 45
+Height 16
+scale 2.5
+damage (13)
+damagetype "BCrusher"
+Obituary "%o was kicked by %k."
+speed 15
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 1
+stop
+}
+}
+
+actor SmashGrappleBK
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 3
+Height 5
+scale 2.5
+damage (0)
+damagetype "ThunderClaw"
+speed 15
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 1 A_Explode(0,90,0)
+stop
+}
+}
+
+actor SmashGrapple
+{
+PROJECTILE
+//+RIPPER
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++PIERCEARMOR
++FORCEXYBILLBOARD
+damage (1)
+damagetype "ThunderClaw"
+height 8
+radius 14
+Speed 26
+scale 2.5
+states
+{
+Spawn:
+TNT1 H 1
+TNT1 H 1
+TNT1 H 1
+TNT1 H 1
+TNT1 H 1 
+stop
+Death:
+TNT1 H 0
+stop
+}
+}
+
+actor RendingPunch
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 24
+Height 24
+scale 1.5
+damage (3)
+damagetype "VulcanJab"
+Obituary "%o was run down by %k's Rending Charge."
+speed 40
+States
+{
+Spawn:
+CKIC D 0
+CKIC D 0 
+CKIC DEF 2
+stop
+}
+}
+
+actor RendingSmasher
+{
+PROJECTILE
+Radius 14
+Height 25
+scale 2.5
+damage (3)
+damagetype "USmasherClaws"
+Obituary "%o was run down by %k's Rending Charge."
+speed 15
+States
+{
+Spawn:
+CKIC D 0
+CKIC D 0 
+CKIC DEF 2 A_Explode(1,80,0) 
+stop
+}
+}
+
+actor Uppercut
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++RIPPER
+Radius 8
+Height 5
+scale 2.5
+damage (0)
+damagetype "Uppercut"
+speed 15
+Obituary "%o was knocked out by %k's uppercut."
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 1 A_Explode(6,90,0)
+stop
+}
+}
+
+actor Uppercut2
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++RIPPER
+Radius 20
+Height 5
+scale 2.5
+damage (0)
+damagetype "Uppercut"
+speed 15
+Obituary "%o was skyrocketed by %k's Super Uppercut."
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 1 A_Explode(8,90,0)
+stop
+}
+}
+
+actor USCUppercut
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++RIPPER
+Radius 8
+Height 5
+scale 2.5
+damage (0)
+damagetype "USCUppercut"
+speed 15
+Obituary "%o was knocked out by %k's uppercut."
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 1 A_Explode(9,90,0)
+stop
+}
+}
+
+actor ComboStun
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 10
+Height 5
+scale 2.5
+damage (1)
+damagetype "SmashCombo"
+Obituary "%o collapsed before %k could finish his special move."
+speed 15
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 1 A_Explode(10,90,0)
+stop
+}
+}
+
+actor QuickBlow
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 10
+Height 5
+scale 2.5
+damage (1)
+damagetype "SmashCombo"
+Obituary "%o was swiftly dealt with by %k's Quick Blow."
+speed 15
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 1 A_Explode(5,90,0)
+stop
+}
+}
+
+actor UltraUppercut
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++RIPPER
+Radius 20
+Height 5
+scale 2.5
+damage (0)
+damagetype "UltraUppercut"
+speed 15
+Obituary "%o couldn't stand up to %k's Shin Shoryuken."
+States
+{
+Spawn:
+TNT1 H 0 
+BOMB BCDEFGHIJKLMNOPQR 1 A_Explode(3,120,0)
+stop
+}
+}
+
+actor AntiAir1
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 20
+Height 5
+scale 2.5
+damage (10)
+damagetype "AntiAir1"
+speed 15
+Obituary "%o was knocked outta the air by %k's Eagle Killer."
+States
+{
+Spawn:
+TNT1 H 0
+TNT1 H 1 A_Explode(15,90,0)
+stop
+}
+}
+
+actor AntiAir2
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 20
+Height 5
+scale 2.5
+damage (35)
+damagetype "AntiAir2"
+speed 15
+Obituary "%o was knocked outta the air by %k's Eagle Killer."
+States
+{
+Spawn:
+TNT1 H 0
+TNT1 H 1 A_Explode(15,90,0)
+stop
+}
+}
+
+actor RendingKick1
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 14
+Height 25
+scale 2.5
+damage (3)
+damagetype "RendingKick"
+Obituary "%o was run down by %k's Rending Charge."
+speed 40
+States
+{
+Spawn:
+CKIC D 1 ThrustThingZ(0, 14, 0, 1)
+CKIC E 1 ThrustThingZ(0, 14, 0, 1)
+CKIC F 1 ThrustThingZ(0, 14, 0, 1)
+CKIC F 2
+stop
+}
+}
+
+actor RendingKick2
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 24
+Height 24
+scale 2.5
+damage (3)
+damagetype "RendingKick"
+Obituary "%o was run down by %k's Rending Charge."
+speed 40
+States
+{
+Spawn:
+CKIC D 0
+CKIC D 0 
+CKIC DEF 2
+stop
+}
+}
+
+actor RendingKick3
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 24
+Height 25
+scale 2.5
+damage (3)
+damagetype "RendingKick"
+Obituary "%o was run down by %k's Rending Charge."
+speed 40
+States
+{
+Spawn:
+CKIC D 1 ThrustThingZ(0, -14, 0, 1)
+CKIC E 1 ThrustThingZ(0, -14, 0, 1)
+CKIC F 1 ThrustThingZ(0, -14, 0, 1)
+CKIC F 2
+stop
+}
+}
+
+actor RendingSpin
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 3
+Height 5
+scale 2.5
+damage (2)
++RIPPER
+damagetype "Top"
+Obituary "%o was run down by %k's Rending Charge."
+speed 15
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_Explode(10,56,0)
+stop
+}
+}
+
+actor RendingSpin2
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 24
+Height 24
+scale 2.5
+damage (5)
+damagetype "BCrusher"
+Obituary "%o was run down by %k's Rending Charge."
+speed 40
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0
+TNT1 A 2
+stop
+}
+}
+
+actor RendingSmashSpin
+{
+PROJECTILE
++DONTREFLECT
+Radius 3
+Height 5
+scale 2.5
+damage (10)
++RIPPER
+damagetype "Top"
+Obituary "%o was run down by %k's Rending Charge."
+speed 15
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_Explode(8,40,0)
+stop
+}
+}
+
+actor RendingSmashSpin2
+{
+PROJECTILE
++RIPPER
+Radius 14
+Height 25
+scale 2.5
+damage (10)
+damagetype "USmasherClaws"
+Obituary "%o was run down by %k's Rending Charge."
+speed 40
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0
+TNT1 A 2 A_Explode(8,40,0)
+stop
+}
+}
+
+
+actor SpinFist
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+scale 2.5
+damagetype "TopSpin"
+Obituary "%o was whirled around by %k's Spin Punch."
+Speed 0
+height 0
+radius 0
+States
+{
+Spawn:
+TNT1 A 0
+TOPS A 2 A_Explode(16,80,0)
+stop
+}
+}
+
+actor GroundPound
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++RIPPER
+Radius 22
+Height 25
+scale 2.5
+damage (5)
+damagetype "Top"
+Obituary "%o was stomped by %k's Ground Pound."
+speed 0
+States
+{
+Spawn:
+TNT1 A 0 ThrustThingZ(0,-200,0,0)
+TNT1 A 1 A_Explode(5,50,0)
+loop
+Death:
+TNT1 A 0 ThrustThingZ(0,-200,0,0)
+TNT1 A 1 A_Explode(5,50,0)
+stop
+}
+}
+
+
+actor StompWave
+{
+PROJECTILE
+Obituary "%o was knocked down by %k's Ground Pound."
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 0 A_Explode(20,64,0)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,0)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,15)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,30)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,45)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,60)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,75)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,90)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,105)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,120)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,135)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,150)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,165)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,180)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,195)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,210)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,225)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,240)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,255)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,270)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,285)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,300)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,315)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,330)
+TNT1 A 0 A_SpawnItemEx("DuoShockwavePart2",0,0,0,18,0,0,345)
+stop
+}
+}
+
+actor SpiritBlast
+{
+PROJECTILE
++DONTREFLECT
+Radius 3
+Height 5
+scale 2.5
+damage (50)
+damagetype "DuoFist3"
+speed 5
+Obituary "%o was destroyed by %k's Spirit Blast."
+States
+{
+Spawn:
+BOMB A 0 A_PlaySoundEx("weapon/hyperbomb", "Weapon")
+BOMB A 0 A_ChangeFlag("NOGRAVITY",1)
+BOMB A 0 A_Explode(200, 180, 0)
+BOMB BCDEFGHIJKLMNOPQR 1
+stop
+}
+}
+
+actor SuperSpiritBlast
+{
+PROJECTILE
++DONTREFLECT
+Radius 20
+Height 5
+scale 2.5
+damage (70)
+damagetype "DuoFist3"
+speed 5
+Obituary "%o was destroyed by %k's Spirit Blast."
+States
+{
+Spawn:
+BOMB A 0 A_PlaySoundEx("weapon/hyperbomb", "Weapon")
+BOMB A 0 A_ChangeFlag("NOGRAVITY",1)
+BOMB A 0 A_Explode(250, 250, 0)
+BOMB BCDEFGHIJKLMNOPQR 1
+stop
+}
+}
+
+actor BoneCrusher1
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++RIPPER
+Radius 20
+Height 25
+scale 2.5
+damage (12)
+damagetype "BCrusher"
+Obituary "%o was crippled by %k's Bone Crusher."
+speed 40
+States
+{
+Spawn:
+CKIC D 1 ThrustThingZ(0, -14, 0, 1)
+CKIC E 1 ThrustThingZ(0, -14, 0, 1)
+CKIC F 1 ThrustThingZ(0, -14, 0, 1)
+CKIC F 2 A_Explode(13,90,0)
+stop
+}
+}
+
+actor BoneCrusher2
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++RIPPER
+Radius 20
+Height 25
+scale 2.5
+damage (12)
+damagetype "BCrusher"
+Obituary "%o was crippled by %k's Bone Crusher."
+speed 40
+States
+{
+Spawn:
+CKIC D 1 ThrustThingZ(0, 14, 0, 1)
+CKIC E 1 ThrustThingZ(0, 14, 0, 1)
+CKIC F 1 ThrustThingZ(0, 14, 0, 1)
+CKIC F 2 A_Explode(13,90,0)
+stop
+}
+}
+
+actor BoneCrusher3
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++RIPPER
+Radius 20
+Height 25
+scale 2.5
+damage (5)
+damagetype "USmasherClaws"
+Obituary "%o was crippled by %k's Bone Crusher."
+speed 40
+States
+{
+Spawn:
+CKIC D 1 ThrustThingZ(0, -14, 0, 1)
+CKIC E 1 ThrustThingZ(0, -14, 0, 1)
+CKIC F 1 ThrustThingZ(0, -14, 0, 1)
+CKIC F 2 A_Explode(13,90,0)
+stop
+}
+}
+
+actor BoneCrusher4
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
++RIPPER
+Radius 20
+Height 25
+scale 2.5
+damage (5)
+damagetype "USmasherClaws"
+Obituary "%o was crippled by %k's Bone Crusher."
+speed 40
+States
+{
+Spawn:
+CKIC D 1 ThrustThingZ(0, 14, 0, 1)
+CKIC E 1 ThrustThingZ(0, 14, 0, 1)
+CKIC F 1 ThrustThingZ(0, 14, 0, 1)
+CKIC F 2 A_Explode(13,90,0)
+stop
+}
+}
+
+actor SevenStars
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 10
+Height 5
+scale 2.5
+damage (15)
+damagetype "SevenStars"
+Obituary "%o is seeing Seven Stars after %k's attack."
+speed 15
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 1 A_Explode(30,90,0)
+stop
+}
+}
+
+actor SkullCracker
+{
+PROJECTILE
++RIPPER
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 10
+Height 5
+scale 2.5
+damage (350)
+damagetype "SCracker"
+Obituary "%o's head was split apart by %k's Skull Cracker."
+speed 15
+States
+{
+Spawn:
+TNT1 H 0 
+TNT1 H 1 A_Explode(30,90,0)
+stop
+}
+}
+
+actor DragonSwarm
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 3
+Height 5
+scale 2.5
+damage (0.01)
++RIPPER
+damagetype "Buster"
+Obituary "%o was taken down by %k's Dragon Swarm."
+speed 15
+States
+{
+Spawn:
+TNT1 A 0
+TNT1 A 1 A_Explode(8,40,0)
+stop
+}
+}
+
+actor DragonSwarm2
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 14
+Height 25
+scale 2.5
+damage (3)
+damagetype "RendingKick"
+Obituary "%o was taken down by %k's Dragon Swarm."
+speed 40
+States
+{
+Spawn:
+CKIC D 0
+CKIC D 0 
+CKIC DEF 2
+stop
+}
+}
+
+actor SmashKick
+{
+PROJECTILE
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+Radius 14
+RenderStyle "Translucent"
+Height 25
+scale 2.5
+damage (3)
+damagetype "VulcanJab"
+Obituary "%o destroyed by %k's Smashing Descent."
+speed 40
+States
+{
+Spawn:
+CKIC DEF 0 A_Recoil(-65)
+CKIC DEF 3 ThrustThingZ(0,-115,0,0)
+loop
+death:
+TNT1 A 1 A_Explode(20,50,0)
+stop
+}
+}
+
+actor SmashDive
+{
+PROJECTILE
+scale 2.5
+damagetype "BCrusher"
+Obituary "%o was crushed under %k's Smashing Descent."
+Speed 0
++THRUGHOST
++DONTBLAST
++DONTREFLECT
+height 0
+radius 0
+States
+{
+Spawn:
+TNT1 A 0
+TOPS A 2 A_Explode(35,90,0)
+stop
+}
+}
+
+actor DuoShockwavePart2
+{
+PROJECTILE
+Scale 2.0
+Speed 30
+Damage (5)
+Radius 12
+Height 6
+States
+{
+Spawn:
+DUOR T 1 A_FadeOut(0.05)
+loop
+}
+}
+
+actor SmashFistsAmmo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 28
+}
+
+actor SuperUppercutCharge : Ammo
+{
+inventory.amount 1
+inventory.maxamount 200
+}
+
+actor SuperUppercutDuration : Ammo
+{
+inventory.amount 1
+inventory.maxamount 100
+}
+
+actor SkullCrackerCharge : Ammo
+{
+inventory.amount 1
+inventory.maxamount 100
+}
+
+actor FistAttack : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor SecondPunch : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor ThirdKick : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor UppercutAttack : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor QuickBlowCharge : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor RendingChargeAnim : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor NormalAttack : Inventory
+{
+inventory.amount 1
+inventory.maxamount 3
+}
+
+actor USCAttack : Inventory
+{
+inventory.amount 1
+inventory.maxamount 4
+}
+
+actor ChargeChecker : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}
+
+actor SmashSlowed : PowerupGiver
+{
+Speed 0.67
+powerup.duration 175
+powerup.type "PowerSlow"
++INVENTORY.AUTOACTIVATE
++INVENTORY.ALWAYSPICKUP
+states
+{
+Pickup:
+TNT1 A 0 
+
+TNT1 A 175
+stop
+}
+}
+
+actor SmashSlow : PowerSpeed
+{
+Speed 0.67
+}

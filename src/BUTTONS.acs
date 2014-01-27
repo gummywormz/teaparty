@@ -1,0 +1,33 @@
+#include "zcommon.acs"
+#library "BUTTONS"
+
+int buttons[32];
+script 302 (void)
+{
+buttons[PlayerNumber()] = GetPlayerInput(PlayerNumber(), INPUT_BUTTONS);
+if (buttons[PlayerNumber()] & BT_FORWARD)
+{
+	SetResultValue(1);
+	//Print(s:"FORWARD");
+	terminate;
+}
+if (buttons[PlayerNumber()] & BT_BACK)
+{
+	SetResultValue(2);
+	//Print(s:"BACK");
+	terminate;
+}
+if (buttons[PlayerNumber()] & BT_MOVELEFT)
+{
+	SetResultValue(3);
+	//Print(s:"LEFT");
+	terminate;
+}
+if (buttons[PlayerNumber()] & BT_MOVERIGHT)
+{
+	SetResultValue(4);
+	//Print(s:"Right");
+	terminate;
+}
+SetResultValue(0);
+}

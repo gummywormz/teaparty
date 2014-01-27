@@ -1,0 +1,383 @@
+#include "zcommon.acs" 
+#library "wcolors"
+// Firstly we need to give your new weapons a number definition. This is mainly used to keep things tidy.
+// Scroll to the bottom of this list.
+
+#DEFINE MEGABUSTER 0
+#DEFINE BUBBLELEAD 1
+#DEFINE LEAFSHIELD 2
+#DEFINE ATOMICFIRE 3
+#DEFINE SHADOWBLADE 4
+#DEFINE NAPALMBOMB 5
+#DEFINE AIRSHOOTER 6
+#DEFINE HYPERBOMB 7
+#DEFINE MAGNETMISSILE 8
+#DEFINE TOPSPIN 9
+#DEFINE NEEDLECANNON 10
+#DEFINE GEMINILASER 11
+#DEFINE SEARCHSNAKE 12
+#DEFINE TIMESTOPPER 13
+#DEFINE SUPERARM 14
+#DEFINE ICESLASHER 15
+#DEFINE THUNDERBEAM 16
+#DEFINE METALBLADE 17
+#DEFINE HARDKNUCKLE 18
+#DEFINE DRILLBOMB 19
+#DEFINE BLIZZARDATTACK 20
+#DEFINE FIRESTORM 21
+#DEFINE QUICKBOOMERANG 22
+#DEFINE CRASHBOMB 23
+#DEFINE CHARGEKICK 24
+#DEFINE ROLLINGCUTTER 25
+#DEFINE SPARKSHOCK 26
+#DEFINE RINGBOOMERANG 27
+#DEFINE GYROATTACK 28
+#DEFINE POWERSTONE 29
+#DEFINE DUSTCRUSHER 30
+#DEFINE PHARAOHSHOT 31
+#DEFINE WATERWAVE 32
+#DEFINE CRYSTALEYE 33
+#DEFINE SKULLBARRIER 34
+#DEFINE FLAMEBLAST 35
+#DEFINE PROTOBUSTER 36
+#DEFINE YAMATOSPEAR 37
+#DEFINE DIVEMISSILE 38
+#DEFINE PLANTBARRIER 39
+#DEFINE SILVERTOMAHAWK 40
+#DEFINE WINDSTORM 41
+#DEFINE KNIGHTCRUSH 42
+#DEFINE STARCRASH 43
+#DEFINE RAINFLUSH 44
+#DEFINE SAKUGARNE 45
+#DEFINE BASSBUSTER 46
+#DEFINE BALLADECRACKER 47
+#DEFINE SCREWCRUSHER 48
+#DEFINE FLASHSTOPPER 49
+#DEFINE GRAVITYHOLD 50
+#DEFINE CENTAURFLASH 51
+#DEFINE MIRRORBUSTER 52
+
+#DEFINE BALLADEREAL 53
+
+#DEFINE ATOMICFIRECRG1 60
+#DEFINE ATOMICFIRECRG2 61
+#DEFINE ATOMICFIRECRG3 62
+
+#DEFINE PROTOCHARGE1 63
+#DEFINE PROTOCHARGE2 64
+
+#DEFINE ENKERCHARGE1 65
+#DEFINE ENKERCHARGE2 66
+
+#DEFINE METALMANREAL 67
+
+#DEFINE BOSSPAIN 68
+
+#DEFINE FREEZECRACKER 54
+#DEFINE NOISECRUSH 55
+#DEFINE THUNDERBOLT 56
+#DEFINE JUNKSHIELD 57
+#DEFINE WILDCOIL 58
+#DEFINE SCORCHWHEEL 59
+#DEFINE SLASHCLAW 69
+#DEFINE DANGERWRAP 70
+
+#DEFINE NOISECRUSHCRG1 71
+#DEFINE NOISECRUSHCRG2 72
+#DEFINE NOISECRUSHCRG3 73
+
+#DEFINE WILDCOILCRG1 74
+#DEFINE WILDCOILCRG2 75
+#DEFINE WILDCOILCRG3 76
+
+#DEFINE SUPERADAPTOR 77
+#DEFINE SUPERADAPTORCRG1 78
+#DEFINE SUPERADAPTORCRG2 79
+#DEFINE SUPERADAPTORCRG3 80
+
+#DEFINE FLAMESWORD 81
+#DEFINE ICEWAVE 82
+#DEFINE THUNDERCLAW 83
+#DEFINE WATERBALLOON 84
+#DEFINE TORNADOHOLD 85
+#DEFINE FLASHBOMB 86
+#DEFINE ASTROCRUSH 87
+#DEFINE HOMINGSNIPER 88
+
+#DEFINE HOMINGCHRG1 89
+#DEFINE HOMINGCHRG2 90
+#DEFINE HOMINGCHRG3 91
+
+#DEFINE MEGACHARGE1 92
+#DEFINE MEGACHARGE2 93
+#DEFINE MEGACHARGE3 94
+
+#DEFINE OILSLIDER 95
+#DEFINE TIMESLOW 96
+
+#DEFINE MEGABALL 100
+
+#DEFINE DUOFIST 101
+#DEFINE DUOCHARGE1 102
+#DEFINE DUOCHARGE2 103
+#DEFINE DUOCHARGE3 104
+
+#DEFINE ICEDEATH 105
+
+#DEFINE LASERCHARGE1 106
+#DEFINE LASERCHARGE2 107
+
+// New definitions here.
+// The number has to be unique, so use a fairly high one.
+
+#DEFINE DLVCHARGE1 125
+#DEFINE DLVCHARGE2 126
+#DEFINE DLVCHARGE3 127
+#DEFINE PROTOMANCSCC 200
+#DEFINE PROTOMANCSCC2 201
+#DEFINE PROTOMANCSCC3 202
+#DEFINE SMASHCOLOR 203
+#DEFINE SMASHCOLOR2 204
+#DEFINE ZardGun 207
+#DEFINE DanmakuBoomerangWep 208
+#DEFINE FIREPALMCOLOR 950
+#DEFINE FIREPALMCOLOR2 951
+
+// These numbers represent the values specified in the ACS_ExecuteAlways line in the weapon's code (in the ready state).
+// For example, Cool Weapon's code is this:
+//
+// COOW B 0 ACS_ExecuteAlways(998,0,100) 
+//
+// And awsum weapon's is:
+//
+// AWSM B 0 ACS_ExecuteAlways(998,0,101) 
+//
+// The last argument of that line represents the number you just defined here.
+
+script 998 (int weap, int nosound) 
+{
+if(nosound==0){LocalAmbientSound("menu/cursor",127);} //Play weapon switch noise
+
+If(ACS_ExecuteWithResult(975, 1)==1)
+	{
+	Switch(PlayerTeam())
+		{
+		Case 0:
+		break;
+		Case 1:
+		Thing_SetTranslation(0, 48);
+		break;
+		Case 2:
+		Thing_SetTranslation(0, 43);
+		break;
+		Case 3:
+		Thing_SetTranslation(0, 47);
+		break;
+		}
+	terminate;
+	}
+Thing_SetTranslation(0, weap);
+}
+	
+Script 993 OPEN
+{
+CreateTranslation (BUBBLELEAD, 192:192=4:4, 198:198=93:93);
+CreateTranslation (LEAFSHIELD, 192:192=4:4, 198:198=110:110);
+CreateTranslation (ATOMICFIRE, 192:192=229:229, 198:198=41:41);
+CreateTranslation (ATOMICFIRECRG1, 192:192=229:229, 198:198=41:41, 0:2=201:201, 3:8=201:201, 243:247=201:201);
+CreateTranslation (ATOMICFIRECRG2, 192:192=229:229, 198:198=193:193, 0:2=37:37, 3:8=37:37, 243:247=37:37);
+CreateTranslation (ATOMICFIRECRG3, 192:192=229:229, 198:198=4:4, 0:2=4:4, 3:8=4:4, 243:247=4:4);
+CreateTranslation (SHADOWBLADE, 192:192=34:34, 198:198=239:239);
+CreateTranslation (NAPALMBOMB, 192:192=216:216, 198:198=75:75);
+CreateTranslation (AIRSHOOTER, 192:192=4:4);
+CreateTranslation (HYPERBOMB, 192:192=4:4, 198:198=110:110);
+CreateTranslation (MAGNETMISSILE, 192:192=87:87, 198:198=227:227);
+CreateTranslation (TOPSPIN, 192:192=52:52, 198:198=93:93);
+CreateTranslation (NEEDLECANNON, 192:192=4:4, 198:198=220:220);
+CreateTranslation (GEMINILASER, 192:192=4:4,198:198=197:197);
+CreateTranslation (SEARCHSNAKE, 192:192=4:4, 198:198=110:110);
+CreateTranslation (TIMESTOPPER, 192:192=34:34, 198:198=239:239);
+CreateTranslation (SUPERARM, 192:192=4:4, 198:198=220:220);
+CreateTranslation (ICESLASHER, 192:192=4:4, 198:198=75:75);
+CreateTranslation (THUNDERBEAM, 192:192=215:215, 198:198=94:94);
+CreateTranslation (METALBLADE, 192:192=210:210, 198:198=164:164);
+CreateTranslation (HARDKNUCKLE, 192:192=87:87, 198:198=199:199);
+CreateTranslation (DRILLBOMB, 192:192=87:87, 198:198=227:227);
+CreateTranslation (BLIZZARDATTACK, 192:192=4:4, 198:198=197:197);
+CreateTranslation (FIRESTORM, 192:192=229:229, 198:198=227:227);
+CreateTranslation (QUICKBOOMERANG, 192:192=34:34, 198:198=39:39);
+CreateTranslation (CRASHBOMB, 192:192=4:4, 198:198=225:225);
+CreateTranslation (CHARGEKICK, 192:192=4:4, 198:198=225:225);
+CreateTranslation (ROLLINGCUTTER, 192:192=4:4, 198:198=94:94);
+CreateTranslation (SPARKSHOCK, 192:192=4:4, 198:198=225:225);
+CreateTranslation (RINGBOOMERANG, 192:192=215:215, 198:198=230:230);
+CreateTranslation (GYROATTACK, 192:192=4:4, 198:198=128:128);
+CreateTranslation (POWERSTONE, 192:192=4:4, 198:198=46:46);
+CreateTranslation (DUSTCRUSHER, 192:192=4:4, 198:198=93:93);
+CreateTranslation (PHARAOHSHOT, 192:192=52:52, 198:198=225:225);
+CreateTranslation (WATERWAVE, 192:192=4:4);
+CreateTranslation (CRYSTALEYE, 192:192=4:4, 198:198=193:193);
+CreateTranslation (SKULLBARRIER, 198:198=197:197);
+CreateTranslation (FLAMEBLAST, 192:192=52:52, 198:198=225:225);
+CreateTranslation (PROTOBUSTER, 192:192=87:87, 198:198=42:42);
+CreateTranslation (PROTOCHARGE1, 192:192=87:87, 198:198=227:227, 0:2=253:253, 3:8=253:253, 243:247=253:253);
+CreateTranslation (PROTOCHARGE2, 192:192=160:160, 198:198=148:148, 0:2=166:166, 3:8=204:166, 243:247=166:166);
+CreateTranslation (YAMATOSPEAR, 192:192=4:4, 198:198=236:236);
+CreateTranslation (DIVEMISSILE, 192:192=4:4);
+CreateTranslation (PLANTBARRIER, 192:192=4:4, 198:198=39:39);
+CreateTranslation (SILVERTOMAHAWK, 192:192=52:52, 198:198=220:220);
+CreateTranslation (WINDSTORM, 192:192=4:4, 198:198=93:93);
+CreateTranslation (KNIGHTCRUSH, 192:192=87:87);
+CreateTranslation (STARCRASH, 192:192=229:229, 198:198=220:220);
+CreateTranslation (RAINFLUSH, 192:192=4:4, 198:198=104:104);
+CreateTranslation (SAKUGARNE, 192:192=138:138, 198:198=130:130);
+CreateTranslation (BASSBUSTER, 192:192=217:217, 198:198=95:95);
+CreateTranslation (BALLADECRACKER, 192:192=64:64, 198:198=62:62);
+CreateTranslation (SCREWCRUSHER, 192:192=54:54, 198:198=42:42);
+CreateTranslation (FLASHSTOPPER, 192:192=4:4, 198:198=239:239);
+CreateTranslation (GRAVITYHOLD, 192:192=4:4, 198:198=239:239);
+CreateTranslation (CENTAURFLASH, 192:192=4:4, 198:198=128:128);
+CreateTranslation (MIRRORBUSTER, 192:192=229:229, 198:198=76:76);
+CreateTranslation (ENKERCHARGE1, 192:192=229:229, 198:198=199:199, 0:2=4:4, 3:8=4:4, 243:247=4:4);
+CreateTranslation (ENKERCHARGE2, 192:192=229:229, 198:198=199:199, 0:2=196:204, 3:8=196:204, 243:247=204:204);
+CreateTranslation (BALLADEREAL, 192:192=228:228, 198:198=62:62);
+CreateTranslation (METALMANREAL, 192:192=228:228, 198:198=41:41);
+CreateTranslation (FREEZECRACKER, 192:192=4:4, 198:198=203:203);
+CreateTranslation (NOISECRUSH, 192:192=204:204, 198:198=61:61);
+CreateTranslation (NOISECRUSHCRG1, 192:192=204:204, 198:198=61:61, 0:2=112:112, 3:8=112:112, 243:247=112:112);
+CreateTranslation (NOISECRUSHCRG2, 192:192=0:0, 198:198=204:204, 0:2=61:61, 3:8=61:61, 243:247=61:61);
+CreateTranslation (NOISECRUSHCRG3, 192:192=61:61, 198:198=0:0, 0:2=204:204, 3:8=204:204, 243:247=204:204);
+CreateTranslation (WILDCOIL, 192:192=109:109, 198:198=238:238);
+CreateTranslation (WILDCOILCRG1, 192:192=109:109, 198:198=238:238, 0:2=41:41, 3:8=41:41, 243:247=41:41);
+CreateTranslation (WILDCOILCRG2, 192:192=0:0, 198:198=109:109, 0:2=238:238, 3:8=238:238, 243:247=238:238);
+CreateTranslation (WILDCOILCRG3, 192:192=238:238, 198:198=0:0, 0:2=109:109, 3:8=109:109, 243:247=109:109);
+CreateTranslation (DANGERWRAP, 192:192=4:4, 198:198=232:232);
+CreateTranslation (SCORCHWHEEL, 192:192=93:93, 198:198=42:42);
+CreateTranslation (JUNKSHIELD, 192:192=68:68, 198:198=94:94);
+CreateTranslation (SLASHCLAW, 192:192=228:228, 198:198=111:111);
+CreateTranslation (THUNDERBOLT, 192:192=228:228, 198:198=73:73);
+CreateTranslation (BOSSPAIN, 5:247=4:4,0:3=4:4);
+CreateTranslation (SUPERADAPTOR, 192:192=4:4, 198:198=176:176);
+CreateTranslation (SUPERADAPTORCRG1, 192:192=4:4, 198:198=176:176, 0:2=22:22, 3:8=22:22, 243:247=22:22);
+CreateTranslation (SUPERADAPTORCRG2, 192:192=0:0, 198:198=176:176, 0:2=4:4, 3:8=4:4, 243:247=4:4);
+CreateTranslation (SUPERADAPTORCRG3, 192:192=4:4, 198:198=0:0, 0:2=176:176, 3:8=176:176, 243:247=176:176);
+CreateTranslation (THUNDERCLAW, 198:198=220:220);
+CreateTranslation (HOMINGSNIPER, 198:198=230:230);
+CreateTranslation (HOMINGCHRG1, 198:198=230:230, 244:247=26:26);
+CreateTranslation (HOMINGCHRG2, 192:192=0:0, 198:198=192:192, 244:247=230:230);
+CreateTranslation (HOMINGCHRG3, 192:192=230:230, 198:198=0:0, 244:247=192:192);
+CreateTranslation (WATERBALLOON, 198:198=62:62);
+CreateTranslation (FLAMESWORD, 192:192=248:248, 198:198=41:41);
+CreateTranslation (ICEWAVE, 192:192=229:229, 198:198=205:205);
+CreateTranslation (TORNADOHOLD, 192:192=236:236, 198:198=194:194);
+CreateTranslation (FLASHBOMB, 192:192=229:229, 198:198=77:77);
+CreateTranslation (ASTROCRUSH, 192:192=229:229, 198:198=128:128);
+CreateTranslation (MEGACHARGE1, 0:2=39:39, 3:8=39:39, 243:247=39:39);
+CreateTranslation (MEGACHARGE2, 192:192=198:198, 198:198=247:247, 0:2=192:192, 243:247=192:192);
+CreateTranslation (MEGACHARGE3, 192:192=247:247, 198:198=192:192, 0:2=198:198, 243:247=198:198);
+CreateTranslation (OILSLIDER, 192:192=68:68, 198:198=47:47);
+CreateTranslation (TIMESLOW, 192:192=34:34, 198:198=239:239);
+CreateTranslation (MEGABALL, 192:192=197:197, 198:198=239:239);
+CreateTranslation (DUOFIST, 192:192=220:220, 198:198=195:195);
+CreateTranslation (DUOCHARGE1, 192:192=220:220, 198:198=195:195, 3:8=192:192, 243:247=192:192);
+CreateTranslation (DUOCHARGE2, 192:192=247:247, 198:198=192:192, 3:8=195:195, 243:247=195:195);
+CreateTranslation (DUOCHARGE3, 192:192=195:195, 198:198=4:4, 3:8=192:192, 243:247=192:192);
+CreateTranslation (ICEDEATH, 192:192=4:4, 198:198=201:201, 3:8=72:72, 243:247=72:72, 208:215=4:4);
+CreateTranslation (LASERCHARGE1, 3:8=70:70, 243:247=70:70);
+CreateTranslation (LASERCHARGE2, 192:192=100:100, 198:198=109:109, 3:8=104:104, 243:247=104:104);
+// New translations
+// The first example is Cool Weapon.
+// The body color needs to be purple, and the rest need to be blue.
+// Looking at the Doom Palette, the closest I can get to that purple is 254
+// The closest to that blue I can see is 197.
+// So therefore 198 (arms) needs to become 254.
+// And 192 (body) needs to become 197.
+// Another thing worth noting is that you do not need to keep these tips in the final product. In fact, it is recommended that you do not.
+CreateTranslation (ZardGun, 192:192=160:160, 198:198=76:76);
+CreateTranslation (PROTOMANCSCC, 192:192=199:199, 198:198=8:8);
+CreateTranslation (PROTOMANCSCC2, 192:192=199:199, 198:198=8:8, 0:2=241:241, 3:8=241:241, 243:247=241:241);
+CreateTranslation (PROTOMANCSCC3, 192:192=199:199, 198:198=8:8, 0:2=168:168, 3:8=168:168, 243:247=168:168);
+CreateTranslation (DanmakuBoomerangWep, 192:192=160:160, 198:198=76:76);
+CreateTranslation (SMASHCOLOR, 192:192=201:201, 198:198=128:128);
+CreateTranslation (SMASHCOLOR2, 192:192=201:201, 198:198=128:128, 199:199=228:228);
+CreateTranslation (FIREPALMCOLOR, 192:192=226:226, 198:198=227:227);
+CreateTranslation (FIREPALMCOLOR2, 192:192=226:226, 198:198=227:227, 0:2=170:170, 3:8=170:170, 243:247=170:170);
+CreateTranslation (DLVCHARGE1, 192:192=87:87, 198:198=199:199, 3:8=192:192, 243:247=192:192);
+CreateTranslation (DLVCHARGE2, 192:192=247:247, 198:198=199:199, 3:8=78:78, 243:247=78:78);
+CreateTranslation (DLVCHARGE3, 192:192=78:78, 198:198=4:4, 3:8=199:199, 243:247=199:199);
+}
+
+
+Script 992 (int amount)//god damn bloody thing doesnt want to compile >_>, so instead i have to make this shobby work around.
+{
+if(CheckWeapon("BubbleLeadWepC")==1){GiveInventory("BubbleLeadAmmo",amount);}
+if(CheckWeapon("ShadowBladeWepC")==1){GiveInventory("ShadowBladeAmmo",amount);}
+if(CheckWeapon("NapalmBombWepC")==1){GiveInventory("NapalmBombAmmo",amount);}
+if(CheckWeapon("AtomicFireWepC")==1){GiveInventory("AtomicFireAmmo",amount+2);}
+if(CheckWeapon("LeafShieldWepC")==1){GiveInventory("LeafShieldAmmo",amount);}
+if(CheckWeapon("AirShooterWepC")==1){GiveInventory("AirShooterAmmo",amount);}
+if(CheckWeapon("HyperBombWepC")==1){GiveInventory("HyperBombAmmo",amount+2);}
+if(CheckWeapon("MagnetMissileWepC")==1){GiveInventory("MagnetMissileAmmo",amount);}
+if(CheckWeapon("TopSpinWepC")==1){GiveInventory("TopSpinAmmo",amount);}
+if(CheckWeapon("NeedleCannonWepC")==1){GiveInventory("NeedleCannonAmmo",amount);}
+if(CheckWeapon("GeminiLaserWepC")==1){GiveInventory("GeminiLaserAmmo",amount);}
+if(CheckWeapon("SearchSnakeWepC")==1){GiveInventory("SearchSnakeAmmo",amount);}
+//if(CheckWeapon("TimeStopperWepC")==1){GiveInventory("TimeStopperAmmo",amount);}
+if(CheckWeapon("SuperArmWepC")==1){GiveInventory("SuperArmAmmo",amount);}
+if(CheckWeapon("IceSlasherWepC")==1){GiveInventory("IceSlasherAmmo",amount);}
+if(CheckWeapon("ThunderBeamWepC")==1){GiveInventory("ThunderBeamAmmo",amount);}
+if(CheckWeapon("MetalBladeWepC")==1){GiveInventory("MetalBladeAmmo",amount);}
+if(CheckWeapon("HardKnuckleWepC")==1){GiveInventory("HardKnuckleAmmo",amount);}
+if(CheckWeapon("DrillBombWepC")==1){GiveInventory("DrillBombAmmo",amount);}
+if(CheckWeapon("BlizzardAttackWepC")==1){GiveInventory("BlizzardAttackAmmo",amount);}
+if(CheckWeapon("FireStormWepC")==1){GiveInventory("FireStormAmmo",amount);}
+if(CheckWeapon("QuickBoomerangWepC")==1){GiveInventory("QuickBoomerangAmmo",amount*2);}
+if(CheckWeapon("CrashBombWepC")==1){GiveInventory("CrashBombAmmo",amount);}
+if(CheckWeapon("ChargeKickWepC")==1){GiveInventory("ChargeKickAmmo",amount);}
+if(CheckWeapon("RollingCutterWepC")==1){GiveInventory("RollingCutterAmmo",amount);}
+if(CheckWeapon("SparkShockWepC")==1){GiveInventory("SparkShockAmmo",amount);}
+if(CheckWeapon("RingBoomerangWepC")==1){GiveInventory("RingBoomerangAmmo",amount);}
+if(CheckWeapon("GyroAttackWepC")==1){GiveInventory("GyroAttackAmmo",amount);}
+if(CheckWeapon("PowerStoneWepC")==1){GiveInventory("PowerStoneAmmo",amount);}
+if(CheckWeapon("DustCrusherWepC")==1){GiveInventory("DustCrusherAmmo",amount);}
+if(CheckWeapon("PharaohShotWepC")==1){GiveInventory("PharaohShotAmmo",amount);}
+if(CheckWeapon("WaterWaveWepC")==1){GiveInventory("WaterWaveAmmo",amount);}
+if(CheckWeapon("CrystalEyeWepC")==1){GiveInventory("CrystalEyeAmmo",amount);}
+if(CheckWeapon("SkullBarrierWepC")==1){GiveInventory("SkullBarrierAmmo",amount);}
+if(CheckWeapon("FlameBlastWepC")==1){GiveInventory("FlameBlastAmmo",amount);}
+if(CheckWeapon("YamatoSpearWepC")==1){GiveInventory("YamatoSpearAmmo",amount);}
+if(CheckWeapon("DiveMissileWepC")==1){GiveInventory("DiveMissileAmmo",amount);}
+if(CheckWeapon("PlantBarrierWepC")==1){GiveInventory("PlantBarrierAmmo",amount);}
+if(CheckWeapon("SilverTomahawkWepC")==1){GiveInventory("SilverTomahawkAmmo",amount);}
+if(CheckWeapon("WindStormWepC")==1){GiveInventory("WindStormAmmo",amount);}
+if(CheckWeapon("KnightCrushWepC")==1){GiveInventory("KnightCrushAmmo",amount);}
+if(CheckWeapon("StarCrashWepC")==1){GiveInventory("StarCrashAmmo",amount);}
+if(CheckWeapon("RainFlushWepC")==1){GiveInventory("RainFlushAmmo",amount);}
+if(CheckWeapon("SakugarneWepC")==1){GiveInventory("SakugarneAmmo",amount);}
+if(CheckWeapon("BalladeCrackerWepC")==1){GiveInventory("BalladeCrackerAmmo",amount);}
+if(CheckWeapon("ScrewCrusherWepC")==1){GiveInventory("ScrewCrusherAmmo",amount*2);}
+if(CheckWeapon("FlashStopperWepC")==1){GiveInventory("FlashStopperAmmo",amount);}
+if(CheckWeapon("GravityHoldWepC")==1){GiveInventory("GravityHoldAmmo",amount);}
+if(CheckWeapon("CentaurFlashWepC")==1){GiveInventory("CentaurFlashAmmo",amount);}
+if(CheckWeapon("MirrorBusterWepC")==1){GiveInventory("MirrorBusterAmmo",amount);}
+if(CheckWeapon("FreezeCrackerWepC")==1){GiveInventory("FreezeCrackerAmmo",amount);}
+if(CheckWeapon("NoiseCrushWepC")==1){GiveInventory("NoiseCrushAmmo",amount);}
+if(CheckWeapon("WildCoilWepC")==1){GiveInventory("WildCoilAmmo",amount);}
+if(CheckWeapon("DangerWrapWepC")==1){GiveInventory("DangerWrapAmmo",amount);}
+if(CheckWeapon("ScorchWheelWepC")==1){GiveInventory("ScorchWheelAmmo",amount);}
+if(CheckWeapon("JunkShieldWepC")==1){GiveInventory("JunkShieldAmmo",amount);}
+if(CheckWeapon("SlashClawWepC")==1){GiveInventory("SlashClawAmmo",amount);}
+if(CheckWeapon("ThunderBoltWepC")==1){GiveInventory("ThunderBoltAmmo",amount);}
+if(CheckWeapon("AstroCrushWepC")==1){GiveInventory("AstroCrushAmmo",amount);}
+if(CheckWeapon("FlameSwordWepC")==1){GiveInventory("FlameSwordAmmo",amount);}
+if(CheckWeapon("ThunderClawWepC")==1){GiveInventory("ThunderClawAmmo",amount);}
+if(CheckWeapon("HomingSniperWepC")==1){GiveInventory("HomingSniperAmmo",amount);}
+if(CheckWeapon("WaterBalloonWepC")==1){GiveInventory("WaterBalloonAmmo",amount);}
+if(CheckWeapon("MegaBallWepC")==1){GiveInventory("MegaBallAmmo",amount);}
+if(CheckWeapon("FlashBombWepC")==1){GiveInventory("FlashBombAmmo",amount);}
+if(CheckWeapon("IceWaveWepC")==1){GiveInventory("IceWaveAmmo",amount);}
+if(CheckWeapon("TornadoHoldWepC")==1){GiveInventory("TornadoHoldAmmo",amount);}
+if(CheckWeapon("TimeSlowWepC")==1){GiveInventory("TimeSlowAmmo",amount);}
+if(CheckWeapon("OilSliderWepC")==1){GiveInventory("OilSliderAmmo",amount);}
+if(CheckWeapon("ZardGunCopyWep")==1){GiveInventory("ZardCopyWepAmmo",amount);}
+}

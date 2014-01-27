@@ -1,0 +1,1347 @@
+//_Wep : CMM or whoever's original weapon.
+//_WepC : The sliding enabled version of the weapon.
+//_WepCGiver : Replaces the Weps placed on the map so only those that can copy weapons and don't have the weapon can grab them.
+//_WepCDropped : The weapons the players drop; can refill ammo.
+
+actor WepCGiver : CustomInventory
+{
+inventory.pickupmessage "Power up! Mega Buster!"
+inventory.pickupsound "weapon/weaponup"
+inventory.amount 1
+inventory.maxamount 1
+inventory.respawntics 5
+scale 2.0
++INVENTORY.AUTOACTIVATE
+States
+{
+Spawn:
+TNT1 A 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("MegaBusterC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("MegaBusterC",1)
+stop
+}
+}
+
+actor DangerWrapWepCGiver : WepCGiver replaces DangerWrapWep
+{
+inventory.pickupmessage "Power up! Danger Wrap!"
+States
+{
+Spawn:
+WEA3 L 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("DangerWrapWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("DangerWrapWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor JunkShieldWepCGiver : WepCGiver replaces JunkShieldWep
+{
+inventory.pickupmessage "Power up! Junk Shield!"
+States
+{
+Spawn:
+WEA3 N 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("JunkShieldWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("JunkShieldWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor NoiseCrushWepCGiver : WepCGiver replaces NoiseCrushWep
+{
+inventory.pickupmessage "Power up! Noise Crush!"
+States
+{
+Spawn:
+WEA3 J 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("NoiseCrushWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("NoiseCrushWepC",1)
+stop
+}
+}
+
+actor ScorchWheelWepCGiver : WepCGiver replaces ScorchWheelWep
+{
+inventory.pickupmessage "Power up! Scorch Wheel!"
+States
+{
+Spawn:
+WEA3 M 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("ScorchWheelWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("ScorchWheelWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor ThunderBoltWepCGiver : WepCGiver replaces ThunderBoltWep
+{
+inventory.pickupmessage "Power up! Thunder Bolt!"
+States
+{
+Spawn:
+WEA3 R 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("ThunderBoltWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("ThunderBoltWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor WildCoilWepCGiver : WepCGiver replaces WildCoilWep
+{
+inventory.pickupmessage "Power up! Wild Coil!"
+States
+{
+Spawn:
+WEA3 K 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("WildCoilWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("WildCoilWepC",1)
+stop
+}
+}
+
+actor SlashClawWepCGiver : WepCGiver replaces SlashClawWep
+{
+inventory.pickupmessage "Power up! Slash Claw!"
+States
+{
+Spawn:
+WEA3 Q 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("SlashClawWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("SlashClawWepC",1)
+stop
+}
+}
+
+actor AirShooterWepCGiver : WepCGiver replaces AirShooterWep
+{
+inventory.pickupmessage "Power up! Air Shooter!"
+States
+{
+Spawn:
+WEAP G 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("AirShooterWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("AirShooterWepC",1)
+stop
+}
+}
+
+actor AtomicFireWepCGiver : WepCGiver replaces AtomicFireWep
+{
+inventory.pickupmessage "Power up! Atomic Fire!"
+States
+{
+Spawn:
+WEAP E 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("AtomicFireWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("AtomicFireWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor BalladeCrackerWepCGiver : WepCGiver replaces BalladeCrackerWep
+{
+inventory.pickupmessage "Power up! Ballade Cracker!"
+States
+{
+Spawn:
+WEA3 C 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("BalladeCrackerWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("BalladeCrackerWepC",1)
+stop
+}
+}
+
+actor BlizzardAttackWepCGiver : WepCGiver replaces BlizzardAttackWep
+{
+inventory.pickupmessage "Power up! Blizzard Attack!"
+States
+{
+Spawn:
+WEAP W 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("BlizzardAttackWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("BlizzardAttackWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor BubbleLeadWepCGiver : WepCGiver replaces BubbleLeadWep
+{
+inventory.pickupmessage "Power up! Bubble Lead!"
+States
+{
+Spawn:
+WEAP D 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("BubbleLeadWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("BubbleLeadWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor CentaurFlashWepCGiver : WepCGiver replaces CentaurFlashWep
+{
+inventory.pickupmessage "Power up! Centaur Flash!"
+States
+{
+Spawn:
+WEA3 G 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CentaurFlashWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("CentaurFlashWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor ChargeKickWepCGiver : WepCGiver replaces ChargeKickWep
+{
+inventory.pickupmessage "Power up! Charge Kick!"
+States
+{
+Spawn:
+WEA2 E 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("ChargeKickWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("ChargeKickWepC",1)
+stop
+}
+}
+
+actor CrashBombWepCGiver : WepCGiver replaces CrashBombWep
+{
+inventory.pickupmessage "Power up! Crash Bomb!"
+States
+{
+Spawn:
+WEA2 C 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CrashBombWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("CrashBombWepC",1)
+stop
+}
+}
+
+actor CrystalEyeWepCGiver : WepCGiver replaces CrystalEyeWep
+{
+inventory.pickupmessage "Power up! Crystal Eye!"
+States
+{
+Spawn:
+WEA2 N 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CrystalEyeWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("CrystalEyeWepC",1)
+stop
+}
+}
+
+actor DiveMissileWepCGiver : WepCGiver replaces DiveMissileWep
+{
+inventory.pickupmessage "Power up! Dive Missile!"
+States
+{
+Spawn:
+WEA2 S 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("DiveMissileWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("DiveMissileWepC",1)
+stop
+}
+}
+
+actor DrillBombWepCGiver : WepCGiver replaces DrillBombWep
+{
+inventory.pickupmessage "Power up! Drill Bomb!"
+States
+{
+Spawn:
+WEAP V 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("DrillBombWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("DrillBombWepC",1)
+stop
+}
+}
+
+actor DustCrusherWepCGiver : WepCGiver replaces DustCrusherWep
+{
+inventory.pickupmessage "Power up! Dust Crusher!"
+States
+{
+Spawn:
+WEA2 K 1
+loop
+Pickup:
+DUST B 0 
+DUST B 0 A_JumpIfInventory("DustCrusherWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("DustCrusherWepC",1)
+stop
+}
+}
+
+actor FireStormWepCGiver : WepCGiver replaces FireStormWep
+{
+inventory.pickupmessage "Power up! Fire Storm!"
+States
+{
+Spawn:
+WEAP Y 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("FireStormWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("FireStormWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor FlameBlastWepCGiver : WepCGiver replaces FlameBlastWep
+{
+inventory.pickupmessage "Power up! Flame Blast!"
+States
+{
+Spawn:
+WEA2 P 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("FlameBlastWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("FlameBlastWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor FlashStopperWepCGiver : WepCGiver replaces FlashStopperWep
+{
+inventory.pickupmessage "Power up! Flash Stopper!"
+States
+{
+Spawn:
+WEA3 E 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("FlashStopperWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("FlashStopperWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor FreezeCrackerWepCGiver : WepCGiver replaces FreezeCrackerWep
+{
+inventory.pickupmessage "Power up! Freeze Cracker!"
+States
+{
+Spawn:
+WEA3 O 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("FreezeCrackerWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("FreezeCrackerWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor GeminiLaserWepCGiver : WepCGiver replaces GeminiLaserWep
+{
+inventory.pickupmessage "Power up! Gemini Laser!"
+States
+{
+Spawn:
+WEAP M 1
+loop
+Pickup:
+DUST B 0 
+DUST B 0 A_JumpIfInventory("GeminiLaserWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("GeminiLaserWepC",1)
+stop
+}
+}
+
+actor GravityHoldWepCGiver : WepCGiver replaces GravityHoldWep
+{
+inventory.pickupmessage "Power up! Gravity Hold!"
+States
+{
+Spawn:
+WEA3 F 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("GravityHoldWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("GravityHoldWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor GyroAttackWepCGiver : WepCGiver replaces GyroAttackWep
+{
+inventory.pickupmessage "Power up! Gyro Attack!"
+States
+{
+Spawn:
+WEA2 I 1
+loop
+Pickup:
+DUST B 0 
+DUST B 0 A_JumpIfInventory("GyroAttackWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("GyroAttackWepC",1)
+stop
+}
+}
+
+actor HardKnuckleWepCGiver : WepCGiver replaces HardKnuckleWep
+{
+inventory.pickupmessage "Power up! Hard Knuckle!"
+States
+{
+Spawn:
+WEAP T 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("HardKnuckleWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("HardKnuckleWepC",1)
+stop
+}
+}
+
+actor HyperBombWepCGiver : WepCGiver replaces HyperBombWep
+{
+inventory.pickupmessage "Power up! Hyper Bomb!"
+States
+{
+Spawn:
+WEAP H 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("HyperBombWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("HyperBombWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor IceSlasherWepCGiver : WepCGiver replaces IceSlasherWep
+{
+inventory.pickupmessage "Power up! Ice Slasher!"
+States
+{
+Spawn:
+WEAP P 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("IceSlasherWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("IceSlasherWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor KnightCrushWepCGiver : WepCGiver replaces KnightCrushWep
+{
+inventory.pickupmessage "Power up! Knight Crush!"
+States
+{
+Spawn:
+WEA2 W 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("KnightCrushWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("KnightCrushWepC",1)
+stop
+}
+}
+
+actor LeafShieldWepCGiver : WepCGiver replaces LeafShieldWep
+{
+inventory.pickupmessage "Power up! Leaf Shield!"
+States
+{
+Spawn:
+WEAP F 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("LeafShieldWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("LeafShieldWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor MagnetMissileWepCGiver : WepCGiver replaces MagnetMissileWep
+{
+inventory.pickupmessage "Power up! Magnet Missile!"
+States
+{
+Spawn:
+WEAP I 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("MagnetMissileWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("MagnetMissileWepC",1)
+stop
+}
+}
+
+actor MetalBladeWepCGiver : WepCGiver replaces MetalBladeWep
+{
+inventory.pickupmessage "Power up! Metal Blade!"
+States
+{
+Spawn:
+WEAP S 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("MetalBladeWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("MetalBladeWepC",1)
+stop
+}
+}
+
+actor MirrorBusterWepCGiver : WepCGiver replaces MirrorBusterWep
+{
+inventory.pickupmessage "Power up! Mirror Buster!"
+States
+{
+Spawn:
+WEA3 H 1
+loop
+Pickup: 
+DUST B 0 A_JumpIfInventory("MirrorBusterWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("MirrorBusterWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor NapalmBombWepCGiver : WepCGiver replaces NapalmBombWep
+{
+inventory.pickupmessage "Power up! Napalm Bomb!"
+States
+{
+Spawn:
+WEAP C 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("NapalmBombWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("NapalmBombWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor NeedleCannonWepCGiver : WepCGiver replaces NeedleCannonWep
+{
+inventory.pickupmessage "Power up! Needle Cannon!"
+States
+{
+Spawn:
+WEAP L 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("NeedleCannonWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("NeedleCannonWepC",1)
+stop
+}
+}
+
+actor PharaohShotWepCGiver : WepCGiver replaces PharaohShotWep
+{
+inventory.pickupmessage "Power up! Pharaoh Shot!"
+States
+{
+Spawn:
+WEA2 L 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("PharaohShotWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("PharaohShotWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor PlantBarrierWepCGiver : WepCGiver replaces PlantBarrierWep
+{
+inventory.pickupmessage "Power up! Plant Barrier!"
+States
+{
+Spawn:
+WEA2 T 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("PlantBarrierWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("PlantBarrierWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor PowerStoneWepCGiver : WepCGiver replaces PowerStoneWep
+{
+inventory.pickupmessage "Power up! Power Stone!"
+States
+{
+Spawn:
+WEA2 J 1
+loop
+Pickup: 
+DUST B 0 A_JumpIfInventory("PowerStoneWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("PowerStoneWepC",1)
+stop
+}
+}
+
+actor QuickBoomerangWepCGiver : WepCGiver replaces QuickBoomerangWep
+{
+inventory.pickupmessage "Power up! Quick Boomerang!"
+States
+{
+Spawn:
+WEAP Z 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("QuickBoomerangWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("QuickBoomerangWepC",1)
+stop
+}
+}
+
+actor RainFlushWepCGiver : WepCGiver replaces RainFlushWep
+{
+inventory.pickupmessage "Power up! Rain Flush!"
+States
+{
+Spawn:
+WEA2 Y 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("RainFlushWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("RainFlushWepC",1)
+stop
+}
+}
+
+actor RingBoomerangWepCGiver : WepCGiver replaces RingBoomerangWep
+{
+inventory.pickupmessage "Power up! Ring Boomerang!"
+States
+{
+Spawn:
+WEA2 H 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("RingBoomerangWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("RingBoomerangWepC",1)
+stop
+}
+}
+
+actor RollingCutterWepCGiver : WepCGiver replaces RollingCutterWep
+{
+inventory.pickupmessage "Power up! Rolling Cutter!"
+States
+{
+Spawn:
+WEA2 F 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("RollingCutterWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("RollingCutterWepC",1)
+stop
+}
+}
+
+actor SakugarneWepCGiver : WepCGiver replaces SakugarneWep
+{
+inventory.pickupmessage "Power up! Sakugarne!"
+States
+{
+Spawn:
+WEA2 Z 1
+loop
+Pickup:
+DUST B 0 
+DUST B 0 A_JumpIfInventory("SakugarneWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("SakugarneWepC",1)
+stop
+}
+}
+
+actor ScrewCrusherWepCGiver : WepCGiver replaces ScrewCrusherWep
+{
+inventory.pickupmessage "Power up! Screw Crusher!"
+States
+{
+Spawn:
+WEA3 D 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("ScrewCrusherWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("ScrewCrusherWepC",1)
+stop
+}
+}
+
+actor SearchSnakeWepCGiver : WepCGiver replaces SearchSnakeWep
+{
+inventory.pickupmessage "Power up! Search Snake!"
+States
+{
+Spawn:
+WEAP K 1
+loop
+Pickup: 
+DUST B 0 A_JumpIfInventory("SearchSnakeWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("SearchSnakeWepC",1)
+stop
+}
+}
+
+actor ShadowBladeWepCGiver : WepCGiver replaces ShadowBladeWep
+{
+inventory.pickupmessage "Power up! Shadow Blade!"
+States
+{
+Spawn:
+WEAP A 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("ShadowBladeWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("ShadowBladeWepC",1)
+stop
+}
+}
+
+actor SilverTomahawkWepCGiver : WepCGiver replaces SilverTomahawkWep
+{
+inventory.pickupmessage "Power up! Silver Tomahawk!"
+States
+{
+Spawn:
+WEA2 U 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("SilverTomahawkWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("SilverTomahawkWepC",1)
+stop
+}
+}
+
+actor SkullBarrierWepCGiver : WepCGiver replaces SkullBarrierWep
+{
+inventory.pickupmessage "Power up! Skull Barrier!"
+States
+{
+Spawn:
+WEA2 O 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("SkullBarrierWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("SkullBarrierWepC",1)
+stop
+}
+}
+
+actor SparkShockWepCGiver : WepCGiver replaces SparkShockWep
+{
+inventory.pickupmessage "Power up! Spark Shock!"
+States
+{
+Spawn:
+WEA2 G 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("SparkShockWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("SparkShockWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor StarCrashWepCGiver : WepCGiver replaces StarCrashWep
+{
+inventory.pickupmessage "Power up! Star Crash!"
+States
+{
+Spawn:
+WEA2 X 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("StarCrashWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("StarCrashWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor SuperArmWepCGiver : WepCGiver replaces SuperArmWep
+{
+inventory.pickupmessage "Power up! Super Arm!"
+States
+{
+Spawn:
+WEAP O 1
+loop
+Pickup:
+DUST B 0 
+DUST B 0 A_JumpIfInventory("SuperArmWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("SuperArmWepC",1)
+stop
+}
+}
+
+actor ThunderBeamWepCGiver : WepCGiver replaces ThunderBeamWep
+{
+inventory.pickupmessage "Power up! Thunder Beam!"
+States
+{
+Spawn:
+WEAP R 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("ThunderBeamWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("ThunderBeamWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor TimeStopperWepCGiver : WepCGiver replaces TimeStopperWep
+{
+inventory.pickupmessage "Power up! Time Stopper!"
+States
+{
+Spawn:
+WEAP N 0
+WEAP N 0 A_JumpIf(ACS_ExecuteWithResult(975,0)==1,"Death")
+WEAP N 1 A_JumpIf(ACS_ExecuteWithResult(975,0)==3,"Death")
+WEAP N 1
+Goto Spawn+3
+Pickup:
+DUST B 0 A_JumpIfInventory("TimeStopperWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("TimeStopperWepC",1)
+stop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor TopSpinWepCGiver : WepCGiver replaces TopSpinWep
+{
+inventory.pickupmessage "Power up! Top Spin!"
+States
+{
+Spawn:
+WEAP J 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("TopSpinWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("TopSpinWepC",1)
+stop
+}
+}
+
+actor WaterWaveWepCGiver : WepCGiver replaces WaterWaveWep
+{
+inventory.pickupmessage "Power up! Water Wave!"
+States
+{
+Spawn:
+WEA2 M 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("WaterWaveWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("WaterWaveWepC",1)
+stop
+}
+}
+
+actor WindStormWepCGiver : WepCGiver replaces WindStormWep
+{
+inventory.pickupmessage "Power up! Wind Storm!"
+States
+{
+Spawn:
+WEA2 V 1
+loop
+Pickup: 
+DUST B 0 A_JumpIfInventory("WindStormWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("WindStormWepC",1)
+stop
+}
+}
+
+actor YamatoSpearWepCGiver : WepCGiver replaces YamatoSpearWep
+{
+inventory.pickupmessage "Power up! Yamato Spear!"
+States
+{
+Spawn:
+WEA2 R 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("YamatoSpearWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("YamatoSpearWepC",1)
+stop
+}
+}
+
+actor OilSliderWepCGiver : WepCGiver replaces OilSliderWep
+{
+inventory.pickupmessage "Power up! Oil Slider!"
+States
+{
+Spawn:
+WEA7 J 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("OilSliderWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("OilSliderWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor TimeSlowWepCGiver : WepCGiver replaces TimeSlowWep
+{
+inventory.pickupmessage "Power up! Time Slow!"
+States
+{
+Spawn:
+SLOT X 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("TimeSlowWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("TimeSlowWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor MegaBallWepCGiver : WepCGiver replaces MegaBallWep
+{
+inventory.pickupmessage "Power up! Mega Ball!"
+States
+{
+Spawn:
+WEA4 D 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("MegaBallWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("MegaBallWepC",1)
+stop
+}
+}
+
+actor AstroCrushWepCGiver : WepCGiver replaces AstroCrushWep
+{
+inventory.pickupmessage "Power up! Astro Crush!"
+States
+{
+Spawn:
+WEA4 E 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("AstroCrushWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("AstroCrushWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor FlameSwordWepCGiver : WepCGiver replaces FlameSwordWep
+{
+inventory.pickupmessage "Power up! Flame Sword!"
+States
+{
+Spawn:
+WEA4 F 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("FlameSwordWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("FlameSwordWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor FlashBombWepCGiver : WepCGiver replaces FlashBombWep
+{
+inventory.pickupmessage "Power up! Flash Bomb!"
+States
+{
+Spawn:
+WEA4 B 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("FlashBombWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("FlashBombWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor HomingSniperWepCGiver : WepCGiver replaces HomingSniperWep
+{
+inventory.pickupmessage "Power up! Homing Sniper!"
+States
+{
+Spawn:
+WEA4 H 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("HomingSniperWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("HomingSniperWepC",1)
+stop
+}
+}
+
+actor IceWaveWepCGiver : WepCGiver replaces IceWaveWep
+{
+inventory.pickupmessage "Power up! Ice Wave!"
+States
+{
+Spawn:
+WEA4 A 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("IceWaveWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("IceWaveWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor ThunderClawWepCGiver : WepCGiver replaces ThunderClawWep
+{
+inventory.pickupmessage "Power up! Thunder Claw!"
+States
+{
+Spawn:
+WEA4 G 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("ThunderClawWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("ThunderClawWepC",1)
+stop
+DUST B 0
+stop
+}
+}
+
+actor TornadoHoldWepCGiver : WepCGiver replaces TornadoHoldWep
+{
+inventory.pickupmessage "Power up! Tornado Hold!"
+States
+{
+Spawn:
+WEA4 C 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("TornadoHoldWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("TornadoHoldWepC",1)
+stop
+}
+}
+
+actor WaterBalloonWepCGiver : WepCGiver replaces WaterBalloonWep
+{
+inventory.pickupmessage "Power up! Water Balloon!"
+States
+{
+Spawn:
+WEA4 I 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("WaterBalloonWepC", 1, 2)
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, 2)
+DUST B 0 
+fail
+DUST B 0 A_GiveInventory("WaterBalloonWepC",1)
+stop
+}
+}
+
+actor CanCopyWeapons : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}

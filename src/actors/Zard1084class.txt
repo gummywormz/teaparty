@@ -1,0 +1,84 @@
+actor Zard1084class : ClassBase //This is the actor name for your class. If you want to use a pre-made actor as a template, just change "PlayerPawn" to something else.
+{
+player.displayname "Zard1084" //This is the class name in the options menu.
+player.soundclass "Zard1084" //This is the sound sets that you want to use.
+player.damagescreencolor "yellow" //If your class gets hit, it will flash this colour.
+player.forwardmove 0.8, 0.8 //Moving speed.
+//+BOSS
++NOBLOOD
++DONTBLAST
+player.sidemove 0.78, 0.78 //Strafe speed.
+player.jumpz 10 //Jump height
+player.startitem "ZardGun" //Starting item, the item(s) that your player will get upon spwaning.
+player.startitem "ZardAmmo", 60 //Add ammo if you want your class to start with some ammo. It could be anything.
+player.startitem "ParalizingBeamspellUseItem"
+player.startitem "FlashFreezespellUseItem"
+player.startitem "SummonYukkuriUseItem", 3
+player.startitem "IsZardFlag"
++NODAMAGETHRUST
+player.colorrange 0 0
+mass 9999
+damagefactor "Normal", 0.8
+damagefactor "HyperBomb", 2.0
+damagefactor "NapalmBomb", 1.5
+damagefactor "BalladeCracker", 1.5
+damagefactor "DrillBomb", 1.5
+damagefactor "CrashBomb", 1.5
+damagefactor "GravityHold", 1.5
+damagefactor "SlashClaw", 0.7
+damagefactor "TopSpin", 0.7
+damagefactor "ThunderBeam", 0.7
+damagefactor "ThunderBolt", 0.7
+damagefactor "SparkShock", 0.7
+damagefactor "IceSlasher", 0.5
+damagefactor "BlizzardAttack", 0.5
+damagefactor "FreezeCracker", 0.5
+damagefactor "FreezeCrackerBit", 0.5
+damagefactor "IceWave", 0.5
+damagefactor "AtomicFire1", 1.5
+damagefactor "AtomicFire2", 1.5
+damagefactor "AtomicFire3", 1.5
+damagefactor "PharaohShot1", 1.5
+damagefactor "PharaohShot2", 1.5
+damagefactor "PharaohShot3", 1.5
+damagefactor "FireStorm", 1.5
+damagefactor "FlameBlast", 1.5
+damagefactor "ScorchWheel", 1.5
+damagefactor "QuickBoomerang", 1.0
+damagefactor "BubbleLead", 1.0
+damagefactor "RainFlush", 1.0
+damagefactor "WaterWave", 1.0
+damagefactor "FirePalm", 1.5
+gravity 0.8 //This is how fast your class will fall.
+scale 2.5
+States
+{
+Spawn:
+ZARD A 0 //Standing state, add standing frames.
+ZARD B 1
+ZARD A 1
+Goto Spawn+2
+See:
+ZARD BCDE 5 //Walking frames.
+Goto Spawn
+Missile:
+ZARD F 5 //Shooting frames.
+ZARD G 4
+goto Spawn
+ClassPain:
+ZARD H 0 A_Pain
+goto PainContinue
+ClassDeath:
+ZARD H 0 
+goto DeathContinue
+DropWeapon:
+ZARD Z 0 A_SpawnItemEX("ZardCopyWepGiver",0,0,0,0)
+goto NoDropWeapon
+TheEnd:
+ZARD G 4 //If I tell you what this is, I'll be giving out spoilers unless you seen the ending of the MM6 Cmapaign.
+loop
+CreditWalk:
+ZARD BCDE 8 //This is just the player walking during the credits.
+loop 
+}
+}

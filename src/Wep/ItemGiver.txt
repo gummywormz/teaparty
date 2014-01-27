@@ -1,0 +1,656 @@
+actor WeaponEnergy : CustomInventory replaces Shell 10003
+{
+//$Category MM8BDM-Health/Energy
+//Inventory.RespawnTics 210
+inventory.pickupmessage "Picked up a small energy capsule."
+inventory.amount 1
+inventory.pickupsound "item/energyup"
+Scale 2.0
+States
+{
+Spawn:
+EBAL A 0
+EBAL A 0 Thing_ChangeTID(0,999)
+EBAL AB 6
+Goto Spawn+2
+Pickup:
+TNT1 A 1 A_JumpIfInventory("IAmMega",1,1)
+fail
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(521,0),"Success")
+fail
+Success:
+TNT1 A 0 ACS_ExecuteAlways(992,0,4)
+stop
+}
+}
+
+actor BigWeaponEnergy : CustomInventory replaces ShellBox 10004
+{
+//$Category MM8BDM-Health/Energy
+//Inventory.RespawnTics 350
+inventory.pickupmessage "Picked up a large energy capsule."
++COUNTITEM
+inventory.pickupsound "item/energyup"
+Scale 2.0
+States
+{
+Spawn:
+EBAL C 0
+EBAL C 0 Thing_ChangeTID(0,999)
+EBAL CD 6 
+Goto Spawn+2
+Pickup:
+TNT1 A 1 A_JumpIfInventory("IAmMega",1,1)
+fail
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(521,0),"Success")
+fail
+Success:
+TNT1 A 0 ACS_ExecuteAlways(992,0,10)
+stop
+}
+}
+
+actor ItemGiver : CustomInventory
+{
++ACTIVATEMCROSS
+//+INVENTORY.AUTOACTIVATE
+//+FLOORCLIP
+inventory.pickupmessage "ENERGY BALANCER!"
+inventory.pickupsound "item/1up"
+Scale 2.0
+States
+{
+Spawn:
+DUST B 0
+loop
+Health:
+DUST B 0 A_GiveInventory("Health", 10)
+stop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor BassUpgradeGiver : ItemGiver replaces BassUpgrade
+{
+Inventory.RespawnTics 350
+inventory.pickupmessage "Support Item! Bass Buster Upgrade!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+WEA3 A 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, "Success")
+DUST B 0 A_JumpIfInventory("StandardSpecial", 1, "SmashPU")
+DUST B 0 
+fail
+Success:
+NRGB A 0 A_GiveInventory("BassUpgrade", 1)
+stop
+SmashPU:
+DUST B 0 A_GiveInventory("UltraSmasherClawsUpgrade", 1)
+Stop
+}
+}
+
+actor ProtoUpgradeGiver : ItemGiver replaces ProtoUpgrade
+{
+Inventory.RespawnTics 350
+inventory.pickupmessage "Support Item! Proto Buster Upgrade!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+WEA2 Q 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, "Success")
+DUST B 0 A_JumpIfInventory("StandardSpecial", 1, "SmashPU")
+DUST B 0 
+fail
+Success:
+NRGB A 0 A_GiveInventory("ProtoUpgrade", 1)
+stop
+SmashPU:
+DUST B 0 A_GiveInventory("UltraSmasherClawsUpgrade", 1)
+Stop
+}
+}
+
+actor RushCoilGiver : ItemGiver replaces RushCoil
+{
+inventory.pickupmessage "Support Item! Rush Coil!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+WEAP B 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CanUseItems", 1,"Success")
+DUST B 0 A_JumpIfInventory("IsZardFlag",1,"Spellcard")
+DUST B 0 
+fail
+Success:
+NRGB A 0 A_GiveInventory("RushCoil", 1)
+stop
+Spellcard:
+DUST B 0 A_GiveInventory("TornadoJump",1)
+stop
+WFail2:
+//DUST B 0 A_GiveInventory("Item1", 1)
+//DUST B 0 A_GiveInventory("StaticBoardUse", 1)
+DUST B 0 
+stop
+}
+}
+
+actor RushJetGiver : ItemGiver replaces RushJet
+{
+//Inventory.RespawnTics 875
+inventory.pickupmessage "Support Item! Rush jet!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+WEA2 B 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("MegaBuster", 1,"Success")
+DUST B 0 
+fail
+Success:
+DUST B 0 A_GiveInventory("RushJet", 1)
+stop
+WFail2:
+//DUST B 0 A_GiveInventory("Item1", 1)
+//DUST B 0 A_GiveInventory("StaticBoardUse", 1)
+DUST B 0 
+stop
+}
+}
+
+actor ETankGiver : ItemGiver replaces ETank
+{
+//Inventory.RespawnTics 350
+inventory.pickupmessage "Support Item! E-Tank!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+EBAL E 0 
+EBAL E 0 A_JumpIf(ACS_ExecuteWithResult(975,0)==3,"Death")
+EBAL E 0 Thing_ChangeTID(0,999)
+EBAL EF 6
+Goto Spawn+2
+Pickup:
+DUST B 0 A_JumpIfInventory("ETank", 1, "WFail")
+DUST B 0 A_JumpIfInventory("IsZardFlag",1,"GiveRecoveryTea")
+DUST B 0 A_JumpIfInventory("StandardSpecial", 1, "SmashPU")
+DUST B 0 A_JumpIfInventory("StandardSpecialUSC", 1, "SmashPU")
+DUST B 0 A_JumpIfInventory("CanUseItems", 1, "Success")
+DUST B 0
+stop
+Success:
+DUST B 0 A_GiveInventory("ETank", 1)
+stop
+GiveRecoveryTea:
+DUST B 0 A_GiveInventory("RecoveryTea", 1)
+Stop
+SmashPU:
+DUST B 0 A_GiveInventory("HotDog", 1)
+Stop
+WFail:
+DUST B 0
+stop
+}
+}
+
+actor WTankGiver : ItemGiver replaces WTank
+{
+//Inventory.RespawnTics 350
+inventory.pickupmessage "Support Item! W-Tank!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+EBAL E 0
+EBAL E 0 Thing_ChangeTID(0,999)
+EBAL EH 6
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, "Success")
+DUST B 0 A_JumpIfInventory("StandardSpecial", 1, "Bonus")
+DUST B 0 A_JumpIfInventory("StandardSpecialUSC", 1, "Bonus")
+DUST B 0 
+stop
+Success:
+DUST B 0 A_GiveInventory("WTankC", 1)
+stop
+WFail:
+DUST B 0
+stop
+Bonus:
+DUST B 0 A_GiveInventory("Soda", 1)
+stop
+}
+}
+
+actor MTankGiverC : ItemGiver replaces MTank
+{
+//Inventory.RespawnTics 350
+inventory.pickupmessage "Support Item! M-Tank!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+EBAL E 0 
+EBAL E 0 A_JumpIf(ACS_ExecuteWithResult(975,0)==3,"Death")
+EBAL E 0 Thing_ChangeTID(0,999)
+EBAL EG 6
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("IsZardFlag",1,"GiveLifeTea")
+DUST B 0 A_JumpIfInventory("StandardSpecial",1,"SmashPU")
+DUST B 0 A_JumpIfInventory("StandardSpecialUSC", 1, "SmashPU")
+DUST B 0 A_JumpIfInventory("CanUseItems", 1, "Success")
+DUST B 0
+stop
+Success:
+DUST B 0 A_GiveInventory("MTankC", 1)
+DUST B 0
+stop
+GiveLifeTea:
+DUST B 0 A_GiveInventory("LifeTea", 1)
+Stop
+SmashPU:
+DUST B 0 A_GiveInventory("Pizza", 1)
+Stop
+WFail:
+DUST B 0
+stop
+}
+}
+
+actor TangoSummonGiver : ItemGiver replaces TangoSummon
+{
+inventory.pickupmessage "Support Item! Tango Roll!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+WEA3 B 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("MegaBuster", 1, "Success")
+DUST B 0 A_JumpIfInventory("IsZardFlag",1,"Spellcard")
+DUST B 0 
+fail
+Success:
+DUST B 0 A_GiveInventory("TangoSummon", 1)
+DUST B 0 
+stop
+WFail:
+DUST B 0
+stop
+Spellcard:
+DUST B 0 A_GiveInventory("SummonYukkuriUseItem",3)
+stop
+}
+}
+
+actor TrebleSentryGiver : ItemGiver replaces TrebleSentry
+{
+inventory.pickupmessage "Support Item! Treble Sentry!"
+States
+{
+Spawn:
+TRBI A 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("MegaBuster", 1, "Treble")
+DUST B 0 A_JumpIfInventory("IsZardFlag",1,"Spellcard")
+DUST B 0 
+fail
+Treble:
+NRGB A 0 A_GiveInventory("TrebleSentry", 1)
+stop
+WFail:
+DUST B 0
+stop
+Spellcard:
+DUST B 0 A_GiveInventory("SummonYukkuriUseItem",3)
+stop
+}
+}
+
+actor BeatCallGiver : ItemGiver replaces BeatCall
+{
+Inventory.RespawnTics 200
+inventory.pickupmessage "Support Item! Beat Call!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+WEA3 I 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CanUseItems", 1, "Success")
+DUST B 0 A_JumpIfInventory("IsZardFlag",1,"Success")
+DUST B 0 
+fail
+Success:
+DUST B 0 A_GiveInventory("BeatCallCheck", 1)
+stop
+WFail2:
+DUST B 0 
+stop
+stop
+}
+}
+
+actor Item1Giver : ItemGiver replaces Item1
+{
+Inventory.RespawnTics 210
+inventory.pickupmessage "Support Item! Item 1!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+WEA2 A 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CanUseItems", 1, "Item1")
+DUST B 0 A_JumpIfInventory("IsZardFlag",1,"Spellcard")
+DUST B 0
+stop
+Item1:
+DUST B 0 A_GiveInventory("Item1", 3)
+stop
+Spellcard:
+DUST B 0 A_GiveInventory("AirJump",3)
+stop
+}
+}
+
+
+actor EddieSummonGiver : ItemGiver replaces EddieSummon
+{
+inventory.pickupmessage "Support Item! Eddie Call!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+WEAP Q 0
+WEAP Q 1 A_JumpIf(ACS_ExecuteWithResult(975,0)==3,"Death")
+WEAP Q 1
+Goto Spawn+2
+Pickup:
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, "Success")
+DUST B 0 
+stop
+Success:
+DUST B 0 A_GiveInventory("EddieSummon", 1)
+stop
+}
+}
+
+actor WTankC : CustomInventory 
+{
+//$Category MM8BDM-Assists
+inventory.amount 1
+inventory.maxamount 5
+//Inventory.RespawnTics 350
+inventory.pickupmessage "Support Item! W-Tank!"
+inventory.icon "WTANK"
+Inventory.PickupSound "item/1up"
++INVBAR
++COUNTITEM
+scale 2.0
+States
+{
+Spawn:
+EBAL E 0
+EBAL E 0 Thing_ChangeTID(0,999)
+EBAL EH 6
+Goto Spawn+2
+Use:
+TNT1 A 0 A_JumpIf(ACS_ExecuteWithResult(984,0),"Success")
+fail
+Success:
+EBAL E 0 A_PlaySound("item/energyup")
+EBAL E 0 A_PlaySoundEx("item/refill","Voice")
+EBAL E 0 ACS_Execute(992, 0, 255)
+EBAL E 0 A_TakeInventory("WTankC",1)
+fail
+}
+}
+
+actor MTankC : CustomInventory
+{
+inventory.amount 1
+inventory.maxamount 1
+inventory.pickupmessage "Support Item! M-Tank!"
+inventory.icon "MTANK"
+Inventory.PickupSound "item/1up"
++INVBAR
++COUNTITEM
+scale 2.0
+States
+{
+Spawn:
+EBAL E 0 
+EBAL E 0 A_JumpIf(ACS_ExecuteWithResult(975,0)==3,"Death")
+EBAL E 0 Thing_ChangeTID(0,999)
+EBAL EG 6
+Goto Spawn+3
+Use:
+EBAL E 0 A_PlaySound("item/energyup")
+EBAL E 0 A_PlaySoundEx("item/refill","Voice")
+EBAL E 0 HealThing(100)
+EBAL E 0 A_GiveInventory("BubbleLeadAmmo",255)
+EBAL E 0 A_GiveInventory("LeafShieldAmmo",255)
+EBAL E 0 A_GiveInventory("AtomicFireAmmo",255)
+EBAL E 0 A_GiveInventory("ShadowBladeAmmo",255)
+EBAL E 0 A_GiveInventory("NapalmBombAmmo",255)
+EBAL E 0 A_GiveInventory("AirShooterAmmo",255)
+EBAL E 0 A_GiveInventory("HyperBombAmmo",255)
+EBAL E 0 A_GiveInventory("MagnetMissileAmmo",255)
+EBAL E 0 A_GiveInventory("TopSpinAmmo",255)
+EBAL E 0 A_GiveInventory("NeedleCannonAmmo",255)
+EBAL E 0 A_GiveInventory("GeminiLaserAmmo",255)
+EBAL E 0 A_GiveInventory("SearchSnakeAmmo",255)
+EBAL E 0 A_GiveInventory("TimeStopperAmmo",255)
+EBAL E 0 A_GiveInventory("SuperArmAmmo",255)
+EBAL E 0 A_GiveInventory("IceSlasherAmmo",255)
+EBAL E 0 A_GiveInventory("ThunderBeamAmmo",255)
+EBAL E 0 A_GiveInventory("DiveMissileAmmo",255)
+EBAL E 0 A_GiveInventory("MetalBladeAmmo",255)
+EBAL E 0 A_GiveInventory("HardKnuckleAmmo",255)
+EBAL E 0 A_GiveInventory("DrillBombAmmo",255)
+EBAL E 0 A_GiveInventory("BlizzardAttackAmmo",255)
+EBAL E 0 A_GiveInventory("FireStormAmmo",255)
+EBAL E 0 A_GiveInventory("QuickBoomerangAmmo",255)
+EBAL E 0 A_GiveInventory("CrashBombAmmo",255)
+EBAL E 0 A_GiveInventory("ChargeKickAmmo",255)
+EBAL E 0 A_GiveInventory("RollingCutterAmmo",255)
+EBAL E 0 A_GiveInventory("RingBoomerangAmmo",255)
+EBAL E 0 A_GiveInventory("SparkShockAmmo",255)
+EBAL E 0 A_GiveInventory("GyroAttackAmmo",255)
+EBAL E 0 A_GiveInventory("PowerStoneAmmo",255)
+EBAL E 0 A_GiveInventory("DustCrusherAmmo",255)
+EBAL E 0 A_GiveInventory("PharaohShotAmmo",255)
+EBAL E 0 A_GiveInventory("SkullBarrierAmmo",255)
+EBAL E 0 A_GiveInventory("WaterWaveAmmo",255)
+EBAL E 0 A_GiveInventory("CrystalEyeAmmo",255)
+EBAL E 0 A_GiveInventory("FlameBlastAmmo",255)
+EBAL E 0 A_GiveInventory("YamatoSpearAmmo",255)
+EBAL E 0 A_GiveInventory("DiveMissileAmmo",255)
+EBAL E 0 A_GiveInventory("PlantBarrierAmmo",255)
+EBAL E 0 A_GiveInventory("SilverTomahawkAmmo",255)
+EBAL E 0 A_GiveInventory("WindStormAmmo",255)
+EBAL E 0 A_GiveInventory("KnightCrushAmmo",255)
+EBAL E 0 A_GiveInventory("StarCrashAmmo",255)
+EBAL E 0 A_GiveInventory("RainFlushAmmo",255)
+EBAL E 0 A_GiveInventory("SakugarneAmmo",255)
+EBAL E 0 A_GiveInventory("BalladeCrackerAmmo",255)
+EBAL E 0 A_GiveInventory("ScrewCrusherAmmo",255)
+EBAL E 0 A_GiveInventory("FlashStopperAmmo",255)
+EBAL E 0 A_GiveInventory("GravityHoldAmmo",255)
+EBAL E 0 A_GiveInventory("CentaurFlashAmmo",255)
+EBAL E 0 A_GiveInventory("MirrorBusterAmmo",255)
+EBAL E 0 A_GiveInventory("FreezeCrackerAmmo",255)
+EBAL E 0 A_GiveInventory("DangerWrapAmmo",255)
+EBAL E 0 A_GiveInventory("JunkShieldAmmo",255)
+EBAL E 0 A_GiveInventory("ThunderBoltAmmo",255)
+EBAL E 0 A_GiveInventory("SlashClawAmmo",255)
+EBAL E 0 A_GiveInventory("ScorchWheelAmmo",255)
+EBAL E 0 A_GiveInventory("NoiseCrushAmmo",255)
+EBAL E 0 A_GiveInventory("WildCoilAmmo",255)
+EBAL E 0 A_GiveInventory("AstroCrushAmmo",255)
+EBAL E 0 A_GiveInventory("FlameSwordAmmo",255)
+EBAL E 0 A_GiveInventory("ThunderClawAmmo",255)
+EBAL E 0 A_GiveInventory("HomingSniperAmmo",255)
+EBAL E 0 A_GiveInventory("WaterBalloonAmmo",255)
+EBAL E 0 A_GiveInventory("MegaBallAmmo",255)
+EBAL E 0 A_GiveInventory("FlashBombAmmo",255)
+EBAL E 0 A_GiveInventory("IceWaveAmmo",255)
+EBAL E 0 A_GiveInventory("TornadoHoldAmmo",255)
+EBAL E 0 A_GiveInventory("TimeSlowAmmo",255)
+EBAL E 0 A_GiveInventory("OilSliderAmmo",255)
+Goto Additional
+Additional: //Inherit and place additional items here
+EBAL E 0
+stop
+Death:
+TNT1 A 0
+stop
+}
+}
+
+actor BeatSupportGiver : ItemGiver replaces BeatSupport
+{
+inventory.pickupmessage "Support Item! Beat Support!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+WEA4 O 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("MegaBuster", 1,"Success")
+DUST B 0 A_JumpIfInventory("IsZardFlag",1,"Success")
+DUST B 0 
+fail
+Success:
+NRGB A 0 A_GiveInventory("BeatSupport", 1)
+stop
+WFail2:
+DUST B 0
+stop
+}
+}
+
+actor AdaptorGiver : ItemGiver replaces AdaptorUpgrade
+{
+Inventory.RespawnTics 350
+inventory.pickupmessage "Support Item! Adaptor Upgrade!"
+inventory.pickupsound "item/1up"
+States
+{
+Spawn:
+WEA3 P 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, "Success")
+DUST B 0 A_JumpIfInventory("IsZardFlag",1,"Success")
+DUST B 0 
+fail
+Success:
+NRGB A 0 A_GiveInventory("AdaptorUpgrade", 1)
+stop
+}
+}
+
+actor LaserBusterGiver : ItemGiver replaces LaserBusterUpgrade
+{
+Inventory.RespawnTics 350
+inventory.pickupmessage "Support Item! Laser Buster Upgrade!"
+Inventory.PickupSound "item/1up"
+states
+{
+Spawn:
+WEA4 K 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, "Success")
+DUST B 0 A_JumpIfInventory("StandardSpecial", 1, "SmashPU")
+DUST B 0 
+fail
+Success:
+DUST B 0 A_GiveInventory("LaserBusterUpgrade", 1)
+stop
+SmashPU:
+DUST B 0 A_GiveInventory("UltraSmasherClawsUpgrade", 1)
+Stop
+}
+}
+
+actor ArrowBusterGiver : ItemGiver replaces ArrowBusterUpgrade
+{
+Inventory.RespawnTics 350
+inventory.pickupmessage "Support Item! Arrow Buster Upgrade!"
+Inventory.PickupSound "item/1up"
+states
+{
+Spawn:
+WEA4 L 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, "Success")
+DUST B 0 A_JumpIfInventory("StandardSpecial", 1, "SmashPU")
+DUST B 0 
+fail
+Success:
+DUST B 0 A_GiveInventory("ArrowBusterUpgrade", 1)
+stop
+SmashPU:
+DUST B 0 A_GiveInventory("UltraSmasherClawsUpgrade", 1)
+Stop
+}
+}
+
+actor DuoFistGiver : ItemGiver replaces DuoFistUpgrade
+{
+Inventory.RespawnTics 350
+inventory.pickupmessage "Support Item! Duo Fist Upgrade!"
+Inventory.PickupSound "item/1up"
+states
+{
+Spawn:
+DUOF A 1
+loop
+Pickup:
+DUST B 0 A_JumpIfInventory("CanCopyWeapons", 1, "Success")
+DUST B 0 A_JumpIfInventory("StandardSpecial", 1, "SmashPU")
+DUST B 0 
+fail
+Success:
+DUST B 0 A_GiveInventory("DuoFistUpgrade", 1)
+stop
+SmashPU:
+DUST B 0 A_GiveInventory("UltraSmasherClawsUpgrade", 1)
+Stop
+DUST B 0
+stop
+}
+}
+
+actor CanUseItems : Inventory
+{
+inventory.amount 1
+inventory.maxamount 1
+}

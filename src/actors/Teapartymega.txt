@@ -1,0 +1,420 @@
+actor TeapartyMega : PlayerPawn //This is the actor name for your class. If you want to use a pre-made actor as a template, just change "PlayerPawn" to something else.
+{
+player.displayname "megaman" //This is the class name in the options menu.
+player.soundclass "megaman" //This is the sound sets that you want to use.
+player.damagescreencolor "yellow" //If your class gets hit, it will flash this colour.
+player.forwardmove 0.8, 0.8 //Moving speed.
+//+BOSS
++NOBLOOD
++DONTBLAST
+player.sidemove 0.78, 0.78 //Strafe speed.
+player.jumpz 10 //Jump height
+player.startitem "MegaBusterC" //Starting item, the item(s) that your player will get upon spwaning.
+player.startitem "BusterAmmo", 3 //Add ammo if you want your class to start with some ammo. It could be anything.
+player.startitem "CanCopyWeapons"
+player.startitem "CanUseItems"
+player.startitem "IAmMega"
++NODAMAGETHRUST
+player.colorrange 0 0
+mass 9999
+damagefactor "Dummy", 0.0 //Damage factors. Formula for damage taken:Raw damage*Damage factor(assuming they have same damage types). To change basic armour, add a damage factor for "Normal". To make weaknesses and resistances, just make damage factors for the corresponding damage types.
+gravity 0.8 //This is how fast your class will fall.
+scale 2.5
+States
+{
+Spawn:
+PLAY A 0 ACS_ExecuteAlways(994,0)
+PLAY B 1
+PLAY A 1
+Goto Spawn+2
+See:
+PLAY BCDE 5 //Walking frames.
+Goto Spawn
+Missile:
+PLAY F 5 //Shooting frames.
+PLAY G 4
+goto Spawn
+Pain.ReversalAttack:
+PLAY H 0 A_GiveInventory("ReversalOK",1)
+Goto pain+1
+Pain.DeadlyWind:
+PLAY H 0 ACS_ExecuteAlways(990,0,1)
+PLAY H 0 ThrustThingZ(0,45,0,0)
+Goto pain+1
+Pain.EnragementBurn:
+PLAY H 0 //A_ChangeFlag("SHOOTABLE",0)
+PLAY H 0 A_SpawnItemEx("ImOnFire")
+PLAY H 0 A_GiveInventory("FireVision",1)
+Goto Pain+1
+Pain.FlashStopper:
+PLAY H 0 
+PLAY H 0 A_JumpIfInventory("BrightBlind", 1,3)
+PLAY H 0 A_GiveInventory("BrightBlind",125)
+PLAY H 0 ACS_ExecuteAlways(249, 0)
+Goto pain+1
+PLAY H 0 A_GiveInventory("BrightBlind",55)
+Goto pain+1
+Pain.TimeSlow:
+PLAY H 0 A_GiveInventory("Slowed",1)
+Goto pain+1
+Pain.FireSpin:
+Pain.QuickBoomerang:
+Pain.Buster:
+Pain.WildCoil:
+Pain.ChargeKick:
+Pain.YamatoSpear:
+Pain.DiveMissile:
+Pain.StarCrash:
+Pain.NeedleCannon:
+Pain.CentaurFlash:
+Pain.FreezeCrack:
+Pain.ScrewCrusher:
+Pain.PharaohHold:
+Pain.TornadoHold:
+Pain.TrebleSentry:
+Pain.ScorchWheel:
+Pain.MagnetMissile:
+Pain.JunkShield:
+Pain.Misc:
+Pain.Oil:
+Pain.FireType:
+Pain.IceType:
+Pain.PoisonType:
+Pain.ThunderType:
+Pain.FlareNE:
+PLAY H 0 
+Goto pain+1
+Pain.MGRound:
+PLAY H 0 A_Recoil(2)
+Goto pain+1
+Pain.CMT2:
+PLAY H 0 A_Stop
+PLAY H 0 A_SpawnItemEx("ShockFX",4,0,32)
+PLAY H 0 A_GiveInventory("Shocked",1)
+goto pain+1
+Pain.CMT3:
+PLAY H 0 
+PLAY H 0 //A_SpawnItemEx("WepJammed",1)
+goto pain
+Pain.CMT4:
+PLAY H 0 ThrustThingZ(0,8,0,0)
+PLAY H 0 A_Recoil(56)
+Goto Pain
+Pain.CMT5:
+PLAY H 0 
+Goto Pain+1
+Pain.AntiAir1: //Smash Personal Damagetype
+PLAY H 0 A_Stop
+PLAY H 0 ThrustThingZ(0,25,0,0)
+PLAY H 0 A_PlaySoundEx("smash/punch4","SoundSlot5")
+PLAY H 4 A_GiveInventory("Shocked",1)
+PLAY H 0
+Goto pain+1
+Pain.AntiAir2: //Smash Personal Damagetype
+PLAY H 0 A_Recoil(10)
+PLAY H 0 ThrustThingZ(0,150,1,0)
+PLAY H 0 A_PlaySoundEx("smash/punch5","SoundSlot5")
+PLAY H 0 A_JumpIf(z-floorz>180,"GravityForce4")
+PLAY H 0 A_JumpIf(z-floorz>128,"GravityForce3")
+PLAY H 0 A_JumpIf(z-floorz>32,"GravityForce2")
+PLAY H 0 A_JumpIf(z-floorz>8,"GravityForce1")
+Goto pain
+Pain.VulcanJab: //Smash Personal Damagetype
+PLAY H 0 A_PlaySoundEx("smash/punch7","SoundSlot5")
+Goto pain+1
+Pain.RendingKick: //Smash Personal Damagetype
+PLAY H 0 A_PlaySoundEx("smash/punch6","SoundSlot5")
+PLAY H 0 A_Stop
+Goto pain
+Pain.Uppercut: //Smash Personal Damagetype
+PLAY H 0 ThrustThingZ(0,60,0,0)
+PLAY H 0 A_PlaySoundEx("smash/punch4","SoundSlot5")
+Goto pain
+Pain.BCrusher: //Smash Personal Damagetype
+PLAY H 0 A_PlaySoundEx("smash/punch8","SoundSlot5")
+Goto pain
+Pain.SevenStars: //Smash Personal Damagetype
+PLAY H 0 A_PlaySoundEx("smash/punch9","SoundSlot5")
+PLAY H 0 A_SpawnItemEx("ShockFX",4,0,32)
+PLAY H 0 A_PlaySoundEx("misc/dizzy","SoundSlot6")
+PLAY H 0 A_GiveInventory("ExtraShocked",1)
+PLAY H 105 A_Stop
+PLAY H 0 
+goto pain+1 
+Pain.SCracker: //Smash Personal Damagetype
+PLAY H 0 A_PlaySoundEx("smash/punch10","SoundSlot5")
+Goto pain
+Pain.USmasherClaws: //Smash Personal Damagetype
+PLAY H 0 A_PlaySoundEx("smash/punch11","SoundSlot5")
+Goto pain
+Pain.USCUppercut: //Smash Personal Damagetype
+PLAY H 0 A_PlaySoundEx("smash/punch4","SoundSlot5")
+PLAY H 0 ThrustThingZ(0,60,0,0)
+PLAY H 0 A_PlaySoundEx("smash/punch11","SoundSlot6")
+Goto pain
+Pain.UltraUppercut: //Smash Personal Damagetype
+PLAY H 0 A_PlaySoundEx("smash/criticalhit","SoundSlot5")
+PLAY H 0 ThrustThingZ(0,60,0,0)
+PLAY H 0 A_PlaySoundEx("smash/criticalhit2","SoundSlot6")
+Goto pain
+Pain.SmashCombo: //Smash Personal Damagetype
+PLAY H 0 A_PlaySoundEx("smash/punch7","SoundSlot5")
+PLAY H 0 A_SpawnItemEx("ShockFX",4,0,32)
+PLAY H 0 A_GiveInventory("ExtraShocked",1)
+PLAY H 105 A_Stop
+PLAY H 0 
+goto pain
+//Zard spells damagetypes
+Pain.ParalizingBeam:
+PLAY H 0 A_SpawnItemEx("ShockFX",4,0,32)
+PLAY H 0 A_GiveInventory("ExtraShocked",1)
+PLAY H 0 A_SpawnItemEx("ShockFX",4,0,32)
+Goto Pain+1
+Pain.FlashFreeze:
+PLAY H 0 A_ChangeFlag("SHOOTABLE",0)
+PLAY H 0 SetPlayerProperty(0,1,4)
+PLAY H 0 A_SpawnItemEx("ImFrozen")
+PLAY H 0 A_GiveInventory("IceVision",1)
+PLAY H 0 A_SpawnItemEx("FreezeBlockStart",0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+PLAY H 6 A_Stop
+PLAY H 0 A_SpawnItemEx("FreezeBlock1",0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+PLAY H 6 A_Stop
+PLAY H 0 A_SpawnItemEx("FreezeBlock2",0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+PLAY H 6 A_Stop
+PLAY H 0 A_SpawnItemEx("FreezeBlock3",0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+PLAY H 6 A_Stop
+PLAY H 0 A_SpawnItemEx("FreezeBlock4",0, 0, 0, momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
+PLAY H 6 A_Stop
+PLAY H 0 SetPlayerProperty(0,0,4)
+PLAY H 0 A_TakeInventory("IceVision",1)
+PLAY H 0 A_PlaySoundEx("weapon/Freezebreak","Weapon")
+PLAY H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+PLAY H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+PLAY H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+PLAY H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+PLAY H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+PLAY H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+PLAY H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+PLAY H 0 A_SpawnItemEx("FreezeShatter",0,0,10,random(10,-10),random(10,-10),random(15,5))
+goto pain
+Pain.TornadoJump:
+"----" H 0
+"----" H 0 ThrustThingZ(0,20,0,0)
+"----" H 0 A_Recoil(32)
+Goto pain+1
+//Zard spells damage types end here
+Pain.WindStorm:
+PLAY H 0 //ThrustThing(random(0,255),50,1,0) //This is an example of custom pain states. To make one, add "Pain.(insert damage type here)".
+PLAY H 0 ThrustThingZ(0,90,0,0) //This shows that Wind Storm throws the victim upwards.
+Goto pain+1
+Pain.SlashClaw:
+PLAY H 0 A_PlaySoundEx("weapon/slashclawhit","SoundSlot5")
+Goto Pain
+Pain.Bright:
+PLAY H 0 A_GiveInventory("Flashed",1)
+Goto pain+1
+Pain.CrashBomb:
+PLAY H 0 A_Stop
+PLAY H 0
+Goto Pain+1
+Pain.CrashBomb2://For proto's protorangs
+PLAY H 0 A_ScaleVelocity(0.5)
+PLAY H 0
+Goto Pain+1
+Pain.SparkShock:
+PLAY H 0 A_SpawnItemEx("ShockFX",4,0,32)
+PLAY H 0 A_GiveInventory("Shocked",1)
+Goto Pain+1
+Pain.GravityHold:
+PLAY H 0 ThrustThingZ(0,150,1,0)
+PLAY H 0 A_JumpIf(z-floorz>180,"GravityForce4")
+PLAY H 0 A_JumpIf(z-floorz>128,"GravityForce3")
+PLAY H 0 A_JumpIf(z-floorz>32,"GravityForce2")
+PLAY H 0 A_JumpIf(z-floorz>8,"GravityForce1")
+Goto pain+1
+GravityForce4:
+//PLAY H 0 A_Print("Gravity 4")
+PLAY H 0 A_GiveInventory("GravityForce4",1)
+Goto Pain+1
+GravityForce3:
+//PLAY H 0 A_Print("Gravity 3")
+PLAY H 0 A_GiveInventory("GravityForce3",1)
+Goto Pain+1
+GravityForce2:
+//PLAY H 0 A_Print("Gravity 2")
+PLAY H 0 A_GiveInventory("GravityForce2",1)
+Goto Pain+1
+GravityForce1:
+//PLAY H 0 A_Print("Gravity 1")
+PLAY H 0 A_GiveInventory("GravityForce1",1)
+Goto Pain+1
+Pain.WilyFire:
+PLAY H 0 //A_ChangeFlag("SHOOTABLE",0)
+PLAY H 0 A_SpawnItemEx("ImOnFire")
+PLAY H 0 A_GiveInventory("FireVision",1)
+Goto Pain
+Pain.WilyIce:
+PLAY H 0 A_ChangeFlag("SHOOTABLE",0)
+PLAY H 0 SetPlayerProperty(0,1,4)
+PLAY H 0 A_SpawnItemEx("ImFrozen")
+PLAY H 0 A_GiveInventory("IceVision",1)
+PLAY H 30 A_Stop
+PLAY H 30 A_ChangeFlag("SHOOTABLE",1)
+PLAY H 0 SetPlayerProperty(0,0,0)
+PLAY H 0 A_TakeInventory("IceVision",1)
+Goto Spawn
+Pain.XZone:
+PLAY H 0 ThrustThingZ(0,250,1,0)
+Goto pain+2
+Pain.Rage:
+PLAY H 0 ThrustThing(random(0,255),50,1,0)
+PLAY H 0 ThrustThingZ(0,100,0,0)
+goto Pain+1
+Pain.DrkMgnPul:
+PLAY H 0 SetPlayerProperty(0,1,4)
+PLAY H 0 ThrustThingZ(0,9001,1,0)
+PLAY H 3 A_Recoil(48)
+PLAY H 0 A_Stop
+PLAY H 0 A_SpawnItemEx("DarkShockFX",4,0,32)
+PLAY H 0 A_GiveInventory("DarkStunned",1)
+PLAY H 0 SetPlayerProperty(0,0,4)
+goto Pain
+Pain:
+PLAY H 0 A_ScaleVelocity(0.75)
+PLAY H 0 A_JumpIfInventory("EnkerMirrorCount",1,"EnkerAbsorb")
+PLAY H 0 A_Pain
+PLAY H 0 //A_GiveInventory("TempInvince",1)
+PLAY H 0 //SetPlayerProperty(0, 1, 4)
+PLAY H 1 A_SpawnItem("PainFX",0,3)
+PLAY H 1 //A_Recoil(1)
+PLAY H 1 A_SpawnItem("PainFX",0,3)
+PLAY H 1 //A_Recoil(1)
+PLAY H 1 A_SpawnItem("PainFX",0,3)
+PLAY H 1 //A_Recoil(1)
+PLAY H 1 A_SpawnItem("PainFX",0,3)
+PLAY H 1 //A_Recoil(1)
+PLAY H 1 A_SpawnItem("PainFX",0,3)
+PLAY H 1 //A_Recoil(1)
+PLAY H 1 A_SpawnItem("PainFX",0,3)
+PLAY H 1 //A_Recoil(1)
+PLAY H 1 A_SpawnItem("PainFX",0,3)
+PLAY H 1 //A_Recoil(1)
+PLAY H 1 A_SpawnItem("PainFX",0,3)
+PLAY H 1 //A_Recoil(1)
+PLAY H 1 A_SpawnItem("PainFX",0,3)
+PLAY H 1 //A_Recoil(1)
+PLAY H 1 A_SpawnItem("PainFX",0,3)
+PLAY H 1 //A_Recoil(1)
+PLAY H 0 //SetPlayerProperty(0, 0, 4)
+PLAY H 0//SetPlayerProperty(0,0,1)
+Goto Spawn
+Death.Beam:
+Death.Gravity:
+Death.instagib:
+PLAY Z 1 SetPlayerProperty(0, 0, 4) //Custom Death states.
+PLAY H 0 A_GiveToTarget("KilledMe",1)
+PLAY H 0 A_GiveToTarget("KilledMeStock",1)
+PLAY H 0 A_GiveInventory("IsDead",1)
+PLAY Z 0 A_PlayerScream
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,0,2,90)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,0,2,-90)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,90,2,45)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,-90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,-90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,-90,2,45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,0,2,90)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,0,2,-90)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,90,2,45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,-90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,-90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,-90,2,45)
+PLAY Z -1
+stop
+Death:
+PLAY H 0 SetPlayerProperty(0, 0, 4) //Death states. If your class is killed, this will happen.
+PLAY H 0 A_TakeInventory("PharaohCharge",999)   
+PLAY H 0 A_NoBlocking
+PLAY H 0 A_GiveInventory("CutterFlag",999)
+PLAY H 0 A_GiveInventory("IsDead",1)
+PLAY H 0 A_Stop
+PLAY H 0 A_GiveToTarget("KilledMeStock",1)
+PLAY H 1 A_GiveToTarget("KilledMe",1)
+PLAY H 19 ACS_ExecuteAlways(999,0,0)
+PLAY H 0 SetPlayerProperty(0, 0, 4)
+PLAY H 0 A_PlayerScream
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,0,2,90)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,0,2,-90)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,90,2,45)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,-90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,-90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX1",0,0,-90,2,45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,0,2,90)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,0,2,-90)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,90,2,45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,-90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,-90,2,0)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,90,2,-45)
+PLAY Z 0 A_CustomMissile("DeathFX2",0,0,-90,2,45)
+PLAY Z -1
+stop
+Death.Falling:
+PLAY H 0 SetPlayerProperty(0, 0, 4)
+PLAY H 0 A_TakeInventory("PharaohCharge",999)   
+PLAY H 0 A_NoBlocking
+PLAY H 0 A_GiveInventory("CutterFlag",999)
+PLAY H 0 A_GiveInventory("IsDead",1)
+PLAY Z 1 A_PlayerScream
+PLAY Z 1 A_Stop
+PLAY Z 1 ACS_ExecuteAlways(999,0,0)
+PLAY Z -1
+stop
+PunkSpin:
+PLAY AVW 3
+PLAY XY 3
+Goto PunkSpin+3
+PunkStop:
+PLAY WV 5
+Goto Spawn
+EnkerRaise:
+PLAY Y 1
+loop
+EnkerAbsorb:
+PLAY Y 0 A_PlaySound("weapon/mirrorabsorb")
+PLAY Y 0 A_GiveInventory("EnkerMirrorCount",1)
+Goto EnkerAbsorb3
+EnkerAbsorb3:
+PLAY Y 3 ACS_ExecuteAlways(998,0,65)
+PLAY Y 0 A_JumpIfInventory("EnkerMirrorCount",1,"EnkerAbsorb2")
+Goto Spawn
+EnkerAbsorb2:
+PLAY Y 3 ACS_ExecuteAlways(998,0,66)
+PLAY Y 0 A_JumpIfInventory("EnkerMirrorCount",1,"EnkerAbsorb3")
+Goto Spawn
+DarkLeap:
+PLAY Y 1 A_SpawnItemEx("DarkDamager")
+PLAY Y 0 A_JumpIf(z-floorz==0,"Spawn")
+loop
+BalladeJump:
+PLAY Y 5 A_SpawnItemEx("BalladeMelee")
+loop
+TheEnd:
+PLAY G 4 //If I tell you what this is, I'll be giving out spoilers unless you seen the ending of the MM6 Cmapaign.
+loop
+CreditWalk:
+PLAY BCDE 8 //This is just the player walking during the credits.
+loop
+}
+}
+
+actor IAmMega : Inventory
+{
+Inventory.Amount 1
+Inventory.MaxAmount 1
+}
