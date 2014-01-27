@@ -3,7 +3,7 @@ actor YukkuriReimu
 MONSTER
 health 40
 obituary "%o was made to take it easy by a \cjYukkuri \cgReimu!"
-Translation "192:192=179:179,198:198=4:4"
+//Translation "192:192=179:179,198:198=4:4" j
 +DONTBLAST
 -COUNTKILL
 +FRIENDLY

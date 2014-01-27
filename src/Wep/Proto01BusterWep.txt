@@ -1,3 +1,4 @@
+//
 actor Proto01Buster : Weapon
 {
 Weapon.AmmoUse 1
@@ -29,12 +30,12 @@ PRO1 J 1 A_WeaponReady
 PRO1 J 0 A_SpawnItemEx("ProtoShieldX",23,-17,8,momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
 PRO1 J 0 A_GiveInventory("ArcTimer",1)
 PRO1 J 0 A_GiveInventory("Chakra",1)
-Goto Ready+8
+Goto Ready+7
 ReadyNS:
-PRO1 J 1 A_WeaponReady
-PRO1 J 0 A_GiveInventory("PowerSlightSpeedBuff",1)
-PRO1 J 0 A_GiveInventory("ArcTimer",1)
-PRO1 J 0 A_GiveInventory("Chakra",1)
+PRO1 D 1 A_WeaponReady
+PRO1 D 0 A_GiveInventory("PowerSlightSpeedBuff",1)
+PRO1 D 0 A_GiveInventory("ArcTimer",1)
+PRO1 D 0 A_GiveInventory("Chakra",1)
 Goto Ready+2
 Deselect:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
@@ -48,7 +49,7 @@ Fire:
 PRO1 D 0 A_JumpIfNoAmmo("Hold")
 PRO1 D 0 A_PlaySoundEx("weapon/mbuster","Weapon")
 PRO1 D 0 A_FireCustomMissile("Proto01Shot",0,0,8,0)
-PRO1 KLD 1 A_TakeInventory("ProtoCharge",999)
+PRO1 D 1 A_TakeInventory("ProtoCharge",999)
 PRO1 EF 2
 PRO1 D 0
 goto Hold
@@ -72,23 +73,23 @@ PRO1 D 9
 PRO1 D 0 //A_Refire
 goto Ready+1
 Hold:
-PRO1 J 0 A_JumpIfInventory("IDontWantToCarryThis", 1, "HoldNS")
+PRO1 D 0 A_JumpIfInventory("IDontWantToCarryThis", 1, "HoldNS")
 PRO1 J 0 A_JumpIfInventory("ProtoCharge",8,"Hold2")
 PRO1 J 0 A_JumpIfInventory("ProtoCharge",7,"HoldStart")
 PRO1 J 0 A_SpawnItemEx("ProtoShieldX",23,-17,8,momx, momy, momz, 0, SXF_ABSOLUTEMOMENTUM, 0)
-PRO1 J 2 A_GiveInventory("ProtoCharge",1)
+PRO1 D 2 A_GiveInventory("ProtoCharge",1)
 PRO1 J 0 ACS_ExecuteAlways(994,0)
 PRO1 J 0 A_Refire
 Goto Ready+4
 HoldNS:
-PRO1 J 0 A_JumpIfInventory("ProtoCharge",8,"Hold2")
-PRO1 J 0 A_JumpIfInventory("ProtoCharge",7,"HoldStart")
-PRO1 J 2 A_GiveInventory("ProtoCharge",1)
-PRO1 J 0 ACS_ExecuteAlways(994,0)
-PRO1 J 0 A_Refire
+PRO1 D 0 A_JumpIfInventory("ProtoCharge",8,"Hold2")
+PRO1 D 0 A_JumpIfInventory("ProtoCharge",7,"HoldStart")
+PRO1 D 2 A_GiveInventory("ProtoCharge",1)
+PRO1 D 0 ACS_ExecuteAlways(994,0)
+PRO1 D 0 A_Refire
 Goto ReadyNS+4
 HoldStart:
-PRO1 N 2 A_PlaySoundEx("weapon/coilstart", "Weapon")
+PRO1 D 2 A_PlaySoundEx("weapon/coilstart", "Weapon")
 PRO1 N 0
 PRO1 N 0 A_GiveInventory("Proto01ChargeFlag",1)
 Goto Hold2
@@ -107,8 +108,8 @@ Goto Fire2
 Hold2NS:
 PRO1 M 0 A_JumpIfInventory("ProtoCharge",28,"Hold3")
 PRO1 M 0 A_JumpIfInventory("ProtoCharge",27,"HoldStart2")
-PRO1 M 1 ACS_ExecuteAlways(991,0,200)
-PRO1 O 1 ACS_ExecuteAlways(991,0,201)
+PRO1 D 1 ACS_ExecuteAlways(991,0,200)
+PRO2 A 1 ACS_ExecuteAlways(991,0,201)
 PRO1 O 0 A_GiveInventory("ProtoCharge",1)
 PRO1 O 0 A_Refire
 Goto Fire2
@@ -126,9 +127,9 @@ PRO1 M 0 A_SpawnItemEx("ProtoShieldX",23,-17,8,momx, momy, momz, 0, SXF_ABSOLUTE
 PRO1 P 0 A_Refire
 Goto Fire3
 Hold3NS:
-PRO1 P 1 ACS_ExecuteAlways(991,0,202)
-PRO1 M 1 ACS_ExecuteAlways(991,0,200)
-PRO1 P 0 A_Refire
+PRO1 D 1 ACS_ExecuteAlways(991,0,202)
+PRO2 B 1 ACS_ExecuteAlways(991,0,200)
+PRO1 D 0 A_Refire
 Goto Fire3
 Flash:
 TNT1 A 5 A_PlaySoundEx("weapon/coilcharge", "Weapon")
@@ -336,11 +337,11 @@ Spawn:
 WEA2 E 1
 loop
 Ready:
-FSTO A 0 ACS_ExecuteAlways(991,0,200)
-FSTO A 20 A_WeaponReady
-FSTO A 0 A_GiveInventory("Chakra", 1)
-FSTO A 1 A_WeaponReady
-FSTO A 0 A_GiveInventory("Chakra", 1)
+PRO1 D 0 ACS_ExecuteAlways(991,0,200)
+PRO1 D 20 A_WeaponReady
+PRO1 D 0 A_GiveInventory("Chakra", 1)
+PRO1 D 1 A_WeaponReady
+PRO1 D 0 A_GiveInventory("Chakra", 1)
 Goto Ready+3
 Deselect:
 TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower

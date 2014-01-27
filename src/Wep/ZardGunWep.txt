@@ -1,3 +1,5 @@
+//
+
 actor ZardGun : MegaBuster
 {
 Weapon.AmmoUse 5
@@ -60,7 +62,7 @@ ZAGN B 0 A_Refire
 Goto AltFire1
 AltHold2:
 ZAGN C 0 A_StopSoundEx ("Weapon") 
-ZAGN C 0 A_PlaySoundEx("weapon/ZardGunCharge", "Weapon")
+ZAGN C 0 A_PlaySound("weapon/ZardGunCharge", CHAN_WEAPON, 0.4)
 ZAGN C 0 A_JumpIfInventory("WeaponCharge",48,"AltHold3")
 ZAGN C 1 ACS_ExecuteAlways(991,0,207)
 ZAGN C 0 ACS_ExecuteAlways(991,0,207)
@@ -69,7 +71,7 @@ ZAGN C 0 A_Refire
 Goto AltFire1
 AltHold3:
 ZAGN D 0 A_StopSoundEx ("Weapon") 
-ZAGN D 0 A_PlaySoundEx("weapon/ZardGunCharge", "Weapon")
+ZAGN D 0 A_PlaySound("weapon/ZardGunCharge", CHAN_WEAPON, 0.4)
 ZAGN D 0 A_JumpIfInventory("WeaponCharge",71,"BotCheck")
 ZAGN D 1 ACS_ExecuteAlways(991,0,207)
 ZAGN D 1 ACS_ExecuteAlways(991,0,207)
@@ -81,7 +83,7 @@ ZAGN D 0 ACS_ExecuteAlways(974,0)
 Goto ALtHold4
 AltHold4:
 ZAGN E 0 A_StopSoundEx ("Weapon")
-ZAGN E 0 A_PlaySoundEx("weapon/ZardGunChargeFull", "Weapon")
+ZAGN E 0 A_PlaySound("weapon/ZardGunChargeFull", CHAN_WEAPON, 0.5)
 ZAGN E 1 ACS_ExecuteAlways(991,0,207)
 ZAGN E 1 ACS_ExecuteAlways(991,0,207)
 ZAGN E 0 A_Refire

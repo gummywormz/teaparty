@@ -1,5 +1,3 @@
 [7:06:33 PM] Gummywormz: also etanks broke
 [7:07:27 PM] Gummywormz: well I picked one up as pik and nothing happened so...
-[7:09:43 PM] Gummywormz: proto: still has wrong hud, still no notice on the hud of either if your shield is up or not
-[7:13:57 PM] Gummywormz: zard's bomb still has an annoying charge sound (reduce the volume)
 [7:16:50 PM] Gummywormz: also should you be able to pick up beat support zard
