@@ -1,0 +1,90 @@
+Actor EMPBlast
+{
+PROJECTILE
+DAMAGE (17)
+DAMAGETYPE "ThunderBeam"
+Scale 2.5
++PIERCEARMOR
++NOTARGETSWITCH
+Speed 40
+Height 16 //change
+Radius 16
+States
+{
+Spawn:
+EMPB ABC 4
+loop
+Death:
+TNT1 A 1 A_SpawnItemEx("EMPXplode")
+stop
+}
+}
+
+Actor EMPXplode
+{
+PROJECTILE
++PIERCEARMOR
+Damage (0)
+DamageType "ThunderBeam"
+Height 1
+Radius 1
+Scale 4.5 //mess with
++RIPPER
+States
+{
+Spawn:
+TNT1 A 1
+TNT1 A 1 A_Explode(35,360,0)
+EMPB DEFDEFDEF 8
+stop
+}
+}
+
+actor EMPBlastWep : MegaBuster //add hud
+{
+Weapon.AmmoUse 14
+Weapon.AmmoGive 56
+Weapon.SlotNumber 3
+Obituary "%o was shocked by %k's EMP Blast."
+Inventory.Pickupmessage "Power up! EMP Blast!"
+weapon.ammotype "EMPBlastAmmo"
+inventory.pickupsound "weapon/weaponup"
++WEAPON.AMMO_OPTIONAL
+inventory.icon "FANGICO" //change
+Scale 2.0
+States
+{
+Spawn:
+FANG H 1
+loop
+Ready:
+FANG E 0 ACS_ExecuteAlways(998,0,228) //change
+FANG E 1 A_WeaponReady
+Goto Ready+1
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+FANG E 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+FANG E 1 A_Raise
+Loop
+Fire:
+FANG E 0 A_JumpIfNoAmmo("NoAmmo")
+FANG E 0 A_PlaySoundEx("weapon/sparkshock","Weapon")
+FANG E 0 A_FireCustomMissile("EMPBlast",0,1,8,0)
+FANG FGE 5
+FANG E 10
+FANG E 0 A_Refire
+Goto Ready+1
+NoAmmo:
+FANG E 1 ACS_Execute(979,0)
+Goto Ready+1
+}
+}
+
+actor EMPBlastAmmo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 56
+}
