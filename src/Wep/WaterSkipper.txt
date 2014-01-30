@@ -1,0 +1,73 @@
+actor WaterSkipperWep : MegaBuster //add hud
+{
+Weapon.AmmoUse 4
+Weapon.AmmoGive 42
+Weapon.SlotNumber 3 //change?
+Obituary "%o was soaked by %k's Water Skipper."
+Inventory.Pickupmessage "Power up! Water Skipper!"
+weapon.ammotype "WaterSkipperAmmo"
+inventory.pickupsound "weapon/weaponup"
++WEAPON.AMMO_OPTIONAL
+inventory.icon "WTRSICO" //change
+Scale 2.0
+States
+{
+Spawn:
+WTRS B 1 //change
+loop
+Ready:
+WTRB H 0 ACS_ExecuteAlways(998,0,84)
+WTRB H 1 A_WeaponReady
+Goto Ready+1
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+WTRB H 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+WTRB H 1 A_Raise
+Loop
+Fire:
+WTRB H 0 A_JumpIfNoAmmo("NoAmmo")
+WTRB H 0 A_PlaySoundEx("weapon/waterballoon","Weapon")
+WTRB H 0 A_FireCustomMissile("WaterSkipper",0,1,8,0)
+WTRB IJ 3
+WTRB J 7
+WTRB H 1 A_Refire
+Goto Ready+1
+NoAmmo:
+WTRB H 1 ACS_Execute(979,0)
+Goto Ready+1
+}
+}
+
+actor WaterSkipperAmmo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 42
+}
+
+actor WaterSkipper
+{
+PROJECTILE
+Height 16 //change later??
+Radius 16
+damagetype "WaterBalloon"
+Damage (7)
+Scale 2.5
+-NOGRAVITY
+Speed 45
+Bouncetype "Grenade"
+WallBounceFactor 0.0
+BounceFactor 0.8
+BounceCount 8
+States
+{
+Spawn:
+WTRS A 1
+loop
+Death:
+WTRS A 1 A_SpawnItemEx("MMSplash") //check out later
+stop
+}
+}
