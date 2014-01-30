@@ -1,0 +1,278 @@
+Actor BoulderBase
+{
+-NOGRAVITY
+PROJECTILE
+Radius 38
+Height 10
+Obituary "%o had his head smashed in by %k's Boulder Cracker"
+scale 2.5
+DamageType "PowerStone"
+damage (1)
+speed 2
+States
+{
+Spawn:
+POWS D 0 A_Stop
+POWS D 1 ThrustThingZ(0,48,1,0)
+POWS D 7
+POWS D 1 A_SpawnItemEx("BoulderOne",0,0,0,0,0,0,0)
+stop
+Death:
+TNT1 A 0 A_PlaySoundEx("weapon/napalm","Voice")
+TNT1 A 0 A_SpawnItemEx("BoulderZeroBounce", 0, 0, 10, 10, 0, 0, 0)
+TNT1 A 0 A_SpawnItemEx("BoulderZeroBounce", 0, 0, 10, 10, 0, 0, 90)
+TNT1 A 0 A_SpawnItemEx("BoulderZeroBounce", 0, 0, 1, 10, 0, 0, 45)
+TNT1 A 0 A_SpawnItemEx("BoulderZeroBounce", 0, 0, 1, 10, 0, 0, 225)
+TNT1 A 0 A_SpawnItemEx("BoulderZeroBounce", 0, 0, 10, 10, 0, 0, 180)
+TNT1 A 1 A_SpawnItemEx("BoulderZeroBounce", 0, 0, 10, 10, 0, 0, 270)
+stop
+}
+}
+
+Actor BoulderOne
+{
+-NOGRAVITY
+Obituary "%o had his head smashed in by %k's Boulder Cracker"
+PROJECTILE
+Radius 38
+Height 10
+scale 2.5
+DamageType "PowerStone"
+damage (1)
+speed 0
+States
+{
+Spawn:
+POWS D 0
+POWS D 1 ThrustThingZ(0,48,1,0)
+POWS D 5
+POWS D 1 A_SpawnItemEx("BoulderTwo",0,0,0,0,0,0,0)
+stop
+Death:
+TNT1 A 0 A_PlaySoundEx("weapon/napalm","Voice")
+TNT1 A 0 A_SpawnItemEx("BoulderOneBounce", 0, 0, 10, 10, 0, 0, 0)
+TNT1 A 0 A_SpawnItemEx("BoulderOneBounce", 0, 0, 10, 10, 0, 0, 90)
+TNT1 A 0 A_SpawnItemEx("BoulderOneBounce", 0, 0, 1, 10, 0, 0, 45)
+TNT1 A 0 A_SpawnItemEx("BoulderOneBounce", 0, 0, 1, 10, 0, 0, 225)
+TNT1 A 0 A_SpawnItemEx("BoulderOneBounce", 0, 0, 10, 10, 0, 0, 180)
+TNT1 A 1 A_SpawnItemEx("BoulderOneBounce", 0, 0, 10, 10, 0, 0, 270)
+stop
+}
+}
+
+Actor BoulderTwo : BoulderOne
+{
+damage (20)
+States
+{
+Spawn:
+POWS D 0
+POWS D 1 ThrustThingZ(0,48,1,0)
+POWS D 5
+POWS D 1 A_SpawnItemEx("BoulderThree",0,0,0,0,0,0,0)
+stop
+Death:
+TNT1 A 0 A_PlaySoundEx("weapon/napalm","Voice")
+TNT1 A 0 A_SpawnItemEx("BoulderTwoBounce", 0, 0, 10, 10, 0, 0, 0)
+TNT1 A 0 A_SpawnItemEx("BoulderTwoBounce", 0, 0, 10, 10, 0, 0, 90)
+TNT1 A 0 A_SpawnItemEx("BoulderTwoBounce", 0, 0, 1, 10, 0, 0, 45)
+TNT1 A 0 A_SpawnItemEx("BoulderTwoBounce", 0, 0, 1, 10, 0, 0, 225)
+TNT1 A 0 A_SpawnItemEx("BoulderTwoBounce", 0, 0, 10, 10, 0, 0, 180)
+TNT1 A 1 A_SpawnItemEx("BoulderTwoBounce", 0, 0, 10, 10, 0, 0, 270)
+stop
+}
+}
+
+Actor BoulderThree : BoulderOne
+{
+Damage (40)
+States
+{
+Spawn:
+POWS D 0
+POWS D 1 ThrustThingZ(0,48,1,0)
+POWS D 8
+POWS D 1 A_SpawnItemEx("BoulderFour",0,0,0,0,0,0,0)
+stop
+Death:
+TNT1 A 0 A_PlaySoundEx("weapon/napalm","Voice")
+TNT1 A 0 A_SpawnItemEx("BoulderThreeBounce", 0, 0, 10, 10, 0, 0, 0)
+TNT1 A 0 A_SpawnItemEx("BoulderThreeBounce", 0, 0, 10, 10, 0, 0, 90)
+TNT1 A 0 A_SpawnItemEx("BoulderThreeBounce", 0, 0, 1, 10, 0, 0, 45)
+TNT1 A 0 A_SpawnItemEx("BoulderThreeBounce", 0, 0, 1, 10, 0, 0, 225)
+TNT1 A 0 A_SpawnItemEx("BoulderThreeBounce", 0, 0, 10, 10, 0, 0, 180)
+TNT1 A 1 A_SpawnItemEx("BoulderThreeBounce", 0, 0, 10, 10, 0, 0, 270)
+stop
+}
+}
+
+Actor BoulderFour : BoulderOne
+{
+Damage (6)
+States
+{
+Spawn:
+POWS D 0
+POWS D 1 ThrustThingZ(0,48,1,0)
+POWS D 8
+POWS D 1
+Goto Death
+Death:
+TNT1 A 0 A_PlaySoundEx("weapon/napalm","Voice")
+TNT1 A 0 A_SpawnItemEx("BoulderFourBounce", 0, 0, 1, 10, 0, 0, 0)
+TNT1 A 0 A_SpawnItemEx("BoulderFourBounce", 0, 0, 1, 10, 0, 0, 90)
+TNT1 A 0 A_SpawnItemEx("BoulderFourBounce", 0, 0, 1, 10, 0, 0, 45)
+TNT1 A 0 A_SpawnItemEx("BoulderFourBounce", 0, 0, 1, 10, 0, 0, 225)
+TNT1 A 0 A_SpawnItemEx("BoulderFourBounce", 0, 0, 1, 10, 0, 0, 180)
+TNT1 A 1 A_SpawnItemEx("BoulderFourBounce", 0, 0, 1, 10, 0, 0, 270)
+stop
+}
+}
+
+actor BoulderOneBounce
+{
+PROJECTILE
+-NOGRAVITY
+Obituary "%o had his head smashed in by %k's Boulder Cracker"
++HEXENBOUNCE
+BOUNCECOUNT 7
+DamageType "PowerStone"
+BOUNCEFACTOR 1.2
+Speed 0
+Damage (12)
+Scale 2.5
+WALLBOUNCEFACTOR 0.0
+States
+{
+Spawn:
+POWS A 1
+loop
+Death:
+MMFX BCDE 2
+stop
+}
+}
+
+actor BoulderZeroBounce : BoulderOneBounce
+{
+BOUNCECOUNT 6
+Damage (6)
+}
+
+actor BoulderTwoBounce : BoulderOneBounce
+{
+BOUNCECOUNT 8
+Damage (24)
+States
+{
+Spawn:
+POWS B 1
+loop
+Death:
+MMFX BCDE 2
+stop
+}
+}
+
+actor BoulderThreeBounce : BoulderOneBounce
+{
+BOUNCECOUNT 9
+Damage (36)
+States
+{
+Spawn:
+POWS C 1
+loop
+Death:
+MMFX BCDE 2
+stop
+}
+}
+
+actor BoulderFourBounce : BoulderOneBounce
+{
+BOUNCECOUNT 10
+Damage (48)
+States
+{
+Spawn:
+POWS D 1
+loop
+Death:
+MMFX BCDE 2
+stop
+}
+}
+
+actor BoulderAmmo : Ammo
+{
+inventory.amount 1
+inventory.maxamount 28
+}
+
+Actor BoulderCrackerWep : MegaBuster //change hud?
+{
+Weapon.AmmoUse 3
+Weapon.AmmoGive 28
+Weapon.SlotNumber 2
+inventory.icon "BOCRICO"
+Obituary "%o had his head smashed in by %k's Boulder Cracker"
+Inventory.Pickupmessage "Power up! Boulder Cracker!"
+weapon.ammotype "BoulderAmmo"
+inventory.pickupsound "weapon/weaponup"
++WEAPON.AMMO_OPTIONAL
+Scale 2.0
+States
+{
+Spawn:
+BOCR E 1
+loop
+Ready:
+BOCR A 0 ACS_ExecuteAlways(998,0,210) //add trans
+BOCR A 1 A_WeaponReady
+Goto Ready+1
+Deselect:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Lower
+BOCR A 1 A_Lower
+Loop
+Select:
+TNT1 AAAAAAAAAAAAAAAAAAAAAA 0 A_Raise
+BOCR A 1 A_Raise
+Loop
+Fire:
+BOCR A 0 A_JumpIfNoAmmo("NoAmmo")
+BOCR A 0 A_TakeInventory("Boulderammo",3)
+BOCR A 0 A_PlaySoundEx("weapon/powerstone","Weapon")
+BOCR BCD 5
+BOCR A 0 A_FireCustomMissile("BoulderSpawner",0,0,8,0)
+BOCR A 15
+BOCR A 1 A_Refire
+goto Ready+1
+NoAmmo:
+BOCR A 1 ACS_Execute(979,0)
+Goto Ready+1
+}
+}
+
+Actor BoulderSpawner
+{
+Radius 5
+Height 5
+Damage (0)
+Speed 0
+PROJECTILE
+-NOGRAVITY
++FLOORHUGGER
++RIPPER
+states
+{
+Spawn:
+TNT1 A 1
+TNT1 A 0 A_SpawnItemEx("BoulderBase", 70, 0, 8, 0, 0, 0, 0)
+TNT1 A 0 A_SpawnItemEx("BoulderBase", -70, 0, 8, 0, 0, 0, 0)
+stop
+Death:
+TNT1 A 0
+stop
+}
+}
