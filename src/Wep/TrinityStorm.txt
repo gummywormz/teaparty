@@ -1,4 +1,4 @@
-actor SteelWingWep : MegaBuster //ADD HUD + TRANSLATION
+actor TrinityStormWep : MegaBuster //ADD HUD + TRANSLATION
 {
 Weapon.AmmoUse 14
 Weapon.AmmoGive 56
@@ -13,7 +13,7 @@ Scale 2.0
 States
 {
 Spawn:
-STLW B 1
+TRNT E 1
 loop
 Ready:
 BUBB D 0 ACS_ExecuteAlways(998,0,1)
